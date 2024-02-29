@@ -53,7 +53,7 @@ namespace HotelSOL
                         formHome.Show();
                         this.Hide();
                     //  MessageBox.Show("User found for id: " + reader.GetInt32(0).ToString());
-                        MessageBox.Show("Connection Success!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       // MessageBox.Show("Connection Success!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
                 }
