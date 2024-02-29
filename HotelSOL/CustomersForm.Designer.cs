@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            groupBox4 = new GroupBox();
+            radioButtonPhone = new RadioButton();
+            radioButtonName = new RadioButton();
+            radioButtonIdentity = new RadioButton();
             button1 = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
-            dataGridView1 = new DataGridView();
-            dataGridView2 = new DataGridView();
+            textBoxSearch = new TextBox();
+            dataGridViewSeaarchResult = new DataGridView();
+            dataGridViewAllCustomers = new DataGridView();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             buttonInsertCust = new Button();
             button3 = new Button();
-            button2 = new Button();
+            buttonDeleteCust = new Button();
             textBoxCustId = new TextBox();
             textCustEmail = new TextBox();
             textCustConNO = new TextBox();
@@ -47,18 +51,22 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            groupBox5 = new GroupBox();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).BeginInit();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(groupBox4);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(textBoxSearch);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1328, 212);
@@ -66,16 +74,62 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Customers";
             // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(radioButtonPhone);
+            groupBox4.Controls.Add(radioButtonName);
+            groupBox4.Controls.Add(radioButtonIdentity);
+            groupBox4.Location = new Point(35, 132);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(1097, 72);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Search by";
+            // 
+            // radioButtonPhone
+            // 
+            radioButtonPhone.AutoSize = true;
+            radioButtonPhone.Location = new Point(869, 28);
+            radioButtonPhone.Name = "radioButtonPhone";
+            radioButtonPhone.Size = new Size(112, 24);
+            radioButtonPhone.TabIndex = 3;
+            radioButtonPhone.TabStop = true;
+            radioButtonPhone.Text = "By Phone Nº";
+            radioButtonPhone.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonName
+            // 
+            radioButtonName.AutoSize = true;
+            radioButtonName.Location = new Point(560, 26);
+            radioButtonName.Name = "radioButtonName";
+            radioButtonName.Size = new Size(90, 24);
+            radioButtonName.TabIndex = 1;
+            radioButtonName.TabStop = true;
+            radioButtonName.Text = "By Name";
+            radioButtonName.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonIdentity
+            // 
+            radioButtonIdentity.AutoSize = true;
+            radioButtonIdentity.Location = new Point(187, 28);
+            radioButtonIdentity.Name = "radioButtonIdentity";
+            radioButtonIdentity.Size = new Size(108, 24);
+            radioButtonIdentity.TabIndex = 0;
+            radioButtonIdentity.TabStop = true;
+            radioButtonIdentity.Text = "By Indentity";
+            radioButtonIdentity.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             button1.BackColor = SystemColors.ActiveCaption;
             button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(635, 144);
+            button1.Location = new Point(1173, 145);
             button1.Name = "button1";
             button1.Size = new Size(131, 46);
             button1.TabIndex = 2;
             button1.Text = "Search";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -83,42 +137,42 @@
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(34, 40);
             label1.Name = "label1";
-            label1.Size = new Size(566, 31);
+            label1.Size = new Size(505, 31);
             label1.TabIndex = 1;
-            label1.Text = "Search customers by ID,Name,Email or Phone Number";
+            label1.Text = "Search customers by ID,Name or Phone Number";
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(34, 88);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(1276, 38);
-            textBox1.TabIndex = 0;
+            textBoxSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxSearch.Location = new Point(34, 88);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(1276, 38);
+            textBoxSearch.TabIndex = 0;
             // 
-            // dataGridView1
+            // dataGridViewSeaarchResult
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 244);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(300, 188);
-            dataGridView1.TabIndex = 1;
+            dataGridViewSeaarchResult.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSeaarchResult.Location = new Point(26, 35);
+            dataGridViewSeaarchResult.Name = "dataGridViewSeaarchResult";
+            dataGridViewSeaarchResult.RowHeadersWidth = 51;
+            dataGridViewSeaarchResult.Size = new Size(569, 257);
+            dataGridViewSeaarchResult.TabIndex = 1;
             // 
-            // dataGridView2
+            // dataGridViewAllCustomers
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(21, 35);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(560, 257);
-            dataGridView2.TabIndex = 2;
+            dataGridViewAllCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAllCustomers.Location = new Point(27, 35);
+            dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
+            dataGridViewAllCustomers.RowHeadersWidth = 51;
+            dataGridViewAllCustomers.Size = new Size(566, 257);
+            dataGridViewAllCustomers.TabIndex = 2;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dataGridView2);
-            groupBox2.Location = new Point(735, 244);
+            groupBox2.Controls.Add(dataGridViewAllCustomers);
+            groupBox2.Location = new Point(723, 244);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(605, 320);
+            groupBox2.Size = new Size(617, 320);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Al Customers";
@@ -127,7 +181,7 @@
             // 
             groupBox3.Controls.Add(buttonInsertCust);
             groupBox3.Controls.Add(button3);
-            groupBox3.Controls.Add(button2);
+            groupBox3.Controls.Add(buttonDeleteCust);
             groupBox3.Controls.Add(textBoxCustId);
             groupBox3.Controls.Add(textCustEmail);
             groupBox3.Controls.Add(textCustConNO);
@@ -166,17 +220,19 @@
             button3.TabIndex = 8;
             button3.Text = "Update";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
-            // button2
+            // buttonDeleteCust
             // 
-            button2.BackColor = SystemColors.ActiveCaption;
-            button2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(1123, 227);
-            button2.Name = "button2";
-            button2.Size = new Size(131, 46);
-            button2.TabIndex = 3;
-            button2.Text = "Delete";
-            button2.UseVisualStyleBackColor = false;
+            buttonDeleteCust.BackColor = SystemColors.ActiveCaption;
+            buttonDeleteCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonDeleteCust.Location = new Point(1123, 227);
+            buttonDeleteCust.Name = "buttonDeleteCust";
+            buttonDeleteCust.Size = new Size(131, 46);
+            buttonDeleteCust.TabIndex = 3;
+            buttonDeleteCust.Text = "Delete";
+            buttonDeleteCust.UseVisualStyleBackColor = false;
+            buttonDeleteCust.Click += buttonDeleteCust_Click;
             // 
             // textBoxCustId
             // 
@@ -251,24 +307,38 @@
             label2.Text = "Customer Name";
             label2.Click += label2_Click;
             // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(dataGridViewSeaarchResult);
+            groupBox5.Location = new Point(62, 244);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(624, 320);
+            groupBox5.TabIndex = 5;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Search Results";
+            // 
             // CustomersForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1419, 904);
+            Controls.Add(groupBox5);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
-            Controls.Add(dataGridView1);
             Controls.Add(groupBox1);
             Name = "CustomersForm";
             Text = "CustomersForm";
+            Load += CustomersForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            groupBox5.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -276,10 +346,10 @@
 
         private GroupBox groupBox1;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox textBoxSearch;
         private Button button1;
-        private DataGridView dataGridView1;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewSeaarchResult;
+        private DataGridView dataGridViewAllCustomers;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private Label label2;
@@ -288,10 +358,16 @@
         private Label label3;
         private Button buttonInsertCust;
         private Button button3;
-        private Button button2;
+        private Button buttonDeleteCust;
         private TextBox textBoxCustId;
         private TextBox textCustEmail;
         private TextBox textCustConNO;
         private TextBox textBoxCustName;
+        private GroupBox groupBox4;
+        private RadioButton radioButton5;
+        private RadioButton radioButtonPhone;
+        private RadioButton radioButtonName;
+        private RadioButton radioButtonIdentity;
+        private GroupBox groupBox5;
     }
 }
