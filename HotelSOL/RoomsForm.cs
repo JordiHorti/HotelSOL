@@ -19,12 +19,12 @@ namespace HotelSOL
 
         private void label7_Click(object sender, EventArgs e)
         {
-            //ADIOS
+            //PACO
         }
 
         private void RoomsForm_Load(object sender, EventArgs e)
         {
-            //ADIOS
+            //MANOLO
         }
     }
 }
