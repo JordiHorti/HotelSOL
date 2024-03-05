@@ -21,5 +21,10 @@ namespace HotelSOL
         {
 
         }
+
+        private void RoomsForm_Load(object sender, EventArgs e)
+        {
+            //HOLA
+        }
     }
 }
