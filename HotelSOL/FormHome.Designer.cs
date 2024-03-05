@@ -31,7 +31,10 @@
             button1 = new Button();
             groupBox1 = new GroupBox();
             button2 = new Button();
+            groupBox2 = new GroupBox();
+            button3 = new Button();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -65,18 +68,40 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(button3);
+            groupBox2.Location = new Point(25, 192);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(532, 140);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Rooms Management";
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.Location = new Point(16, 53);
+            button3.Name = "button3";
+            button3.Size = new Size(500, 42);
+            button3.TabIndex = 0;
+            button3.Text = "Open Rooms Form";
+            button3.UseVisualStyleBackColor = true;
+            // 
             // FormHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             ControlBox = false;
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Name = "FormHome";
             Text = "FormHome";
             Load += FormHome_Load;
             groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -85,5 +110,7 @@
         private Button button1;
         private GroupBox groupBox1;
         private Button button2;
+        private GroupBox groupBox2;
+        private Button button3;
     }
 }
