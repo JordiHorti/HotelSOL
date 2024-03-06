@@ -87,6 +87,7 @@
             button3.TabIndex = 0;
             button3.Text = "Open Rooms Form";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // FormHome
             // 

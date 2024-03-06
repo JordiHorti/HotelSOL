@@ -33,7 +33,7 @@
             radioButtonPhone = new RadioButton();
             radioButtonName = new RadioButton();
             radioButtonIdentity = new RadioButton();
-            button1 = new Button();
+            buttonSearchCust = new Button();
             label1 = new Label();
             textBoxSearch = new TextBox();
             dataGridViewSeaarchResult = new DataGridView();
@@ -41,7 +41,7 @@
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             buttonInsertCust = new Button();
-            button3 = new Button();
+            buttonUpdateCust = new Button();
             buttonDeleteCust = new Button();
             textBoxCustId = new TextBox();
             textCustEmail = new TextBox();
@@ -64,7 +64,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(groupBox4);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(buttonSearchCust);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(textBoxSearch);
             groupBox1.Location = new Point(12, 12);
@@ -119,17 +119,17 @@
             radioButtonIdentity.Text = "By Indentity";
             radioButtonIdentity.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonSearchCust
             // 
-            button1.BackColor = SystemColors.ActiveCaption;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(1173, 145);
-            button1.Name = "button1";
-            button1.Size = new Size(131, 46);
-            button1.TabIndex = 2;
-            button1.Text = "Search";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            buttonSearchCust.BackColor = SystemColors.ActiveCaption;
+            buttonSearchCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSearchCust.Location = new Point(1173, 145);
+            buttonSearchCust.Name = "buttonSearchCust";
+            buttonSearchCust.Size = new Size(131, 46);
+            buttonSearchCust.TabIndex = 2;
+            buttonSearchCust.Text = "Search";
+            buttonSearchCust.UseVisualStyleBackColor = false;
+            buttonSearchCust.Click += buttonSearchCust_Click;
             // 
             // label1
             // 
@@ -180,7 +180,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(buttonInsertCust);
-            groupBox3.Controls.Add(button3);
+            groupBox3.Controls.Add(buttonUpdateCust);
             groupBox3.Controls.Add(buttonDeleteCust);
             groupBox3.Controls.Add(textBoxCustId);
             groupBox3.Controls.Add(textCustEmail);
@@ -208,19 +208,19 @@
             buttonInsertCust.TabIndex = 9;
             buttonInsertCust.Text = "Insert";
             buttonInsertCust.UseVisualStyleBackColor = false;
-            buttonInsertCust.Click += button4_Click;
+            buttonInsertCust.Click += buttonInsertCust_Click;
             // 
-            // button3
+            // buttonUpdateCust
             // 
-            button3.BackColor = SystemColors.ActiveCaption;
-            button3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(972, 227);
-            button3.Name = "button3";
-            button3.Size = new Size(131, 46);
-            button3.TabIndex = 8;
-            button3.Text = "Update";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            buttonUpdateCust.BackColor = SystemColors.ActiveCaption;
+            buttonUpdateCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonUpdateCust.Location = new Point(972, 227);
+            buttonUpdateCust.Name = "buttonUpdateCust";
+            buttonUpdateCust.Size = new Size(131, 46);
+            buttonUpdateCust.TabIndex = 8;
+            buttonUpdateCust.Text = "Update";
+            buttonUpdateCust.UseVisualStyleBackColor = false;
+            buttonUpdateCust.Click += buttonUpdateCust_Click;
             // 
             // buttonDeleteCust
             // 
@@ -290,7 +290,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13.8F);
-            label3.Location = new Point(6, 91);
+            label3.Location = new Point(9, 87);
             label3.Name = "label3";
             label3.Size = new Size(215, 31);
             label3.TabIndex = 1;
@@ -305,7 +305,6 @@
             label2.Size = new Size(179, 31);
             label2.TabIndex = 0;
             label2.Text = "Customer Name";
-            label2.Click += label2_Click;
             // 
             // groupBox5
             // 
@@ -347,7 +346,7 @@
         private GroupBox groupBox1;
         private Label label1;
         private TextBox textBoxSearch;
-        private Button button1;
+        private Button buttonSearchCust;
         private DataGridView dataGridViewSeaarchResult;
         private DataGridView dataGridViewAllCustomers;
         private GroupBox groupBox2;
@@ -357,7 +356,7 @@
         private Label label4;
         private Label label3;
         private Button buttonInsertCust;
-        private Button button3;
+        private Button buttonUpdateCust;
         private Button buttonDeleteCust;
         private TextBox textBoxCustId;
         private TextBox textCustEmail;
