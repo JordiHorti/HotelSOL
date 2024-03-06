@@ -34,5 +34,11 @@ namespace HotelSOL
             CustomersForm customersForm = new CustomersForm();
             customersForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RoomsForm roomsForm = new RoomsForm();
+            roomsForm.Show();
+        }
     }
 }

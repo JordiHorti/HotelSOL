@@ -26,12 +26,8 @@ namespace HotelSOL
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonInsertCust_Click(object sender, EventArgs e)
         {
 
             string customer_name = textBoxCustName.Text;
@@ -89,7 +85,7 @@ namespace HotelSOL
             dataGridViewAllCustomers.DataSource = dt;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSearchCust_Click(object sender, EventArgs e)
         {
             bool idSearchSlected = radioButtonIdentity.Checked;
             bool nameSearchSelected = radioButtonName.Checked;
@@ -167,7 +163,7 @@ namespace HotelSOL
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonUpdateCust_Click(object sender, EventArgs e)
         {
             string customer_name = textBoxCustName.Text;
             string customer_identityNo = textBoxCustId.Text;
