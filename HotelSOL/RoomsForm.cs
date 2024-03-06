@@ -107,6 +107,7 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
     }
 }
