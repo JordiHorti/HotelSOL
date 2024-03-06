@@ -25,7 +25,7 @@ namespace HotelSOL
 
         private void label7_Click(object sender, EventArgs e)
         {
-            //ADIOS
+            
         }
 
         private void RoomsForm_Load(object sender, EventArgs e)
@@ -81,7 +81,6 @@ namespace HotelSOL
             {
                 using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
                 {
-                    conn.ConnectionString = CONNECTION_STRING;
                     conn.Open();
 
 
@@ -89,13 +88,14 @@ namespace HotelSOL
                     SqlCommand createTableCmd = new SqlCommand("IF OBJECT_ID('dbo.rooms', 'U') IS NULL CREATE TABLE rooms (IdentityNo VARCHAR(20), roomNumber INT, type VARCHAR(100), price DECIMAL,booked bit)", conn);
                     createTableCmd.ExecuteNonQuery();
 
-                    // Insertar el cliente en la tabla customers
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@roomId, @roomNo, @roomType, @price,@booked)", conn);
-                    insertCmd.Parameters.AddWithValue("@identityNo", roomId);
+                    // Insertar la habitacion en la tabla rooms
+                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);  // Corregir nombre del parámetro
+                    insertCmd.Parameters.AddWithValue("@IdentityNo", roomId);
                     insertCmd.Parameters.AddWithValue("@roomNo", roomNo);
                     insertCmd.Parameters.AddWithValue("@roomType", roomType);
                     insertCmd.Parameters.AddWithValue("@price", price);
                     insertCmd.Parameters.AddWithValue("@booked", booked);
+
                     insertCmd.ExecuteNonQuery();
 
                     showDataRooms();
@@ -108,7 +108,5 @@ namespace HotelSOL
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-       
     }
 }
