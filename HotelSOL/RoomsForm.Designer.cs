@@ -1,4 +1,5 @@
-﻿namespace HotelSOL
+﻿
+namespace HotelSOL
 {
     partial class RoomsForm
     {
@@ -46,7 +47,7 @@
             textBoxRoomBooked = new TextBox();
             textBoxRoomPrice = new TextBox();
             buttonInsertCust = new Button();
-            button3 = new Button();
+            buttonUpdateRoom = new Button();
             buttonDeleteCust = new Button();
             textBoxRoomType = new TextBox();
             textBoxRommNo = new TextBox();
@@ -75,6 +76,7 @@
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Rooms";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // groupBox4
             // 
@@ -179,6 +181,7 @@
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
             groupBox2.Text = "Al Rooms";
+            groupBox2.Enter += groupBox2_Enter;
             // 
             // dataGridViewAllCustomers
             // 
@@ -196,7 +199,7 @@
             groupBox3.Controls.Add(textBoxRoomBooked);
             groupBox3.Controls.Add(textBoxRoomPrice);
             groupBox3.Controls.Add(buttonInsertCust);
-            groupBox3.Controls.Add(button3);
+            groupBox3.Controls.Add(buttonUpdateRoom);
             groupBox3.Controls.Add(buttonDeleteCust);
             groupBox3.Controls.Add(textBoxRoomType);
             groupBox3.Controls.Add(textBoxRommNo);
@@ -261,16 +264,17 @@
             buttonInsertCust.UseVisualStyleBackColor = false;
             buttonInsertCust.Click += buttonInsertCust_Click;
             // 
-            // button3
+            // buttonUpdateRoom
             // 
-            button3.BackColor = SystemColors.ActiveCaption;
-            button3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(974, 303);
-            button3.Name = "button3";
-            button3.Size = new Size(131, 45);
-            button3.TabIndex = 8;
-            button3.Text = "Update";
-            button3.UseVisualStyleBackColor = false;
+            buttonUpdateRoom.BackColor = SystemColors.ActiveCaption;
+            buttonUpdateRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonUpdateRoom.Location = new Point(974, 303);
+            buttonUpdateRoom.Name = "buttonUpdateRoom";
+            buttonUpdateRoom.Size = new Size(131, 45);
+            buttonUpdateRoom.TabIndex = 8;
+            buttonUpdateRoom.Text = "Update";
+            buttonUpdateRoom.UseVisualStyleBackColor = false;
+            buttonUpdateRoom.Click += buttonUpdateRoom_Click;
             // 
             // buttonDeleteCust
             // 
@@ -329,6 +333,7 @@
             // 
             // label2
             // 
+
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F);
             label2.Location = new Point(6, 43);
@@ -336,6 +341,7 @@
             label2.Size = new Size(101, 31);
             label2.TabIndex = 0;
             label2.Text = "Room ID";
+            label2.Click += label2_Click;
             // 
             // RoomsForm
             // 
@@ -362,6 +368,7 @@
             ResumeLayout(false);
         }
 
+       
         #endregion
 
         private GroupBox groupBox1;
@@ -378,7 +385,7 @@
         private DataGridView dataGridViewAllCustomers;
         private GroupBox groupBox3;
         private Button buttonInsertCust;
-        private Button button3;
+        private Button buttonUpdateRoom;
         private Button buttonDeleteCust;
         private TextBox textBoxRoomType;
         private TextBox textBoxRommNo;

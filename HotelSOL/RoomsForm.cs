@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HotelSOL
 {
@@ -25,7 +27,7 @@ namespace HotelSOL
 
         private void label7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void RoomsForm_Load(object sender, EventArgs e)
@@ -41,27 +43,27 @@ namespace HotelSOL
             adpt.Fill(dt);
             dataGridViewAllCustomers.DataSource = dt;
         }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
-
+        
         private void buttonInsertCust_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
             string roomNo = textBoxRommNo.Text;
-            string roomType= textBoxRoomType.Text;
+            string roomType = textBoxRoomType.Text;
             double price;
             bool booked;
 
-
+            
             // Convertir el valor de price a double
             if (!double.TryParse(textBoxRoomPrice.Text, out price))
             {
                 // Si el valor ingresado no es un número válido, salta mensaje de error
                 MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
 
             // Convertir el valor de booked a bool
@@ -69,14 +71,15 @@ namespace HotelSOL
             {
                 // Si el valor ingresado no es "true" o "false",salta mensaje error
                 MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
-
-            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType)){
+            
+            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
+            {
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
             }
-
+            
             try
             {
                 using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
@@ -89,7 +92,7 @@ namespace HotelSOL
                     createTableCmd.ExecuteNonQuery();
 
                     // Insertar la habitacion en la tabla rooms
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);  // Corregir nombre del parámetro
+                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);
                     insertCmd.Parameters.AddWithValue("@IdentityNo", roomId);
                     insertCmd.Parameters.AddWithValue("@roomNo", roomNo);
                     insertCmd.Parameters.AddWithValue("@roomType", roomType);
@@ -107,6 +110,80 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
+
+        private void buttonUpdateRoom_Click(object sender, EventArgs e)
+        {
+            string roomId = textBoxRoomId.Text;
+            string roomNo = textBoxRommNo.Text;
+            string roomType = textBoxRoomType.Text;
+            double price;
+            bool booked;
+            if (!double.TryParse(textBoxRoomPrice.Text, out price))
+            {
+                // Si el valor ingresado no es un número válido, salta mensaje de error
+                MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Convertir el valor de booked a bool
+            if (!bool.TryParse(textBoxRoomBooked.Text, out booked))
+            {
+                // Si el valor ingresado no es "true" o "false",salta mensaje error
+                MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
+            {
+                MessageBox.Show("No empty fields allowed except email address of the customer");
+                return;
+            }
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    conn.Open();
+                    SqlCommand updateCmd = new SqlCommand("UPDATE rooms SET  roomNumber = @roomNo, type = @roomType,price= @price,booked = @booked WHERE IdentityNo = @roomId", conn);
+                    updateCmd.Parameters.AddWithValue("@roomNo", roomNo);
+                    updateCmd.Parameters.AddWithValue("@roomType", roomType);
+                    updateCmd.Parameters.AddWithValue("@price", price);
+                    updateCmd.Parameters.AddWithValue("@booked", booked);
+                    updateCmd.Parameters.AddWithValue("@roomId", roomId);
+
+                    updateCmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Customer updated successfully!");
+
+                    showDataRooms();
+
+                    conn.Close();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Connection Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
+
     }
 }
