@@ -48,7 +48,7 @@ namespace HotelSOL
         {
 
         }
-        
+
         private void buttonInsertCust_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
@@ -57,7 +57,7 @@ namespace HotelSOL
             double price;
             bool booked;
 
-            
+
             // Convertir el valor de price a double
             if (!double.TryParse(textBoxRoomPrice.Text, out price))
             {
@@ -73,13 +73,13 @@ namespace HotelSOL
                 MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
             {
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
             }
-            
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
@@ -110,8 +110,8 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
 
+        }
         private void buttonUpdateRoom_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
@@ -183,7 +183,7 @@ namespace HotelSOL
 
         }
 
-      
+        
 
     }
 }
