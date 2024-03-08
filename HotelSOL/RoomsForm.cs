@@ -25,7 +25,7 @@ namespace HotelSOL
 
         private void label7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void RoomsForm_Load(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace HotelSOL
         {
             string roomId = textBoxRoomId.Text;
             string roomNo = textBoxRommNo.Text;
-            string roomType= textBoxRoomType.Text;
+            string roomType = textBoxRoomType.Text;
             double price;
             bool booked;
 
@@ -61,7 +61,7 @@ namespace HotelSOL
             {
                 // Si el valor ingresado no es un número válido, salta mensaje de error
                 MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
 
             // Convertir el valor de booked a bool
@@ -69,10 +69,11 @@ namespace HotelSOL
             {
                 // Si el valor ingresado no es "true" o "false",salta mensaje error
                 MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
 
-            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType)){
+            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
+            {
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
             }
@@ -89,7 +90,7 @@ namespace HotelSOL
                     createTableCmd.ExecuteNonQuery();
 
                     // Insertar la habitacion en la tabla rooms
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);  // Corregir nombre del parámetro
+                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);
                     insertCmd.Parameters.AddWithValue("@IdentityNo", roomId);
                     insertCmd.Parameters.AddWithValue("@roomNo", roomNo);
                     insertCmd.Parameters.AddWithValue("@roomType", roomType);
@@ -107,6 +108,22 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
         }
     }
