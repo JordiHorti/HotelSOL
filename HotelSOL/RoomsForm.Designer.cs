@@ -31,12 +31,12 @@ namespace HotelSOL
         {
             groupBox1 = new GroupBox();
             groupBox4 = new GroupBox();
-            radioButtonPhone = new RadioButton();
-            radioButtonName = new RadioButton();
+            radioButtonAvailability = new RadioButton();
+            radioButtonType = new RadioButton();
             radioButtonIdentity = new RadioButton();
-            button1 = new Button();
+            buttonSearch = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
+            textBoxSearch = new TextBox();
             groupBox5 = new GroupBox();
             dataGridViewSeaarchResult = new DataGridView();
             groupBox2 = new GroupBox();
@@ -48,7 +48,7 @@ namespace HotelSOL
             textBoxRoomPrice = new TextBox();
             buttonInsertCust = new Button();
             buttonUpdateRoom = new Button();
-            buttonDeleteCust = new Button();
+            buttonDeleteRoom = new Button();
             textBoxRoomType = new TextBox();
             textBoxRommNo = new TextBox();
             textBoxRoomId = new TextBox();
@@ -67,9 +67,9 @@ namespace HotelSOL
             // groupBox1
             // 
             groupBox1.Controls.Add(groupBox4);
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(buttonSearch);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(textBoxSearch);
             groupBox1.Location = new Point(11, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1328, 212);
@@ -80,8 +80,8 @@ namespace HotelSOL
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(radioButtonPhone);
-            groupBox4.Controls.Add(radioButtonName);
+            groupBox4.Controls.Add(radioButtonAvailability);
+            groupBox4.Controls.Add(radioButtonType);
             groupBox4.Controls.Add(radioButtonIdentity);
             groupBox4.Location = new Point(35, 132);
             groupBox4.Name = "groupBox4";
@@ -90,27 +90,27 @@ namespace HotelSOL
             groupBox4.TabStop = false;
             groupBox4.Text = "Search by";
             // 
-            // radioButtonPhone
+            // radioButtonAvailability
             // 
-            radioButtonPhone.AutoSize = true;
-            radioButtonPhone.Location = new Point(869, 28);
-            radioButtonPhone.Name = "radioButtonPhone";
-            radioButtonPhone.Size = new Size(122, 24);
-            radioButtonPhone.TabIndex = 3;
-            radioButtonPhone.TabStop = true;
-            radioButtonPhone.Text = "By availability";
-            radioButtonPhone.UseVisualStyleBackColor = true;
+            radioButtonAvailability.AutoSize = true;
+            radioButtonAvailability.Location = new Point(869, 28);
+            radioButtonAvailability.Name = "radioButtonAvailability";
+            radioButtonAvailability.Size = new Size(122, 24);
+            radioButtonAvailability.TabIndex = 3;
+            radioButtonAvailability.TabStop = true;
+            radioButtonAvailability.Text = "By availability";
+            radioButtonAvailability.UseVisualStyleBackColor = true;
             // 
-            // radioButtonName
+            // radioButtonType
             // 
-            radioButtonName.AutoSize = true;
-            radioButtonName.Location = new Point(560, 27);
-            radioButtonName.Name = "radioButtonName";
-            radioButtonName.Size = new Size(79, 24);
-            radioButtonName.TabIndex = 1;
-            radioButtonName.TabStop = true;
-            radioButtonName.Text = "By type";
-            radioButtonName.UseVisualStyleBackColor = true;
+            radioButtonType.AutoSize = true;
+            radioButtonType.Location = new Point(560, 27);
+            radioButtonType.Name = "radioButtonType";
+            radioButtonType.Size = new Size(79, 24);
+            radioButtonType.TabIndex = 1;
+            radioButtonType.TabStop = true;
+            radioButtonType.Text = "By type";
+            radioButtonType.UseVisualStyleBackColor = true;
             // 
             // radioButtonIdentity
             // 
@@ -123,17 +123,17 @@ namespace HotelSOL
             radioButtonIdentity.Text = "By Indentity";
             radioButtonIdentity.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonSearch
             // 
-            button1.BackColor = SystemColors.ActiveCaption;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(1173, 145);
-            button1.Name = "button1";
-            button1.Size = new Size(131, 45);
-            button1.TabIndex = 2;
-            button1.Text = "Search";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            buttonSearch.BackColor = SystemColors.ActiveCaption;
+            buttonSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonSearch.Location = new Point(1173, 145);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(131, 45);
+            buttonSearch.TabIndex = 2;
+            buttonSearch.Text = "Search";
+            buttonSearch.UseVisualStyleBackColor = false;
+            buttonSearch.Click += ButtonSearch_Click;
             // 
             // label1
             // 
@@ -145,13 +145,13 @@ namespace HotelSOL
             label1.TabIndex = 1;
             label1.Text = "Search room by type and availability";
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(34, 88);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(1276, 38);
-            textBox1.TabIndex = 0;
+            textBoxSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxSearch.Location = new Point(34, 88);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(1276, 38);
+            textBoxSearch.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -200,7 +200,7 @@ namespace HotelSOL
             groupBox3.Controls.Add(textBoxRoomPrice);
             groupBox3.Controls.Add(buttonInsertCust);
             groupBox3.Controls.Add(buttonUpdateRoom);
-            groupBox3.Controls.Add(buttonDeleteCust);
+            groupBox3.Controls.Add(buttonDeleteRoom);
             groupBox3.Controls.Add(textBoxRoomType);
             groupBox3.Controls.Add(textBoxRommNo);
             groupBox3.Controls.Add(textBoxRoomId);
@@ -274,18 +274,19 @@ namespace HotelSOL
             buttonUpdateRoom.TabIndex = 8;
             buttonUpdateRoom.Text = "Update";
             buttonUpdateRoom.UseVisualStyleBackColor = false;
-            buttonUpdateRoom.Click += buttonUpdateRoom_Click;
+            buttonUpdateRoom.Click += ButtonUpdateRoom_Click;
             // 
-            // buttonDeleteCust
+            // buttonDeleteRoom
             // 
-            buttonDeleteCust.BackColor = SystemColors.ActiveCaption;
-            buttonDeleteCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteCust.Location = new Point(1123, 303);
-            buttonDeleteCust.Name = "buttonDeleteCust";
-            buttonDeleteCust.Size = new Size(131, 45);
-            buttonDeleteCust.TabIndex = 3;
-            buttonDeleteCust.Text = "Delete";
-            buttonDeleteCust.UseVisualStyleBackColor = false;
+            buttonDeleteRoom.BackColor = SystemColors.ActiveCaption;
+            buttonDeleteRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonDeleteRoom.Location = new Point(1123, 303);
+            buttonDeleteRoom.Name = "buttonDeleteRoom";
+            buttonDeleteRoom.Size = new Size(131, 45);
+            buttonDeleteRoom.TabIndex = 3;
+            buttonDeleteRoom.Text = "Delete";
+            buttonDeleteRoom.UseVisualStyleBackColor = false;
+            buttonDeleteRoom.Click += buttonDeleteCust_Click;
             // 
             // textBoxRoomType
             // 
@@ -333,7 +334,6 @@ namespace HotelSOL
             // 
             // label2
             // 
-
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F);
             label2.Location = new Point(6, 43);
@@ -368,17 +368,17 @@ namespace HotelSOL
             ResumeLayout(false);
         }
 
-       
+
         #endregion
 
         private GroupBox groupBox1;
         private GroupBox groupBox4;
-        private RadioButton radioButtonPhone;
-        private RadioButton radioButtonName;
+        private RadioButton radioButtonAvailability;
+        private RadioButton radioButtonType;
         private RadioButton radioButtonIdentity;
-        private Button button1;
+        private Button buttonSearch;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox textBoxSearch;
         private GroupBox groupBox5;
         private DataGridView dataGridViewSeaarchResult;
         private GroupBox groupBox2;
@@ -386,7 +386,7 @@ namespace HotelSOL
         private GroupBox groupBox3;
         private Button buttonInsertCust;
         private Button buttonUpdateRoom;
-        private Button buttonDeleteCust;
+        private Button buttonDeleteRoom;
         private TextBox textBoxRoomType;
         private TextBox textBoxRommNo;
         private TextBox textBoxRoomId;
