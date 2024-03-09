@@ -43,12 +43,89 @@ namespace HotelSOL
             adpt.Fill(dt);
             dataGridViewAllCustomers.DataSource = dt;
         }
-       
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        private void ButtonSearch_Click(object sender, EventArgs e)
+        {
+            bool idSearchSlected = radioButtonIdentity.Checked;
+            bool typeSearchSelected = radioButtonType.Checked;
+            bool availabilitySearchSelected = radioButtonAvailability.Checked;
+            string textToSearch = textBoxSearch.Text;
+
+
+            if (idSearchSlected)
+            {
+                MessageBox.Show("Identity search selected");
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE IdentityNo = @IdentityNo", conn);
+                    cmd.Parameters.AddWithValue("@IdentityNo", textToSearch);
+                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    try
+                    {
+                        conn.Open();
+                        adpt.Fill(dt);
+                        dataGridViewSeaarchResult.DataSource = dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorMessage = $"Connection Error: {ex.Message}";
+                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (typeSearchSelected)
+            {
+                MessageBox.Show("Type search selected");
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE type = @type", conn);
+                    cmd.Parameters.AddWithValue("@type", textToSearch);
+                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    try
+                    {
+                        conn.Open();
+                        adpt.Fill(dt);
+                        dataGridViewSeaarchResult.DataSource = dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorMessage = $"Connection Error: {ex.Message}";
+                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (availabilitySearchSelected)
+            {
+                MessageBox.Show("Availability search selected");
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE booked = @booked", conn);
+
+                    int bookedValue = textToSearch.ToLower() == "true" ? 1 : 0;
+
+                    cmd.Parameters.AddWithValue("@booked", bookedValue);
+                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    try
+                    {
+                        conn.Open();
+                        adpt.Fill(dt);
+                        dataGridViewSeaarchResult.DataSource = dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorMessage = $"Connection Error: {ex.Message}";
+                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
-        
+
         private void buttonInsertCust_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
@@ -57,7 +134,7 @@ namespace HotelSOL
             double price;
             bool booked;
 
-            
+
             // Convertir el valor de price a double
             if (!double.TryParse(textBoxRoomPrice.Text, out price))
             {
@@ -73,13 +150,13 @@ namespace HotelSOL
                 MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
             {
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
             }
-            
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
@@ -110,7 +187,7 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
         private void buttonUpdateRoom_Click(object sender, EventArgs e)
@@ -184,7 +261,34 @@ namespace HotelSOL
 
         }
 
-      
+        private void buttonDeleteCust_Click(object sender, EventArgs e)
+        {
+            string room_identityNo = textBoxRoomId.Text;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    conn.Open();
 
+                    SqlCommand deleteCmd = new SqlCommand("DELETE FROM rooms WHERE IdentityNo = @room_identityNo", conn);
+
+                    deleteCmd.Parameters.AddWithValue("@room_identityNo", room_identityNo);
+                    deleteCmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Room deleted successfully!");
+
+                    showDataRooms();
+
+                    conn.Close();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Connection Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
