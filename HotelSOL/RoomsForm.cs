@@ -23,6 +23,9 @@ namespace HotelSOL
         public RoomsForm()
         {
             InitializeComponent();
+
+            textBoxRoomId.Leave += textBoxRoomId_Leave;
+
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -126,7 +129,7 @@ namespace HotelSOL
             }
         }
 
-        private void buttonInsertCust_Click(object sender, EventArgs e)
+        private void buttonInsertRoom_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
             string roomNo = textBoxRommNo.Text;
@@ -190,6 +193,53 @@ namespace HotelSOL
 
 
         }
+        private void LoadRoomData(string roomId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    conn.Open();
+                    SqlCommand selectCmd = new SqlCommand("SELECT roomNumber, type, price, booked FROM rooms WHERE IdentityNo = @roomId", conn);
+                    selectCmd.Parameters.AddWithValue("@roomId", roomId);
+
+                    SqlDataReader reader = selectCmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        textBoxRommNo.Text = reader["roomNumber"].ToString();
+                        textBoxRoomType.Text = reader["type"].ToString();
+                        textBoxRoomPrice.Text = reader["price"].ToString();
+                        textBoxRoomBooked.Text = reader["booked"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ninguna habitación con el ID especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    reader.Close();
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos de la habitación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Manejador de eventos para cuando se ingresa el ID de la habitación
+        private void textBoxRoomId_Leave(object sender, EventArgs e)
+        {
+
+            string roomId = textBoxRoomId.Text;
+
+            if (!string.IsNullOrEmpty(roomId))
+            {
+                LoadRoomData(roomId);
+            }
+
+        }
+
         private void buttonUpdateRoom_Click(object sender, EventArgs e)
         {
             string roomId = textBoxRoomId.Text;
@@ -217,12 +267,14 @@ namespace HotelSOL
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
             }
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
                 {
                     conn.Open();
                     SqlCommand updateCmd = new SqlCommand("UPDATE rooms SET  roomNumber = @roomNo, type = @roomType,price= @price,booked = @booked WHERE IdentityNo = @roomId", conn);
+                                       
                     updateCmd.Parameters.AddWithValue("@roomNo", roomNo);
                     updateCmd.Parameters.AddWithValue("@roomType", roomType);
                     updateCmd.Parameters.AddWithValue("@price", price);
@@ -261,7 +313,7 @@ namespace HotelSOL
 
         }
 
-        private void buttonDeleteCust_Click(object sender, EventArgs e)
+        private void buttonDeleteRoom_Click(object sender, EventArgs e)
         {
             string room_identityNo = textBoxRoomId.Text;
             try
@@ -291,10 +343,6 @@ namespace HotelSOL
             }
         }
 
-        private void textBoxRoomId_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void groupBox3_Enter(object sender, EventArgs e)
         {

@@ -41,6 +41,9 @@
             groupBox5 = new GroupBox();
             dataGridViewSeaarchResult = new DataGridView();
             groupBox3 = new GroupBox();
+            textBoxRole = new TextBox();
+            textBoxPassword = new TextBox();
+            textBoxUserName = new TextBox();
             label6 = new Label();
             buttonInsertUser = new Button();
             buttonUpdateUser = new Button();
@@ -49,9 +52,6 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            textBoxUserName = new TextBox();
-            textBoxPassword = new TextBox();
-            textBoxRole = new TextBox();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -67,11 +67,9 @@
             groupBox1.Controls.Add(buttonSearch);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(textBoxSearch);
-            groupBox1.Location = new Point(12, 11);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Location = new Point(14, 15);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(1162, 159);
+            groupBox1.Size = new Size(1328, 212);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Rooms";
@@ -81,11 +79,9 @@
             groupBox4.Controls.Add(radioButtonRole);
             groupBox4.Controls.Add(radioButtonUserName);
             groupBox4.Controls.Add(radioButtonIdentity);
-            groupBox4.Location = new Point(31, 99);
-            groupBox4.Margin = new Padding(3, 2, 3, 2);
+            groupBox4.Location = new Point(35, 132);
             groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(3, 2, 3, 2);
-            groupBox4.Size = new Size(960, 54);
+            groupBox4.Size = new Size(1097, 72);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Search by";
@@ -93,10 +89,9 @@
             // radioButtonRole
             // 
             radioButtonRole.AutoSize = true;
-            radioButtonRole.Location = new Point(760, 20);
-            radioButtonRole.Margin = new Padding(3, 2, 3, 2);
+            radioButtonRole.Location = new Point(869, 27);
             radioButtonRole.Name = "radioButtonRole";
-            radioButtonRole.Size = new Size(86, 19);
+            radioButtonRole.Size = new Size(107, 24);
             radioButtonRole.TabIndex = 3;
             radioButtonRole.TabStop = true;
             radioButtonRole.Text = "By userRole";
@@ -106,10 +101,9 @@
             // radioButtonUserName
             // 
             radioButtonUserName.AutoSize = true;
-            radioButtonUserName.Location = new Point(490, 19);
-            radioButtonUserName.Margin = new Padding(3, 2, 3, 2);
+            radioButtonUserName.Location = new Point(560, 25);
             radioButtonUserName.Name = "radioButtonUserName";
-            radioButtonUserName.Size = new Size(93, 19);
+            radioButtonUserName.Size = new Size(114, 24);
             radioButtonUserName.TabIndex = 1;
             radioButtonUserName.TabStop = true;
             radioButtonUserName.Text = "By username";
@@ -119,10 +113,9 @@
             // radioButtonIdentity
             // 
             radioButtonIdentity.AutoSize = true;
-            radioButtonIdentity.Location = new Point(164, 20);
-            radioButtonIdentity.Margin = new Padding(3, 2, 3, 2);
+            radioButtonIdentity.Location = new Point(187, 27);
             radioButtonIdentity.Name = "radioButtonIdentity";
-            radioButtonIdentity.Size = new Size(88, 19);
+            radioButtonIdentity.Size = new Size(108, 24);
             radioButtonIdentity.TabIndex = 0;
             radioButtonIdentity.TabStop = true;
             radioButtonIdentity.Text = "By Indentity";
@@ -133,10 +126,9 @@
             // 
             buttonSearch.BackColor = SystemColors.ActiveCaption;
             buttonSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonSearch.Location = new Point(1026, 109);
-            buttonSearch.Margin = new Padding(3, 2, 3, 2);
+            buttonSearch.Location = new Point(1173, 145);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(115, 34);
+            buttonSearch.Size = new Size(131, 45);
             buttonSearch.TabIndex = 2;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;
@@ -146,30 +138,27 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(30, 29);
+            label1.Location = new Point(34, 39);
             label1.Name = "label1";
-            label1.Size = new Size(310, 25);
+            label1.Size = new Size(377, 31);
             label1.TabIndex = 1;
             label1.Text = "Search User by type and availability";
             // 
             // textBoxSearch
             // 
             textBoxSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBoxSearch.Location = new Point(30, 66);
-            textBoxSearch.Margin = new Padding(3, 2, 3, 2);
+            textBoxSearch.Location = new Point(34, 88);
             textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(1117, 32);
+            textBoxSearch.Size = new Size(1276, 38);
             textBoxSearch.TabIndex = 0;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dataGridViewAllCustomers);
-            groupBox2.Location = new Point(613, 210);
-            groupBox2.Margin = new Padding(3, 2, 3, 2);
+            groupBox2.Location = new Point(701, 280);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(540, 202);
+            groupBox2.Size = new Size(617, 269);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "Al Users";
@@ -177,22 +166,19 @@
             // dataGridViewAllCustomers
             // 
             dataGridViewAllCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAllCustomers.Location = new Point(24, 26);
-            dataGridViewAllCustomers.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewAllCustomers.Location = new Point(27, 35);
             dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
             dataGridViewAllCustomers.RowHeadersWidth = 51;
-            dataGridViewAllCustomers.Size = new Size(495, 155);
+            dataGridViewAllCustomers.Size = new Size(566, 207);
             dataGridViewAllCustomers.TabIndex = 2;
             dataGridViewAllCustomers.CellContentClick += dataGridViewAllCustomers_CellContentClick;
             // 
             // groupBox5
             // 
             groupBox5.Controls.Add(dataGridViewSeaarchResult);
-            groupBox5.Location = new Point(42, 210);
-            groupBox5.Margin = new Padding(3, 2, 3, 2);
+            groupBox5.Location = new Point(48, 280);
             groupBox5.Name = "groupBox5";
-            groupBox5.Padding = new Padding(3, 2, 3, 2);
-            groupBox5.Size = new Size(546, 202);
+            groupBox5.Size = new Size(624, 269);
             groupBox5.TabIndex = 8;
             groupBox5.TabStop = false;
             groupBox5.Text = "Search Results";
@@ -201,11 +187,10 @@
             // dataGridViewSeaarchResult
             // 
             dataGridViewSeaarchResult.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewSeaarchResult.Location = new Point(23, 26);
-            dataGridViewSeaarchResult.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewSeaarchResult.Location = new Point(26, 35);
             dataGridViewSeaarchResult.Name = "dataGridViewSeaarchResult";
             dataGridViewSeaarchResult.RowHeadersWidth = 51;
-            dataGridViewSeaarchResult.Size = new Size(498, 155);
+            dataGridViewSeaarchResult.Size = new Size(569, 207);
             dataGridViewSeaarchResult.TabIndex = 1;
             // 
             // groupBox3
@@ -222,23 +207,48 @@
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label2);
             groupBox3.Font = new Font("Segoe UI", 13.8F);
-            groupBox3.Location = new Point(43, 447);
-            groupBox3.Margin = new Padding(3, 2, 3, 2);
+            groupBox3.Location = new Point(49, 596);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(1118, 278);
+            groupBox3.Size = new Size(1278, 371);
             groupBox3.TabIndex = 10;
             groupBox3.TabStop = false;
             groupBox3.Text = "User Details";
             groupBox3.Enter += groupBox3_Enter;
             // 
+            // textBoxRole
+            // 
+            textBoxRole.Font = new Font("Segoe UI", 13.8F);
+            textBoxRole.Location = new Point(187, 185);
+            textBoxRole.Name = "textBoxRole";
+            textBoxRole.Size = new Size(1067, 38);
+            textBoxRole.TabIndex = 15;
+            textBoxRole.TextChanged += textBoxRole_TextChanged;
+            // 
+            // textBoxPassword
+            // 
+            textBoxPassword.Font = new Font("Segoe UI", 13.8F);
+            textBoxPassword.Location = new Point(187, 137);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.Size = new Size(1067, 38);
+            textBoxPassword.TabIndex = 14;
+            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
+            // 
+            // textBoxUserName
+            // 
+            textBoxUserName.Font = new Font("Segoe UI", 13.8F);
+            textBoxUserName.Location = new Point(187, 89);
+            textBoxUserName.Name = "textBoxUserName";
+            textBoxUserName.Size = new Size(1067, 38);
+            textBoxUserName.TabIndex = 13;
+            textBoxUserName.TextChanged += textBoxUserName_TextChanged;
+            // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 13.8F);
-            label6.Location = new Point(8, 131);
+            label6.Location = new Point(9, 175);
             label6.Name = "label6";
-            label6.Size = new Size(91, 25);
+            label6.Size = new Size(110, 31);
             label6.TabIndex = 12;
             label6.Text = "User Role";
             // 
@@ -246,10 +256,9 @@
             // 
             buttonInsertUser.BackColor = SystemColors.ActiveCaption;
             buttonInsertUser.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInsertUser.Location = new Point(724, 227);
-            buttonInsertUser.Margin = new Padding(3, 2, 3, 2);
+            buttonInsertUser.Location = new Point(827, 303);
             buttonInsertUser.Name = "buttonInsertUser";
-            buttonInsertUser.Size = new Size(115, 34);
+            buttonInsertUser.Size = new Size(131, 45);
             buttonInsertUser.TabIndex = 9;
             buttonInsertUser.Text = "Insert";
             buttonInsertUser.UseVisualStyleBackColor = false;
@@ -259,42 +268,41 @@
             // 
             buttonUpdateUser.BackColor = SystemColors.ActiveCaption;
             buttonUpdateUser.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateUser.Location = new Point(852, 227);
-            buttonUpdateUser.Margin = new Padding(3, 2, 3, 2);
+            buttonUpdateUser.Location = new Point(974, 303);
             buttonUpdateUser.Name = "buttonUpdateUser";
-            buttonUpdateUser.Size = new Size(115, 34);
+            buttonUpdateUser.Size = new Size(131, 45);
             buttonUpdateUser.TabIndex = 8;
             buttonUpdateUser.Text = "Update";
             buttonUpdateUser.UseVisualStyleBackColor = false;
+            buttonUpdateUser.Click += buttonUpdateUser_Click;
             // 
             // buttonDeleteUser
             // 
             buttonDeleteUser.BackColor = SystemColors.ActiveCaption;
             buttonDeleteUser.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteUser.Location = new Point(983, 227);
-            buttonDeleteUser.Margin = new Padding(3, 2, 3, 2);
+            buttonDeleteUser.Location = new Point(1123, 303);
             buttonDeleteUser.Name = "buttonDeleteUser";
-            buttonDeleteUser.Size = new Size(115, 34);
+            buttonDeleteUser.Size = new Size(131, 45);
             buttonDeleteUser.TabIndex = 3;
             buttonDeleteUser.Text = "Delete";
             buttonDeleteUser.UseVisualStyleBackColor = false;
+            buttonDeleteUser.Click += buttonDeleteUser_Click;
             // 
             // textBoxUserId
             // 
             textBoxUserId.Font = new Font("Segoe UI", 13.8F);
-            textBoxUserId.Location = new Point(164, 29);
-            textBoxUserId.Margin = new Padding(3, 2, 3, 2);
+            textBoxUserId.Location = new Point(187, 39);
             textBoxUserId.Name = "textBoxUserId";
-            textBoxUserId.Size = new Size(934, 32);
+            textBoxUserId.Size = new Size(1067, 38);
             textBoxUserId.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F);
-            label4.Location = new Point(8, 98);
+            label4.Location = new Point(9, 131);
             label4.Name = "label4";
-            label4.Size = new Size(91, 25);
+            label4.Size = new Size(110, 31);
             label4.TabIndex = 2;
             label4.Text = "Password";
             // 
@@ -302,9 +310,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13.8F);
-            label3.Location = new Point(5, 67);
+            label3.Location = new Point(6, 89);
             label3.Name = "label3";
-            label3.Size = new Size(105, 25);
+            label3.Size = new Size(127, 31);
             label3.TabIndex = 1;
             label3.Text = "User Name";
             // 
@@ -312,52 +320,23 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F);
-            label2.Location = new Point(5, 31);
+            label2.Location = new Point(6, 41);
             label2.Name = "label2";
-            label2.Size = new Size(73, 25);
+            label2.Size = new Size(88, 31);
             label2.TabIndex = 0;
             label2.Text = "User ID";
             label2.Click += label2_Click;
             // 
-            // textBoxUserName
-            // 
-            textBoxUserName.Font = new Font("Segoe UI", 13.8F);
-            textBoxUserName.Location = new Point(164, 67);
-            textBoxUserName.Margin = new Padding(3, 2, 3, 2);
-            textBoxUserName.Name = "textBoxUserName";
-            textBoxUserName.Size = new Size(934, 32);
-            textBoxUserName.TabIndex = 13;
-            textBoxUserName.TextChanged += textBoxUserName_TextChanged;
-            // 
-            // textBoxPassword
-            // 
-            textBoxPassword.Font = new Font("Segoe UI", 13.8F);
-            textBoxPassword.Location = new Point(164, 103);
-            textBoxPassword.Margin = new Padding(3, 2, 3, 2);
-            textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.Size = new Size(934, 32);
-            textBoxPassword.TabIndex = 14;
-            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
-            // 
-            // textBoxRole
-            // 
-            textBoxRole.Font = new Font("Segoe UI", 13.8F);
-            textBoxRole.Location = new Point(164, 139);
-            textBoxRole.Margin = new Padding(3, 2, 3, 2);
-            textBoxRole.Name = "textBoxRole";
-            textBoxRole.Size = new Size(934, 32);
-            textBoxRole.TabIndex = 15;
-            textBoxRole.TextChanged += textBoxRole_TextChanged;
-            // 
             // UsersForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1635, 773);
+            ClientSize = new Size(1869, 1031);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox5);
             Controls.Add(groupBox1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "UsersForm";
             Text = "UsersForm";
             Load += UsersForm_Load;

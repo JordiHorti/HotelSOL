@@ -26,6 +26,7 @@ namespace HotelSOL
 
         }
 
+        //Mostrar usuarios 
         private void button1_Click(object sender, EventArgs e)
         {
             string username = textBoxUsername.Text.ToString();

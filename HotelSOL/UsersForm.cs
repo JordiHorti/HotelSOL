@@ -161,9 +161,8 @@ namespace HotelSOL
 
         private void buttonInsertUser_Click(object sender, EventArgs e)
         {
-            // FALLA AQUI ESTA OPCION DE INSERTAR -----------------------------
 
-            /*
+
             string userId = textBoxUserId.Text;
             string userName = textBoxUserName.Text;
             string password = textBoxPassword.Text;
@@ -181,11 +180,10 @@ namespace HotelSOL
                     //createTableCmd.ExecuteNonQuery();
 
                     // Insertar usuario en la tabla user_table
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO user_table (user_id, username, password, user_role) VALUES (@user_id, @username, @password, @user_role)", conn);
-                    insertCmd.Parameters.AddWithValue("@user_id", userId);
-                    insertCmd.Parameters.AddWithValue("@username", userName);
+                    SqlCommand insertCmd = new SqlCommand("INSERT INTO user_table ( username, password, user_role) VALUES (@userName, @password, @role)", conn);
+                    insertCmd.Parameters.AddWithValue("@userName", userName);
                     insertCmd.Parameters.AddWithValue("@password", password);
-                    insertCmd.Parameters.AddWithValue("@user_role", role);
+                    insertCmd.Parameters.AddWithValue("@role", role);
 
                     insertCmd.ExecuteNonQuery();
 
@@ -198,7 +196,7 @@ namespace HotelSOL
                 string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            */
+
 
         }
 
@@ -215,6 +213,64 @@ namespace HotelSOL
         private void textBoxRole_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonDeleteUser_Click(object sender, EventArgs e)
+        {
+            string user_identityNo = textBoxUserId.Text;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                {
+                    conn.Open();
+
+                    SqlCommand deleteCmd = new SqlCommand("DELETE FROM user_table WHERE user_id = @user_identityNo", conn);
+
+                    deleteCmd.Parameters.AddWithValue("@user_identityNo", user_identityNo);
+                    deleteCmd.ExecuteNonQuery();
+
+                    MessageBox.Show("User deleted successfully!");
+
+                    showDataUsers();
+
+                    conn.Close();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Connection Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonUpdateUser_Click(object sender, EventArgs e)
+        {
+            string userId = textBoxUserId.Text;
+            string userName = textBoxUserName.Text;
+            string password = textBoxPassword.Text;
+            string role = textBoxRole.Text;
+
+            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            {
+                conn.Open();
+
+                SqlCommand updateCmd = new SqlCommand("UPDATE user_table SET username = @userName , password = @password, user_role = @role WHERE user_id = @userId", conn);
+                updateCmd.Parameters.AddWithValue("@userName", userName);
+                updateCmd.Parameters.AddWithValue("@password", password);
+                updateCmd.Parameters.AddWithValue("@role", role);
+                updateCmd.Parameters.AddWithValue("@userId", userId);
+                updateCmd.ExecuteNonQuery();
+
+                MessageBox.Show("Customer updated successfully!");
+
+                showDataUsers();
+
+                conn.Close();
+
+
+            }
         }
     }
 }
