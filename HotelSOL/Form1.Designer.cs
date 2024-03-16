@@ -47,7 +47,6 @@
             label1.Size = new Size(773, 45);
             label1.TabIndex = 0;
             label1.Text = "Welcome to Hotel SOL Management System";
-            label1.Click += label1_Click;
             // 
             // groupBox1
             // 
@@ -63,7 +62,6 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Please login to coniue";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // button1
             // 
@@ -90,7 +88,6 @@
             textBoxUsername.Name = "textBoxUsername";
             textBoxUsername.Size = new Size(420, 34);
             textBoxUsername.TabIndex = 2;
-            textBoxUsername.TextChanged += textBox1_TextChanged;
             // 
             // label3
             // 
@@ -123,7 +120,6 @@
             Margin = new Padding(9, 7, 9, 7);
             Name = "Form1";
             Text = "Hotel Management System Login";
-            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
