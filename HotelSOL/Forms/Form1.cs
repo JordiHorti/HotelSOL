@@ -29,7 +29,7 @@ namespace HotelSOL
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "SELECT user_id, user_role FROM user_table WHERE username = @username AND password = @password";
+                cmd.CommandText = "SELECT users_id, user_role FROM users WHERE username = @userName AND password = @password";
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
 

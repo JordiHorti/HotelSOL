@@ -66,10 +66,11 @@ namespace HotelSOL
                 // Crear un nuevo objeto Customer con los datos del formulario
                 Customer newCustomer = new Customer
                 {
-                    CustomerName = customer_name,
-                    CustomerPhone = customerPhoneNo,
-                    CustomerEmail = customerEmail
+                    customerName = customer_name,
+                    customerEmail = customerEmail,
+                    customerPhone = customerPhoneNo
                 };
+                Console.WriteLine("Estamos aquí");
 
                 // Guardar el nuevo cliente en la base de datos utilizando el DAO genérico
                 _customerDAO.Insert(newCustomer);
@@ -134,7 +135,7 @@ namespace HotelSOL
                             dataGridViewSeaarchResult.Columns.Add("Column3", "Customer Phone");
                             dataGridViewSeaarchResult.Columns.Add("Column4", "Customer Email");
                         }
-                        dataGridViewSeaarchResult.Rows.Add(customer.customer_id, customer.CustomerName, customer.CustomerPhone, customer.CustomerEmail);
+                        dataGridViewSeaarchResult.Rows.Add(customer.customer_id, customer.customerName, customer.customerPhone, customer.customerEmail);
                     }
                     else
                     {
@@ -206,9 +207,9 @@ namespace HotelSOL
                     if (customerToUpdate != null)
                     {
                         // Actualizar los datos del cliente con los nuevos valores del formulario
-                        customerToUpdate.CustomerName = textBoxCustName.Text;
-                        customerToUpdate.CustomerPhone = textCustConNO.Text;
-                        customerToUpdate.CustomerEmail = textCustEmail.Text;
+                        customerToUpdate.customerName = textBoxCustName.Text;
+                        customerToUpdate.customerPhone = textCustConNO.Text;
+                        customerToUpdate.customerEmail = textCustEmail.Text;
 
                         // Utilizar el método Update del DAO para guardar los cambios
                         _customerDAO.Update(customerToUpdate);

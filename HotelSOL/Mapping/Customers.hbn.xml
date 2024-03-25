@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="HotelSOL" namespace="HotelSOL.Models">
 
-	<class name="Customer" table="customer">
-		<id name="customer_id" column="IdentityNo" type="Int32">
+	<class name="Customer" table="customers">
+		<id name="customer_id" column="customer_id" type="Int32">
 			<generator class="identity"/>
 		</id>
-		<property name="CustomerName" column="customerName"/>
-		<property name="CustomerPhone" column="customerPhone"/>
-		<property name="CustomerEmail" column="customerEmail"/>
+		<property name="customerName" column="customerName"/>
+		<property name="customerEmail" column="customerEmail"/>
+		<property name="customerPhone" column="customerPhone"/>
 	</class>
 
 </hibernate-mapping>
