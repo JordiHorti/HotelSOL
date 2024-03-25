@@ -37,25 +37,25 @@ namespace HotelSOL
 
                 if (reader.HasRows)
                 {
-                    reader.Read(); 
-                    int userRole = reader.GetInt32(1); 
+                    reader.Read();
+                    int userRole = reader.GetInt32(1);
 
                     Form nextForm;
 
                     switch (userRole)
                     {
                         case 1:
-                            nextForm = new FormHome(); 
+                            nextForm = new FormHome();
                             break;
                         case 2:
-                            nextForm = new RoomsCliente(); 
+                            nextForm = new RoomsCliente();
                             break;
                         case 3:
-                            nextForm = new FormHome(); 
+                            nextForm = new FormHome();
                             break;
                         default:
                             MessageBox.Show("Rol de usuario no encontrado");
-                            nextForm = null; 
+                            nextForm = null;
                             break;
                     }
 
@@ -74,5 +74,9 @@ namespace HotelSOL
             }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

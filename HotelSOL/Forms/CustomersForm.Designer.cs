@@ -121,6 +121,7 @@
             // 
             // buttonSearchCust
             // 
+            
             buttonSearchCust.BackColor = SystemColors.ActiveCaption;
             buttonSearchCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonSearchCust.Location = new Point(1173, 145);
@@ -212,6 +213,7 @@
             // 
             // buttonUpdateCust
             // 
+            
             buttonUpdateCust.BackColor = SystemColors.ActiveCaption;
             buttonUpdateCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonUpdateCust.Location = new Point(972, 227);
@@ -224,6 +226,7 @@
             // 
             // buttonDeleteCust
             // 
+            
             buttonDeleteCust.BackColor = SystemColors.ActiveCaption;
             buttonDeleteCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonDeleteCust.Location = new Point(1123, 227);

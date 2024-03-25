@@ -27,6 +27,9 @@ namespace HotelSOL
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
+
+        
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
@@ -66,6 +69,7 @@ namespace HotelSOL
             // 
             // groupBox1
             // 
+            
             groupBox1.Controls.Add(groupBox4);
             groupBox1.Controls.Add(buttonSearch);
             groupBox1.Controls.Add(label1);
@@ -370,7 +374,7 @@ namespace HotelSOL
             groupBox3.PerformLayout();
             ResumeLayout(false);
         }
-
+        
 
         #endregion
 
@@ -401,4 +405,5 @@ namespace HotelSOL
         private TextBox textBoxRoomBooked;
         private TextBox textBoxRoomPrice;
     }
+    
 }

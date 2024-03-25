@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HotelSOL.DAO;
+using HotelSOL.Models;
+using HotelSOL.Nhibernate;
+using NHibernate;
+
 
 namespace HotelSOL
 {
     public partial class FormHome : Form
     {
+        private IDAO<Customer> _customerDAO;
+        private NhibernateUtils _nhibernateUtils;
+
+
         public FormHome()
         {
             InitializeComponent();
+            _nhibernateUtils = new NhibernateUtils() ?? throw new ArgumentNullException(nameof(_nhibernateUtils));
         }
 
         private void FormHome_Load(object sender, EventArgs e)

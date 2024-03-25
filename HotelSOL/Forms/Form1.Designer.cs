@@ -120,6 +120,7 @@
             Margin = new Padding(9, 7, 9, 7);
             Name = "Form1";
             Text = "Hotel Management System Login";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

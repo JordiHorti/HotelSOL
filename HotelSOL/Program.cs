@@ -1,3 +1,11 @@
+using NHibernate.Cfg;
+using NHibernate.Dialect;
+using NHibernate.Driver;
+using System.Reflection;
+
+
+
+
 namespace HotelSOL
 {
     internal static class Program

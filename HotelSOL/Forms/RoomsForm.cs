@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HotelSOL.Models;
+using HotelSOL.Nhibernate;
+using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,23 +13,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using HotelSOL.Nhibernate;
+using HotelSOL.Models;
+using HotelSOL.DAO;
+using NHibernate;
+using NHibernate.Cfg;
+
 
 namespace HotelSOL
 {
     public partial class RoomsForm : Form
     {
-        private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-        SqlDataAdapter adpt;
-        DataTable dt;
-        SqlConnection conn = new SqlConnection();
+        private IDAO<Room> _roomDAO;
+
+        private Configuration myConfiguration;
+
+        private ISessionFactory mySessionFactory;
+
+        private ISession mySession;
 
         public RoomsForm()
         {
             InitializeComponent();
 
+            myConfiguration = new Configuration()
+                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Customers.hbn.xml");
+            mySessionFactory = myConfiguration.BuildSessionFactory();
+
+            // Inicializar DAO con la sesión obtenida del sessionFactory
+            _roomDAO = new DAOimpl<Room>(mySessionFactory.OpenSession());
+
             textBoxRoomId.Leave += textBoxRoomId_Leave;
 
+
         }
+
+
+        private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        SqlDataAdapter adpt;
+        DataTable dt;
+        SqlConnection conn = new SqlConnection();
+
+     
 
         private void label7_Click(object sender, EventArgs e)
         {
@@ -274,7 +302,7 @@ namespace HotelSOL
                 {
                     conn.Open();
                     SqlCommand updateCmd = new SqlCommand("UPDATE rooms SET  roomNumber = @roomNo, type = @roomType,price= @price,booked = @booked WHERE IdentityNo = @roomId", conn);
-                                       
+
                     updateCmd.Parameters.AddWithValue("@roomNo", roomNo);
                     updateCmd.Parameters.AddWithValue("@roomType", roomType);
                     updateCmd.Parameters.AddWithValue("@price", price);
@@ -359,4 +387,5 @@ namespace HotelSOL
 
         }
     }
+    
 }
