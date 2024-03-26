@@ -37,10 +37,11 @@
             label1 = new Label();
             textBoxSearch = new TextBox();
             groupBox2 = new GroupBox();
-            dataGridViewAllCustomers = new DataGridView();
+            dataGridViewAllUsers = new DataGridView();
             groupBox5 = new GroupBox();
             dataGridViewSeaarchResult = new DataGridView();
             groupBox3 = new GroupBox();
+            buttonExport = new Button();
             textBoxRole = new TextBox();
             textBoxPassword = new TextBox();
             textBoxUserName = new TextBox();
@@ -52,11 +53,10 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            buttonExport = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllUsers).BeginInit();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
             groupBox3.SuspendLayout();
@@ -156,7 +156,7 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dataGridViewAllCustomers);
+            groupBox2.Controls.Add(dataGridViewAllUsers);
             groupBox2.Location = new Point(701, 280);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(617, 269);
@@ -164,15 +164,15 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Al Users";
             // 
-            // dataGridViewAllCustomers
+            // dataGridViewAllUsers
             // 
-            dataGridViewAllCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAllCustomers.Location = new Point(27, 35);
-            dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
-            dataGridViewAllCustomers.RowHeadersWidth = 51;
-            dataGridViewAllCustomers.Size = new Size(566, 207);
-            dataGridViewAllCustomers.TabIndex = 2;
-            dataGridViewAllCustomers.CellContentClick += dataGridViewAllCustomers_CellContentClick;
+            dataGridViewAllUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAllUsers.Location = new Point(27, 35);
+            dataGridViewAllUsers.Name = "dataGridViewAllUsers";
+            dataGridViewAllUsers.RowHeadersWidth = 51;
+            dataGridViewAllUsers.Size = new Size(566, 207);
+            dataGridViewAllUsers.TabIndex = 2;
+            dataGridViewAllUsers.CellContentClick += dataGridViewAllCustomers_CellContentClick;
             // 
             // groupBox5
             // 
@@ -216,6 +216,17 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "User Details";
             groupBox3.Enter += groupBox3_Enter;
+            // 
+            // buttonExport
+            // 
+            buttonExport.BackColor = SystemColors.ActiveCaption;
+            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonExport.Location = new Point(25, 302);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(131, 46);
+            buttonExport.TabIndex = 16;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = false;
             // 
             // textBoxRole
             // 
@@ -329,17 +340,6 @@
             label2.Text = "User ID";
             label2.Click += label2_Click;
             // 
-            // buttonExport
-            // 
-            buttonExport.BackColor = SystemColors.ActiveCaption;
-            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(25, 302);
-            buttonExport.Name = "buttonExport";
-            buttonExport.Size = new Size(131, 46);
-            buttonExport.TabIndex = 16;
-            buttonExport.Text = "Export";
-            buttonExport.UseVisualStyleBackColor = false;
-            // 
             // UsersForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -358,7 +358,7 @@
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllUsers).EndInit();
             groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).EndInit();
             groupBox3.ResumeLayout(false);
@@ -377,7 +377,7 @@
         private Label label1;
         private TextBox textBoxSearch;
         private GroupBox groupBox2;
-        private DataGridView dataGridViewAllCustomers;
+        private DataGridView dataGridViewAllUsers;
         private GroupBox groupBox5;
         private DataGridView dataGridViewSeaarchResult;
         private GroupBox groupBox3;

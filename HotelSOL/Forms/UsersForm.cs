@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelSOL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,20 +9,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HotelSOL.DAO;
+using NHibernate;
+using NHibernate.Cfg;
 
 namespace HotelSOL
 {
     public partial class UsersForm : Form
     {
 
-        private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-        SqlDataAdapter adpt;
-        DataTable dt;
-        SqlConnection conn = new SqlConnection();
+
+        private IDAO<User> _userDAO;
+
+        private Configuration myConfiguration;
+
+        private ISessionFactory mySessionFactory;
+
 
         public UsersForm()
         {
             InitializeComponent();
+            myConfiguration = new Configuration()
+               .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Users.hbn.xml");
+            mySessionFactory = myConfiguration.BuildSessionFactory();
+
+            // Inicializar DAO con la sesión obtenida del sessionFactory
+            _userDAO = new DAOimpl<User>(mySessionFactory.OpenSession());
         }
 
         private void UsersForm_Load(object sender, EventArgs e)
@@ -31,11 +44,19 @@ namespace HotelSOL
 
         private void showDataUsers()
         {
-            conn.ConnectionString = CONNECTION_STRING;
-            adpt = new SqlDataAdapter("SELECT * FROM user_table", conn);
-            dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAllCustomers.DataSource = dt;
+            try
+            {
+                // Obtener todos los usuaios utilizando el DAO 
+                IList<User> users = _userDAO.GetAll();
+
+                // Mostrar los clientes en el DataGridView
+                dataGridViewAllUsers.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void groupBox5_Enter(object sender, EventArgs e)
@@ -74,71 +95,99 @@ namespace HotelSOL
             if (idSearchSlected)
             {
                 MessageBox.Show("Identity search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                // Intentar convertir el valor de textToSearch a int
+                if (int.TryParse(textToSearch, out int userId))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM user_table WHERE user_id = @user_id", conn);
-                    cmd.Parameters.AddWithValue("@user_id", textToSearch);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
 
-                    try
+                    // Utilizar el método GetById con el ID convertido a int
+                    User user = _userDAO.GetById(userId);
+
+
+                    // Verificar si se encontró el usuario
+                    if (user != null)
                     {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
+                        dataGridViewSeaarchResult.Columns.Clear();
+                        // Agregar las columnas necesarias si aún no están presentes
+                        if (dataGridViewSeaarchResult.Columns.Count == 0)
+                        {
+                            dataGridViewSeaarchResult.Columns.Add("Column1", "User ID");
+                            dataGridViewSeaarchResult.Columns.Add("Column2", "User Name");
+                            dataGridViewSeaarchResult.Columns.Add("Column3", "User Password");
+                            dataGridViewSeaarchResult.Columns.Add("Column4", "User Role");
+                            dataGridViewSeaarchResult.Columns.Add("Column5", "Customer Email");
+                        }
+                        dataGridViewSeaarchResult.Rows.Add(user.user_id, user.userName, user.password, user.user_role);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"No customer found with ID: {userId}");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Invalid customer ID");
+                }
+
             }
             else if (userNameSearchSelected)
             {
-                MessageBox.Show("User search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
-                {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM user_table WHERE username = @username", conn);
-                    cmd.Parameters.AddWithValue("@username", textToSearch);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
 
-                    try
+                try
+                {
+                    using (ISession mySession = mySessionFactory.OpenSession())
                     {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dataGridViewSeaarchResult.Columns.Clear();
+
+
+                        // Crear una consulta HQL para buscar clientes por nombre
+                        string hqlQuery = "FROM User WHERE userName LIKE :userName";
+
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetString("userName", "%" + textToSearch + "%");
+
+                        // Obtener los resultados de la consulta
+                        IList<User> users = query.List<User>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = users;
+
                     }
                 }
+                catch (Exception ex)
+                {
+                    string errorMessage = $"Connection Error: {ex.Message}";
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             else if (roleSearchSelected)
             {
-                MessageBox.Show("Identity search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                try
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM user_table WHERE user_role = @user_role", conn);
-                    cmd.Parameters.AddWithValue("@user_role", textToSearch);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
 
-                    try
+                    using (ISession mySession = mySessionFactory.OpenSession())
                     {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Crear una consulta HQL para buscar clientes por teléfono
+                        string hqlQuery = "FROM User WHERE user_role =:role";
+
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetInt32("role", int.Parse(textToSearch));
+
+                        // Obtener los resultados de la consulta
+                        IList<User> users = query.List<User>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = users;
                     }
                 }
+                catch (Exception ex)
+                {
+                    string errorMessage = $"Connection Error: {ex.Message}";
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
 
             }
 
@@ -162,44 +211,43 @@ namespace HotelSOL
         private void buttonInsertUser_Click(object sender, EventArgs e)
         {
 
-
-            string userId = textBoxUserId.Text;
             string userName = textBoxUserName.Text;
             string password = textBoxPassword.Text;
             string role = textBoxRole.Text;
 
+            
+            if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password) || String.IsNullOrEmpty(role))
+            {
+                MessageBox.Show("No empty fields allowed");
+                return;
+            }
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                // Crear un nuevo objeto Customer con los datos del formulario
+                User newUser = new User
                 {
-                    conn.Open();
 
+                    userName = userName,
+                    password = password,
+                    user_role = int.Parse(role)
 
-                    // Verificar si la tabla user_table existe, y si no existe, crearla
-                    //SqlCommand createTableCmd = new SqlCommand("IF OBJECT_ID('dbo.user_table', 'U') IS NULL CREATE TABLE user_table (user_id VARCHAR(20), username INT, type VARCHAR(100), price DECIMAL,booked bit)", conn);
-                    //createTableCmd.ExecuteNonQuery();
+                };
 
-                    // Insertar usuario en la tabla user_table
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO user_table ( username, password, user_role) VALUES (@userName, @password, @role)", conn);
-                    insertCmd.Parameters.AddWithValue("@userName", userName);
-                    insertCmd.Parameters.AddWithValue("@password", password);
-                    insertCmd.Parameters.AddWithValue("@role", role);
+                // Guardar el nuevo usuarios en la base de datos utilizando el DAO genérico
+                _userDAO.Insert(newUser);
 
-                    insertCmd.ExecuteNonQuery();
+                showDataUsers(); // Actualizar la visualización de los usuarios en el formulario
+                MessageBox.Show("Usuario added successfully!");
 
-                    showDataUsers();
-                    MessageBox.Show("User added successfully");
-                }
             }
             catch (Exception ex)
             {
-                string errorMessage = $"Connection Error: {ex.Message}";
+                string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
+                
         }
-
         private void textBoxUserName_TextChanged(object sender, EventArgs e)
         {
 
@@ -217,59 +265,87 @@ namespace HotelSOL
 
         private void buttonDeleteUser_Click(object sender, EventArgs e)
         {
-            string user_identityNo = textBoxUserId.Text;
+            string user_id = textBoxUserId.Text;
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                // Intentar convertir el ID del usuario a entero
+                if (int.TryParse(user_id, out int userId))
                 {
-                    conn.Open();
+                    // Utilizar el método GetById para obtener el usuario por su ID
+                    User userToDelete = _userDAO.GetById(userId);
 
-                    SqlCommand deleteCmd = new SqlCommand("DELETE FROM user_table WHERE user_id = @user_identityNo", conn);
+                    if (userToDelete != null)
+                    {
+                        // Eliminar el cliente utilizando el método Delete del DAO
+                        _userDAO.Delete(userToDelete);
 
-                    deleteCmd.Parameters.AddWithValue("@user_identityNo", user_identityNo);
-                    deleteCmd.ExecuteNonQuery();
+                        MessageBox.Show("User deleted successfully!");
 
-                    MessageBox.Show("User deleted successfully!");
-
-                    showDataUsers();
-
-                    conn.Close();
-
-
+                        // Actualizar la visualización de los clientes en el formulario
+                        showDataUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No user found with ID: {userId}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid user ID");
                 }
             }
             catch (Exception ex)
             {
-                string errorMessage = $"Connection Error: {ex.Message}";
+                string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void buttonUpdateUser_Click(object sender, EventArgs e)
         {
-            string userId = textBoxUserId.Text;
+            string user_id = textBoxUserId.Text;
             string userName = textBoxUserName.Text;
             string password = textBoxPassword.Text;
             string role = textBoxRole.Text;
 
-            using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+            try
             {
-                conn.Open();
+                // Intentar convertir el ID del usuario a entero
+                if (int.TryParse(user_id, out int userId))
+                {
+                    // Utilizar el método GetById para obtener el usuario por su ID
+                    User userToUpdate = _userDAO.GetById(userId);
 
-                SqlCommand updateCmd = new SqlCommand("UPDATE user_table SET username = @userName , password = @password, user_role = @role WHERE user_id = @userId", conn);
-                updateCmd.Parameters.AddWithValue("@userName", userName);
-                updateCmd.Parameters.AddWithValue("@password", password);
-                updateCmd.Parameters.AddWithValue("@role", role);
-                updateCmd.Parameters.AddWithValue("@userId", userId);
-                updateCmd.ExecuteNonQuery();
+                    if (userToUpdate != null)
+                    {
+                        // Actualizar los datos del usuario con los nuevos valores del formulario
+                        userToUpdate.userName = textBoxUserName.Text;
+                        userToUpdate.password = textBoxPassword.Text;
+                        userToUpdate.user_role = int.Parse(textBoxRole.Text);
 
-                MessageBox.Show("Customer updated successfully!");
+                        // Utilizar el método Update del DAO para guardar los cambios
+                        _userDAO.Update(userToUpdate);
 
-                showDataUsers();
+                        MessageBox.Show("User updated successfully!");
 
-                conn.Close();
-
-
+                        // Actualizar la visualización de los usuario en el formulario
+                        showDataUsers();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No user found with ID: {userId}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid user ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

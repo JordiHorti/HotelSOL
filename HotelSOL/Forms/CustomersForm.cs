@@ -157,7 +157,7 @@ namespace HotelSOL
                         dataGridViewSeaarchResult.Columns.Clear();
 
 
-                        // Crear una consulta HQL para buscar clientes por teléfono
+                        // Crear una consulta HQL para buscar clientes por nombre
                         string hqlQuery = "FROM Customer WHERE CustomerName LIKE :name";
 
                         // Ejecutar la consulta utilizando NHibernate

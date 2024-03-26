@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HotelSOL.Models
 {
-    internal class User
+    public class User
     {
         public virtual int user_id { get; set; }
-        public virtual string username { get; set; }
+        public virtual string userName { get; set; }
         public virtual string password { get; set; }
         public virtual int user_role { get; set; }
     }
