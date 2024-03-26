@@ -70,7 +70,6 @@ namespace HotelSOL
                     customerEmail = customerEmail,
                     customerPhone = customerPhoneNo
                 };
-                Console.WriteLine("Estamos aquí");
 
                 // Guardar el nuevo cliente en la base de datos utilizando el DAO genérico
                 _customerDAO.Insert(newCustomer);
@@ -151,27 +150,40 @@ namespace HotelSOL
             else if (nameSearchSelected)
             {
 
-                using (ISession mySession = mySessionFactory.OpenSession())
+                try
                 {
-                    dataGridViewSeaarchResult.Columns.Clear();
-                    // Crear una consulta HQL para buscar clientes por teléfono
-                    string hqlQuery = "FROM Customer WHERE CustomerName LIKE :name";
+                    using (ISession mySession = mySessionFactory.OpenSession())
+                    {
+                        dataGridViewSeaarchResult.Columns.Clear();
 
-                    // Ejecutar la consulta utilizando NHibernate
-                    IQuery query = mySession.CreateQuery(hqlQuery);
-                    query.SetString("name", "%" + textToSearch + "%");
 
-                    // Obtener los resultados de la consulta
-                    IList<Customer> customers = query.List<Customer>();
+                        // Crear una consulta HQL para buscar clientes por teléfono
+                        string hqlQuery = "FROM Customer WHERE CustomerName LIKE :name";
 
-                    // Llenar el DataGridView con los resultados
-                    dataGridViewSeaarchResult.DataSource = customers;
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetString("name", "%" + textToSearch + "%");
+
+                        // Obtener los resultados de la consulta
+                        IList<Customer> customers = query.List<Customer>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = customers;
+
+                    }
                 }
-
-               
+                catch (Exception ex)
+                {
+                    string errorMessage = $"Connection Error: {ex.Message}";
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                               
             }
             else if (phoneSearchSelected)
             {
+                try
+                {
+
                 using (ISession mySession = mySessionFactory.OpenSession())
                 {
                     // Crear una consulta HQL para buscar clientes por teléfono
@@ -187,7 +199,14 @@ namespace HotelSOL
                     // Llenar el DataGridView con los resultados
                     dataGridViewSeaarchResult.DataSource = customers;
                 }
-           
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = $"Connection Error: {ex.Message}";
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
             }
 
         }

@@ -18,6 +18,8 @@ using HotelSOL.Models;
 using HotelSOL.DAO;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Hql.Ast;
+using System.Text.RegularExpressions;
 
 
 namespace HotelSOL
@@ -30,32 +32,22 @@ namespace HotelSOL
 
         private ISessionFactory mySessionFactory;
 
-        private ISession mySession;
-
         public RoomsForm()
         {
             InitializeComponent();
 
             myConfiguration = new Configuration()
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Customers.hbn.xml");
+                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Rooms.hbn.xml");
             mySessionFactory = myConfiguration.BuildSessionFactory();
 
             // Inicializar DAO con la sesión obtenida del sessionFactory
             _roomDAO = new DAOimpl<Room>(mySessionFactory.OpenSession());
 
-            textBoxRoomId.Leave += textBoxRoomId_Leave;
+           // textBoxRoomId.Leave += textBoxRoomId_Leave;
 
 
         }
-
-
-        private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-        SqlDataAdapter adpt;
-        DataTable dt;
-        SqlConnection conn = new SqlConnection();
-
-     
-
+       
         private void label7_Click(object sender, EventArgs e)
         {
 
@@ -68,112 +60,123 @@ namespace HotelSOL
 
         private void showDataRooms()
         {
-            conn.ConnectionString = CONNECTION_STRING;
-            adpt = new SqlDataAdapter("SELECT * FROM rooms", conn);
-            dt = new DataTable();
-            adpt.Fill(dt);
-            dataGridViewAllCustomers.DataSource = dt;
-        }
+            try
+            {
+                // Obtener todos las habitaciones utilizando el DAO 
+                IList<Room> rooms = _roomDAO.GetAll();
 
+                // Mostrar los clientes en el DataGridView
+                dataGridViewAllRooms.DataSource = rooms;
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
-            bool idSearchSlected = radioButtonIdentity.Checked;
+            bool idSearchSelected = radioButtonIdentity.Checked;
             bool typeSearchSelected = radioButtonType.Checked;
             bool availabilitySearchSelected = radioButtonAvailability.Checked;
             string textToSearch = textBoxSearch.Text;
 
-
-            if (idSearchSlected)
+            try
             {
-                MessageBox.Show("Identity search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                using (ISession mySession = mySessionFactory.OpenSession())
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE IdentityNo = @IdentityNo", conn);
-                    cmd.Parameters.AddWithValue("@IdentityNo", textToSearch);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
+                    if (idSearchSelected)
+                    {
+                        MessageBox.Show("Id search selected");
 
-                    try
-                    {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
+                        // Crear una consulta HQL para buscar habitaciones por ID
+                        string hqlQuery = "FROM Room WHERE room_id = :roomId";
+
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetInt32("roomId", int.Parse(textToSearch));
+
+                        // Obtener los resultados de la consulta
+                        IList<Room> rooms = query.List<Room>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = rooms;
                     }
-                    catch (Exception ex)
+                    else if (typeSearchSelected)
                     {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Type search selected");
+
+                        // Crear una consulta HQL para buscar habitaciones por tipo
+                        string hqlQuery = "FROM Room WHERE type LIKE :roomType";
+
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetString("roomType", "%" + textToSearch + "%");
+
+                        // Obtener los resultados de la consulta
+                        IList<Room> rooms = query.List<Room>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = rooms;
+                    }
+                    else if (availabilitySearchSelected)
+                    {
+                        MessageBox.Show("Availability search selected");
+
+                        // Crear una consulta HQL para buscar habitaciones por disponibilidad
+                        string hqlQuery = "FROM Room WHERE booked = :booked";
+
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetBoolean("booked", bool.Parse(textToSearch));
+
+                        // Obtener los resultados de la consulta
+                        IList<Room> rooms = query.List<Room>();
+
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = rooms;
                     }
                 }
             }
-            else if (typeSearchSelected)
+            catch (Exception ex)
             {
-                MessageBox.Show("Type search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
-                {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE type = @type", conn);
-                    cmd.Parameters.AddWithValue("@type", textToSearch);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-
-                    try
-                    {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else if (availabilitySearchSelected)
-            {
-                MessageBox.Show("Availability search selected");
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
-                {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM rooms WHERE booked = @booked", conn);
-
-                    int bookedValue = textToSearch.ToLower() == "true" ? 1 : 0;
-
-                    cmd.Parameters.AddWithValue("@booked", bookedValue);
-                    SqlDataAdapter adpt = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-
-                    try
-                    {
-                        conn.Open();
-                        adpt.Fill(dt);
-                        dataGridViewSeaarchResult.DataSource = dt;
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorMessage = $"Connection Error: {ex.Message}";
-                        MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                string errorMessage = $"Connection Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void buttonInsertRoom_Click(object sender, EventArgs e)
         {
-            string roomId = textBoxRoomId.Text;
-            string roomNo = textBoxRommNo.Text;
+            int roomNo;
             string roomType = textBoxRoomType.Text;
-            double price;
+            decimal price;
             bool booked;
+            int roomCapacity;
+            string roomSeason = textBoxRoomSeason.Text;
+            string roomDescription = textBoxRoomDescription.Text;
 
+            if (!int.TryParse(textBoxRommNo.Text, out roomNo))
+            {
+                // Si el valor ingresado no es un número válido, salta mensaje de error
+                MessageBox.Show("La capacidad debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Convertir el valor de price a double
-            if (!double.TryParse(textBoxRoomPrice.Text, out price))
+            if (!decimal.TryParse(textBoxRoomPrice.Text, out price))
             {
                 // Si el valor ingresado no es un número válido, salta mensaje de error
                 MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            if (!int.TryParse(textBoxRoomCapacity.Text, out roomCapacity))
+            {
+                // Si el valor ingresado no es un número válido, salta mensaje de error
+                MessageBox.Show("La capacidad debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // Convertir el valor de booked a bool
             if (!bool.TryParse(textBoxRoomBooked.Text, out booked))
             {
@@ -182,36 +185,35 @@ namespace HotelSOL
                 return;
             }
 
-            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
+            if (String.IsNullOrEmpty(roomType) || String.IsNullOrEmpty(roomSeason))
             {
-                MessageBox.Show("No empty fields allowed except email address of the customer");
+                MessageBox.Show("No empty fields allowed except Room Description");
                 return;
             }
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                // Crear un nuevo objeto Room con los datos del formulario
+                Room newRoom = new Room
                 {
-                    conn.Open();
+                    roomNumber = roomNo,
+                    type = roomType,
+                    roomCapacity = roomCapacity,
+                    roomSeason = roomSeason,
+                    price = price,
+                    roomDescription = roomDescription,
+                    booked = booked
+
+                };
 
 
-                    // Verificar si la tabla rooms existe, y si no existe, crearla
-                    SqlCommand createTableCmd = new SqlCommand("IF OBJECT_ID('dbo.rooms', 'U') IS NULL CREATE TABLE rooms (IdentityNo VARCHAR(20), roomNumber INT, type VARCHAR(100), price DECIMAL,booked bit)", conn);
-                    createTableCmd.ExecuteNonQuery();
+                // Guardar la nueva habitación en la base de datos utilizando el DAO genérico
+                _roomDAO.Insert(newRoom);
 
-                    // Insertar la habitacion en la tabla rooms
-                    SqlCommand insertCmd = new SqlCommand("INSERT INTO rooms (IdentityNo, roomNumber, type, price, booked) VALUES (@IdentityNo, @roomNo, @roomType, @price, @booked)", conn);
-                    insertCmd.Parameters.AddWithValue("@IdentityNo", roomId);
-                    insertCmd.Parameters.AddWithValue("@roomNo", roomNo);
-                    insertCmd.Parameters.AddWithValue("@roomType", roomType);
-                    insertCmd.Parameters.AddWithValue("@price", price);
-                    insertCmd.Parameters.AddWithValue("@booked", booked);
+                showDataRooms();
 
-                    insertCmd.ExecuteNonQuery();
+                MessageBox.Show("Room added successfully");
 
-                    showDataRooms();
-                    MessageBox.Show("Room added successfully");
-                }
             }
             catch (Exception ex)
             {
@@ -219,150 +221,103 @@ namespace HotelSOL
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
         }
-        private void LoadRoomData(string roomId)
+           
+        private void buttonUpdateRoom_Click(object sender, EventArgs e)
         {
-            try
+            string room_id = textBoxRoomId.Text;
+
+            // Intentar convertir el ID del cliente a entero
+            if (int.TryParse(room_id, out int roomId))
             {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+
+                // Utilizar el método GetById para obtener la habitacion por su ID
+                Room roomToUpdate = _roomDAO.GetById(roomId);
+
+                try
                 {
-                    conn.Open();
-                    SqlCommand selectCmd = new SqlCommand("SELECT roomNumber, type, price, booked FROM rooms WHERE IdentityNo = @roomId", conn);
-                    selectCmd.Parameters.AddWithValue("@roomId", roomId);
-
-                    SqlDataReader reader = selectCmd.ExecuteReader();
-
-                    if (reader.Read())
+                    if (roomToUpdate != null)
                     {
-                        textBoxRommNo.Text = reader["roomNumber"].ToString();
-                        textBoxRoomType.Text = reader["type"].ToString();
-                        textBoxRoomPrice.Text = reader["price"].ToString();
-                        textBoxRoomBooked.Text = reader["booked"].ToString();
+                        // Actualizar los datos del cliente con los nuevos valores del formulario
+                        if (int.TryParse(textBoxRommNo.Text, out int roomNo))
+                        {
+                            roomToUpdate.roomNumber = roomNo;
+                        }
+
+                        roomToUpdate.type = textBoxRoomType.Text;
+
+                        if (int.TryParse(textBoxRoomCapacity.Text, out int capacity))
+                        {
+                            roomToUpdate.roomNumber = capacity;
+                        }
+
+                        roomToUpdate.roomSeason = textBoxRoomSeason.Text;
+
+                        if (!decimal.TryParse(textBoxRoomPrice.Text, out decimal roomPrice))
+                        {
+                            roomToUpdate.price = roomPrice;
+                        }
+
+                        roomToUpdate.roomDescription = textBoxRoomDescription.Text;
+
+                        if (!bool.TryParse(textBoxRoomBooked.Text, out bool roomBooked))
+                        {
+                            roomToUpdate.booked = roomBooked;
+                        }
+
+                        // Utilizar el método Update del DAO para guardar los cambios
+                        _roomDAO.Update(roomToUpdate);
+
+                        MessageBox.Show("Room updated successfully!");
+
+                        // Actualizar la visualización de los clientes en el formulario
+                        showDataRooms();
                     }
                     else
                     {
-                        MessageBox.Show("No se encontró ninguna habitación con el ID especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"No room found with ID: {roomId}");
                     }
-
-                    reader.Close();
-                    conn.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar los datos de la habitación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Manejador de eventos para cuando se ingresa el ID de la habitación
-        private void textBoxRoomId_Leave(object sender, EventArgs e)
-        {
-
-            string roomId = textBoxRoomId.Text;
-
-            if (!string.IsNullOrEmpty(roomId))
-            {
-                LoadRoomData(roomId);
-            }
-
-        }
-
-        private void buttonUpdateRoom_Click(object sender, EventArgs e)
-        {
-            string roomId = textBoxRoomId.Text;
-            string roomNo = textBoxRommNo.Text;
-            string roomType = textBoxRoomType.Text;
-            double price;
-            bool booked;
-            if (!double.TryParse(textBoxRoomPrice.Text, out price))
-            {
-                // Si el valor ingresado no es un número válido, salta mensaje de error
-                MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Convertir el valor de booked a bool
-            if (!bool.TryParse(textBoxRoomBooked.Text, out booked))
-            {
-                // Si el valor ingresado no es "true" o "false",salta mensaje error
-                MessageBox.Show("El valor de 'booked' debe ser 'true' o 'false'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (String.IsNullOrEmpty(roomId) || String.IsNullOrEmpty(roomNo) || String.IsNullOrEmpty(roomType))
-            {
-                MessageBox.Show("No empty fields allowed except email address of the customer");
-                return;
-            }
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                catch (Exception ex)
                 {
-                    conn.Open();
-                    SqlCommand updateCmd = new SqlCommand("UPDATE rooms SET  roomNumber = @roomNo, type = @roomType,price= @price,booked = @booked WHERE IdentityNo = @roomId", conn);
-
-                    updateCmd.Parameters.AddWithValue("@roomNo", roomNo);
-                    updateCmd.Parameters.AddWithValue("@roomType", roomType);
-                    updateCmd.Parameters.AddWithValue("@price", price);
-                    updateCmd.Parameters.AddWithValue("@booked", booked);
-                    updateCmd.Parameters.AddWithValue("@roomId", roomId);
-
-                    updateCmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Customer updated successfully!");
-
-                    showDataRooms();
-
-                    conn.Close();
-
-
+                    string errorMessage = $"Connection Error: {ex.Message}";
+                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
-            {
-                string errorMessage = $"Connection Error: {ex.Message}";
-                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonDeleteRoom_Click(object sender, EventArgs e)
         {
-            string room_identityNo = textBoxRoomId.Text;
+            string room_identityNo = textBoxRoomId.Text.Trim();
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(CONNECTION_STRING))
+                // Intentar convertir el ID de la habitación a entero
+                if (int.TryParse(room_identityNo, out int roomId))
                 {
-                    conn.Open();
+                    // Utilizar el método GetById para obtener la habitacion por su ID
+                    Room roomToDelete = _roomDAO.GetById(roomId);
 
-                    SqlCommand deleteCmd = new SqlCommand("DELETE FROM rooms WHERE IdentityNo = @room_identityNo", conn);
+                    if (roomToDelete != null)
+                    {
+                        // Eliminar el cliente utilizando el método Delete del DAO
+                        _roomDAO.Delete(roomToDelete);
 
-                    deleteCmd.Parameters.AddWithValue("@room_identityNo", room_identityNo);
-                    deleteCmd.ExecuteNonQuery();
+                        MessageBox.Show("Room deleted successfully!");
 
-                    MessageBox.Show("Room deleted successfully!");
-
-                    showDataRooms();
-
-                    conn.Close();
-
-
+                        // Actualizar la visualización de los clientes en el formulario
+                        showDataRooms();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No room found with ID: {roomId}");
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Invalid room ID");
+                }
+            
             }
             catch (Exception ex)
             {
@@ -386,6 +341,17 @@ namespace HotelSOL
         {
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textRoomSeason_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
     
 }

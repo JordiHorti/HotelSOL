@@ -52,6 +52,7 @@
             label3 = new Label();
             label2 = new Label();
             groupBox5 = new GroupBox();
+            buttonExport = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
@@ -121,7 +122,6 @@
             // 
             // buttonSearchCust
             // 
-            
             buttonSearchCust.BackColor = SystemColors.ActiveCaption;
             buttonSearchCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonSearchCust.Location = new Point(1173, 145);
@@ -180,6 +180,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(buttonInsertCust);
             groupBox3.Controls.Add(buttonUpdateCust);
             groupBox3.Controls.Add(buttonDeleteCust);
@@ -213,7 +214,6 @@
             // 
             // buttonUpdateCust
             // 
-            
             buttonUpdateCust.BackColor = SystemColors.ActiveCaption;
             buttonUpdateCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonUpdateCust.Location = new Point(972, 227);
@@ -226,7 +226,6 @@
             // 
             // buttonDeleteCust
             // 
-            
             buttonDeleteCust.BackColor = SystemColors.ActiveCaption;
             buttonDeleteCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonDeleteCust.Location = new Point(1123, 227);
@@ -319,6 +318,17 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "Search Results";
             // 
+            // buttonExport
+            // 
+            buttonExport.BackColor = SystemColors.ActiveCaption;
+            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonExport.Location = new Point(52, 227);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(131, 46);
+            buttonExport.TabIndex = 10;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = false;
+            // 
             // CustomersForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -371,5 +381,6 @@
         private RadioButton radioButtonName;
         private RadioButton radioButtonIdentity;
         private GroupBox groupBox5;
+        private Button buttonExport;
     }
 }

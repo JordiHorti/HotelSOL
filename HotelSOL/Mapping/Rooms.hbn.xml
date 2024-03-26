@@ -2,11 +2,15 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="HotelSOL" namespace="HotelSOL.Models">
 
 	<class name="HotelSOL.Models.Room, HotelSOL" table="rooms">
-		<id name="roomNumber" column="roomNumber" type="Int32">
-			<generator class="assigned" />
+		<id name="room_id" column="rooms_id" type="Int32">
+			<generator class="identity" />
 		</id>
-		<property name="type" column="type" type="String" />
+		<property name="roomNumber" column="roomNumber" type="Int32" />
+		<property name="type" column="roomType" type="String" />
+		<property name="roomCapacity" column="roomCapacity" type="Int32" />
+		<property name="roomSeason" column="roomSeason" type="String" />
 		<property name="price" column="price" type="Decimal" />
+		<property name="roomDescription" column="roomDescription" type="String" />
 		<property name="booked" column="booked" type="boolean" />
 	</class>
 

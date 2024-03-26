@@ -29,7 +29,7 @@ namespace HotelSOL
         /// </summary>
         /// 
 
-        
+
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
@@ -43,8 +43,14 @@ namespace HotelSOL
             groupBox5 = new GroupBox();
             dataGridViewSeaarchResult = new DataGridView();
             groupBox2 = new GroupBox();
-            dataGridViewAllCustomers = new DataGridView();
+            dataGridViewAllRooms = new DataGridView();
             groupBox3 = new GroupBox();
+            textRoomDescription = new Label();
+            textRoomSeason = new Label();
+            textRoomCapacity = new Label();
+            textBoxRoomDescription = new TextBox();
+            textBoxRoomSeason = new TextBox();
+            textBoxRoomCapacity = new TextBox();
             label7 = new Label();
             label6 = new Label();
             textBoxRoomBooked = new TextBox();
@@ -58,18 +64,18 @@ namespace HotelSOL
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            buttonExport = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllRooms).BeginInit();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            
             groupBox1.Controls.Add(groupBox4);
             groupBox1.Controls.Add(buttonSearch);
             groupBox1.Controls.Add(label1);
@@ -80,7 +86,6 @@ namespace HotelSOL
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Rooms";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // groupBox4
             // 
@@ -180,26 +185,32 @@ namespace HotelSOL
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dataGridViewAllCustomers);
+            groupBox2.Controls.Add(dataGridViewAllRooms);
             groupBox2.Location = new Point(699, 229);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(617, 269);
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Al Rooms";
-            groupBox2.Enter += groupBox2_Enter;
+            groupBox2.Text = "All Rooms";
             // 
-            // dataGridViewAllCustomers
+            // dataGridViewAllRooms
             // 
-            dataGridViewAllCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAllCustomers.Location = new Point(27, 35);
-            dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
-            dataGridViewAllCustomers.RowHeadersWidth = 51;
-            dataGridViewAllCustomers.Size = new Size(566, 207);
-            dataGridViewAllCustomers.TabIndex = 2;
+            dataGridViewAllRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAllRooms.Location = new Point(27, 35);
+            dataGridViewAllRooms.Name = "dataGridViewAllRooms";
+            dataGridViewAllRooms.RowHeadersWidth = 51;
+            dataGridViewAllRooms.Size = new Size(566, 207);
+            dataGridViewAllRooms.TabIndex = 2;
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonExport);
+            groupBox3.Controls.Add(textRoomDescription);
+            groupBox3.Controls.Add(textRoomSeason);
+            groupBox3.Controls.Add(textRoomCapacity);
+            groupBox3.Controls.Add(textBoxRoomDescription);
+            groupBox3.Controls.Add(textBoxRoomSeason);
+            groupBox3.Controls.Add(textBoxRoomCapacity);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(textBoxRoomBooked);
@@ -216,11 +227,66 @@ namespace HotelSOL
             groupBox3.Font = new Font("Segoe UI", 13.8F);
             groupBox3.Location = new Point(47, 515);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1278, 371);
+            groupBox3.Size = new Size(1274, 471);
             groupBox3.TabIndex = 8;
             groupBox3.TabStop = false;
             groupBox3.Text = "Room Details";
             groupBox3.Enter += groupBox3_Enter;
+            // 
+            // textRoomDescription
+            // 
+            textRoomDescription.AutoSize = true;
+            textRoomDescription.Font = new Font("Segoe UI", 13.8F);
+            textRoomDescription.Location = new Point(9, 348);
+            textRoomDescription.Name = "textRoomDescription";
+            textRoomDescription.Size = new Size(196, 31);
+            textRoomDescription.TabIndex = 18;
+            textRoomDescription.Text = "Room Description";
+            // 
+            // textRoomSeason
+            // 
+            textRoomSeason.AutoSize = true;
+            textRoomSeason.Font = new Font("Segoe UI", 13.8F);
+            textRoomSeason.Location = new Point(9, 308);
+            textRoomSeason.Name = "textRoomSeason";
+            textRoomSeason.Size = new Size(151, 31);
+            textRoomSeason.TabIndex = 14;
+            textRoomSeason.Text = "Room Season";
+            textRoomSeason.Click += textRoomSeason_Click;
+            // 
+            // textRoomCapacity
+            // 
+            textRoomCapacity.AutoSize = true;
+            textRoomCapacity.Font = new Font("Segoe UI", 13.8F);
+            textRoomCapacity.Location = new Point(5, 264);
+            textRoomCapacity.Name = "textRoomCapacity";
+            textRoomCapacity.Size = new Size(102, 31);
+            textRoomCapacity.TabIndex = 17;
+            textRoomCapacity.Text = "Capacity";
+            // 
+            // textBoxRoomDescription
+            // 
+            textBoxRoomDescription.Font = new Font("Segoe UI", 13.8F);
+            textBoxRoomDescription.Location = new Point(204, 345);
+            textBoxRoomDescription.Name = "textBoxRoomDescription";
+            textBoxRoomDescription.Size = new Size(1049, 38);
+            textBoxRoomDescription.TabIndex = 16;
+            // 
+            // textBoxRoomSeason
+            // 
+            textBoxRoomSeason.Font = new Font("Segoe UI", 13.8F);
+            textBoxRoomSeason.Location = new Point(204, 301);
+            textBoxRoomSeason.Name = "textBoxRoomSeason";
+            textBoxRoomSeason.Size = new Size(1050, 38);
+            textBoxRoomSeason.TabIndex = 15;
+            // 
+            // textBoxRoomCapacity
+            // 
+            textBoxRoomCapacity.Font = new Font("Segoe UI", 13.8F);
+            textBoxRoomCapacity.Location = new Point(204, 257);
+            textBoxRoomCapacity.Name = "textBoxRoomCapacity";
+            textBoxRoomCapacity.Size = new Size(1050, 38);
+            textBoxRoomCapacity.TabIndex = 14;
             // 
             // label7
             // 
@@ -246,24 +312,24 @@ namespace HotelSOL
             // textBoxRoomBooked
             // 
             textBoxRoomBooked.Font = new Font("Segoe UI", 13.8F);
-            textBoxRoomBooked.Location = new Point(187, 213);
+            textBoxRoomBooked.Location = new Point(204, 213);
             textBoxRoomBooked.Name = "textBoxRoomBooked";
-            textBoxRoomBooked.Size = new Size(1067, 38);
+            textBoxRoomBooked.Size = new Size(1050, 38);
             textBoxRoomBooked.TabIndex = 11;
             // 
             // textBoxRoomPrice
             // 
             textBoxRoomPrice.Font = new Font("Segoe UI", 13.8F);
-            textBoxRoomPrice.Location = new Point(187, 169);
+            textBoxRoomPrice.Location = new Point(204, 169);
             textBoxRoomPrice.Name = "textBoxRoomPrice";
-            textBoxRoomPrice.Size = new Size(1067, 38);
+            textBoxRoomPrice.Size = new Size(1050, 38);
             textBoxRoomPrice.TabIndex = 10;
             // 
             // buttonInsertCust
             // 
             buttonInsertCust.BackColor = SystemColors.ActiveCaption;
             buttonInsertCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInsertCust.Location = new Point(827, 303);
+            buttonInsertCust.Location = new Point(825, 407);
             buttonInsertCust.Name = "buttonInsertCust";
             buttonInsertCust.Size = new Size(131, 45);
             buttonInsertCust.TabIndex = 9;
@@ -275,7 +341,7 @@ namespace HotelSOL
             // 
             buttonUpdateRoom.BackColor = SystemColors.ActiveCaption;
             buttonUpdateRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateRoom.Location = new Point(974, 303);
+            buttonUpdateRoom.Location = new Point(977, 407);
             buttonUpdateRoom.Name = "buttonUpdateRoom";
             buttonUpdateRoom.Size = new Size(131, 45);
             buttonUpdateRoom.TabIndex = 8;
@@ -287,7 +353,7 @@ namespace HotelSOL
             // 
             buttonDeleteRoom.BackColor = SystemColors.ActiveCaption;
             buttonDeleteRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteRoom.Location = new Point(1123, 303);
+            buttonDeleteRoom.Location = new Point(1123, 407);
             buttonDeleteRoom.Name = "buttonDeleteRoom";
             buttonDeleteRoom.Size = new Size(131, 45);
             buttonDeleteRoom.TabIndex = 3;
@@ -298,25 +364,25 @@ namespace HotelSOL
             // textBoxRoomType
             // 
             textBoxRoomType.Font = new Font("Segoe UI", 13.8F);
-            textBoxRoomType.Location = new Point(187, 125);
+            textBoxRoomType.Location = new Point(204, 125);
             textBoxRoomType.Name = "textBoxRoomType";
-            textBoxRoomType.Size = new Size(1067, 38);
+            textBoxRoomType.Size = new Size(1050, 38);
             textBoxRoomType.TabIndex = 6;
             // 
             // textBoxRommNo
             // 
             textBoxRommNo.Font = new Font("Segoe UI", 13.8F);
-            textBoxRommNo.Location = new Point(187, 84);
+            textBoxRommNo.Location = new Point(204, 84);
             textBoxRommNo.Name = "textBoxRommNo";
-            textBoxRommNo.Size = new Size(1067, 38);
+            textBoxRommNo.Size = new Size(1050, 38);
             textBoxRommNo.TabIndex = 5;
             // 
             // textBoxRoomId
             // 
             textBoxRoomId.Font = new Font("Segoe UI", 13.8F);
-            textBoxRoomId.Location = new Point(187, 39);
+            textBoxRoomId.Location = new Point(204, 37);
             textBoxRoomId.Name = "textBoxRoomId";
-            textBoxRoomId.Size = new Size(1067, 38);
+            textBoxRoomId.Size = new Size(1050, 38);
             textBoxRoomId.TabIndex = 4;
             // 
             // label4
@@ -348,13 +414,23 @@ namespace HotelSOL
             label2.Size = new Size(101, 31);
             label2.TabIndex = 0;
             label2.Text = "Room ID";
-            label2.Click += label2_Click;
+            // 
+            // buttonExport
+            // 
+            buttonExport.BackColor = SystemColors.ActiveCaption;
+            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonExport.Location = new Point(38, 406);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(131, 46);
+            buttonExport.TabIndex = 19;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = false;
             // 
             // RoomsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1377, 907);
+            ClientSize = new Size(1547, 998);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox5);
@@ -369,12 +445,12 @@ namespace HotelSOL
             groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).EndInit();
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAllRooms).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
         }
-        
+
 
         #endregion
 
@@ -389,7 +465,7 @@ namespace HotelSOL
         private GroupBox groupBox5;
         private DataGridView dataGridViewSeaarchResult;
         private GroupBox groupBox2;
-        private DataGridView dataGridViewAllCustomers;
+        private DataGridView dataGridViewAllRooms;
         private GroupBox groupBox3;
         private Button buttonInsertCust;
         private Button buttonUpdateRoom;
@@ -404,6 +480,13 @@ namespace HotelSOL
         private Label label6;
         private TextBox textBoxRoomBooked;
         private TextBox textBoxRoomPrice;
+        private TextBox textBoxRoomDescription;
+        private TextBox textBoxRoomSeason;
+        private TextBox textBoxRoomCapacity;
+        private Label textRoomDescription;
+        private Label textRoomSeason;
+        private Label textRoomCapacity;
+        private Button buttonExport;
     }
     
 }
