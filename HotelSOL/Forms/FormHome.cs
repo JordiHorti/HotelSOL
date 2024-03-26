@@ -11,6 +11,7 @@ using HotelSOL.DAO;
 using HotelSOL.Models;
 using HotelSOL.Nhibernate;
 using NHibernate;
+using HotelSOL.Forms;
 
 
 namespace HotelSOL
@@ -55,6 +56,12 @@ namespace HotelSOL
         {
             UsersForm usersForm = new UsersForm();
             usersForm.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ServiceForm serviceForm = new ServiceForm();
+            serviceForm.Show();
         }
     }
 }

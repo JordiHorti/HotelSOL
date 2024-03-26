@@ -215,7 +215,7 @@ namespace HotelSOL
             string password = textBoxPassword.Text;
             string role = textBoxRole.Text;
 
-            
+
             if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password) || String.IsNullOrEmpty(role))
             {
                 MessageBox.Show("No empty fields allowed");
@@ -246,7 +246,7 @@ namespace HotelSOL
                 string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-                
+
         }
         private void textBoxUserName_TextChanged(object sender, EventArgs e)
         {
@@ -347,6 +347,12 @@ namespace HotelSOL
                 string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.ExportarDatosAXml("users", "data_users");
         }
     }
 }

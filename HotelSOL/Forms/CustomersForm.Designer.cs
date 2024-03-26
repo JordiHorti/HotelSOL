@@ -40,6 +40,7 @@
             dataGridViewAllCustomers = new DataGridView();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            buttonExport = new Button();
             buttonInsertCust = new Button();
             buttonUpdateCust = new Button();
             buttonDeleteCust = new Button();
@@ -52,7 +53,6 @@
             label3 = new Label();
             label2 = new Label();
             groupBox5 = new GroupBox();
-            buttonExport = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
@@ -200,6 +200,18 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Customer Details";
             // 
+            // buttonExport
+            // 
+            buttonExport.BackColor = SystemColors.ActiveCaption;
+            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonExport.Location = new Point(52, 227);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(131, 46);
+            buttonExport.TabIndex = 10;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = false;
+            buttonExport.Click += buttonExport_Click;
+            // 
             // buttonInsertCust
             // 
             buttonInsertCust.BackColor = SystemColors.ActiveCaption;
@@ -317,17 +329,6 @@
             groupBox5.TabIndex = 5;
             groupBox5.TabStop = false;
             groupBox5.Text = "Search Results";
-            // 
-            // buttonExport
-            // 
-            buttonExport.BackColor = SystemColors.ActiveCaption;
-            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(52, 227);
-            buttonExport.Name = "buttonExport";
-            buttonExport.Size = new Size(131, 46);
-            buttonExport.TabIndex = 10;
-            buttonExport.Text = "Export";
-            buttonExport.UseVisualStyleBackColor = false;
             // 
             // CustomersForm
             // 

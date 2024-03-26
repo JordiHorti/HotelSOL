@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace HotelSOL.Forms
 {
-    public partial class BookingForm : Form
+    public partial class Invoice : Form
     {
-        public BookingForm()
+        public Invoice()
         {
             InitializeComponent();
-        }
-
-        private void BookingForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

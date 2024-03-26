@@ -43,11 +43,11 @@ namespace HotelSOL
             // Inicializar DAO con la sesión obtenida del sessionFactory
             _roomDAO = new DAOimpl<Room>(mySessionFactory.OpenSession());
 
-           // textBoxRoomId.Leave += textBoxRoomId_Leave;
+            // textBoxRoomId.Leave += textBoxRoomId_Leave;
 
 
         }
-       
+
         private void label7_Click(object sender, EventArgs e)
         {
 
@@ -74,7 +74,7 @@ namespace HotelSOL
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
             bool idSearchSelected = radioButtonIdentity.Checked;
@@ -222,7 +222,7 @@ namespace HotelSOL
             }
 
         }
-           
+
         private void buttonUpdateRoom_Click(object sender, EventArgs e)
         {
             string room_id = textBoxRoomId.Text;
@@ -317,7 +317,7 @@ namespace HotelSOL
                 {
                     MessageBox.Show("Invalid room ID");
                 }
-            
+
             }
             catch (Exception ex)
             {
@@ -351,7 +351,13 @@ namespace HotelSOL
         {
 
         }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.ExportarDatosAXml("rooms", "data_rooms");
+        }
     }
 
-    
+
 }

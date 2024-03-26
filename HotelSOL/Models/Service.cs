@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace HotelSOL.Models
 {
-    internal class Service
+    public class Service
     {
+        public virtual int services_id { get; set; }
+        public virtual string service {  get; set; }
+        public virtual decimal servicePrice { get; set; }
+
     }
 }

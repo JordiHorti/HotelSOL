@@ -38,7 +38,7 @@ namespace HotelSOL
             // Inicializar DAO con la sesión obtenida del sessionFactory
             _customerDAO = new DAOimpl<Customer>(mySessionFactory.OpenSession());
 
-          
+
         }
 
         private void CustomersForm_Load(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace HotelSOL
                 // Intentar convertir el valor de textToSearch a int
                 if (int.TryParse(textToSearch, out int customerId))
                 {
-                    
+
                     // Utilizar el método GetById con el ID convertido a int
                     Customer customer = _customerDAO.GetById(customerId);
 
@@ -177,28 +177,28 @@ namespace HotelSOL
                     string errorMessage = $"Connection Error: {ex.Message}";
                     MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                               
+
             }
             else if (phoneSearchSelected)
             {
                 try
                 {
 
-                using (ISession mySession = mySessionFactory.OpenSession())
-                {
-                    // Crear una consulta HQL para buscar clientes por teléfono
-                    string hqlQuery = "FROM Customer WHERE CustomerPhone LIKE :phone";
+                    using (ISession mySession = mySessionFactory.OpenSession())
+                    {
+                        // Crear una consulta HQL para buscar clientes por teléfono
+                        string hqlQuery = "FROM Customer WHERE CustomerPhone LIKE :phone";
 
-                    // Ejecutar la consulta utilizando NHibernate
-                    IQuery query = mySession.CreateQuery(hqlQuery);
-                    query.SetString("phone", "%" + textToSearch + "%");
+                        // Ejecutar la consulta utilizando NHibernate
+                        IQuery query = mySession.CreateQuery(hqlQuery);
+                        query.SetString("phone", "%" + textToSearch + "%");
 
-                    // Obtener los resultados de la consulta
-                    IList<Customer> customers = query.List<Customer>();
+                        // Obtener los resultados de la consulta
+                        IList<Customer> customers = query.List<Customer>();
 
-                    // Llenar el DataGridView con los resultados
-                    dataGridViewSeaarchResult.DataSource = customers;
-                }
+                        // Llenar el DataGridView con los resultados
+                        dataGridViewSeaarchResult.DataSource = customers;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -291,6 +291,12 @@ namespace HotelSOL
                 string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.ExportarDatosAXml("customers", "data_customer");
         }
 
         /*

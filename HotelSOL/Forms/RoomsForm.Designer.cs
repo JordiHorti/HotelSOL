@@ -45,6 +45,7 @@ namespace HotelSOL
             groupBox2 = new GroupBox();
             dataGridViewAllRooms = new DataGridView();
             groupBox3 = new GroupBox();
+            buttonExport = new Button();
             textRoomDescription = new Label();
             textRoomSeason = new Label();
             textRoomCapacity = new Label();
@@ -64,7 +65,6 @@ namespace HotelSOL
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            buttonExport = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -232,6 +232,18 @@ namespace HotelSOL
             groupBox3.TabStop = false;
             groupBox3.Text = "Room Details";
             groupBox3.Enter += groupBox3_Enter;
+            // 
+            // buttonExport
+            // 
+            buttonExport.BackColor = SystemColors.ActiveCaption;
+            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonExport.Location = new Point(38, 406);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(131, 46);
+            buttonExport.TabIndex = 19;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = false;
+            buttonExport.Click += buttonExport_Click;
             // 
             // textRoomDescription
             // 
@@ -414,17 +426,6 @@ namespace HotelSOL
             label2.Size = new Size(101, 31);
             label2.TabIndex = 0;
             label2.Text = "Room ID";
-            // 
-            // buttonExport
-            // 
-            buttonExport.BackColor = SystemColors.ActiveCaption;
-            buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(38, 406);
-            buttonExport.Name = "buttonExport";
-            buttonExport.Size = new Size(131, 46);
-            buttonExport.TabIndex = 19;
-            buttonExport.Text = "Export";
-            buttonExport.UseVisualStyleBackColor = false;
             // 
             // RoomsForm
             // 
