@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            textBoxServiceId = new TextBox();
             buttonSearch = new Button();
             groupBox4 = new GroupBox();
             radioButtonIdentity = new RadioButton();
@@ -42,12 +43,12 @@
             textBoxPrice = new TextBox();
             textBoxService = new TextBox();
             buttonInsertUser = new Button();
-            buttonUpdateUser = new Button();
             buttonDeleteUser = new Button();
             textBoxServerId = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            buttonUpdate = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(textBoxServiceId);
             groupBox1.Controls.Add(buttonSearch);
             groupBox1.Controls.Add(groupBox4);
             groupBox1.Controls.Add(label1);
@@ -69,11 +71,19 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Search Rooms";
             // 
+            // textBoxServiceId
+            // 
+            textBoxServiceId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxServiceId.Location = new Point(26, 76);
+            textBoxServiceId.Name = "textBoxServiceId";
+            textBoxServiceId.Size = new Size(1276, 38);
+            textBoxServiceId.TabIndex = 5;
+            // 
             // buttonSearch
             // 
             buttonSearch.BackColor = SystemColors.ActiveCaption;
             buttonSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonSearch.Location = new Point(1000, 161);
+            buttonSearch.Location = new Point(1177, 167);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(131, 45);
             buttonSearch.TabIndex = 4;
@@ -84,7 +94,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(radioButtonIdentity);
-            groupBox4.Location = new Point(34, 73);
+            groupBox4.Location = new Point(26, 120);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(1097, 72);
             groupBox4.TabIndex = 3;
@@ -153,11 +163,11 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonUpdate);
             groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(textBoxPrice);
             groupBox3.Controls.Add(textBoxService);
             groupBox3.Controls.Add(buttonInsertUser);
-            groupBox3.Controls.Add(buttonUpdateUser);
             groupBox3.Controls.Add(buttonDeleteUser);
             groupBox3.Controls.Add(textBoxServerId);
             groupBox3.Controls.Add(label4);
@@ -181,6 +191,7 @@
             buttonExport.TabIndex = 16;
             buttonExport.Text = "Export";
             buttonExport.UseVisualStyleBackColor = false;
+            buttonExport.Click += buttonExport_Click;
             // 
             // textBoxPrice
             // 
@@ -208,17 +219,7 @@
             buttonInsertUser.TabIndex = 9;
             buttonInsertUser.Text = "Insert";
             buttonInsertUser.UseVisualStyleBackColor = false;
-            // 
-            // buttonUpdateUser
-            // 
-            buttonUpdateUser.BackColor = SystemColors.ActiveCaption;
-            buttonUpdateUser.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateUser.Location = new Point(974, 303);
-            buttonUpdateUser.Name = "buttonUpdateUser";
-            buttonUpdateUser.Size = new Size(131, 45);
-            buttonUpdateUser.TabIndex = 8;
-            buttonUpdateUser.Text = "Update";
-            buttonUpdateUser.UseVisualStyleBackColor = false;
+            buttonInsertUser.Click += buttonInsertUser_Click;
             // 
             // buttonDeleteUser
             // 
@@ -230,6 +231,7 @@
             buttonDeleteUser.TabIndex = 3;
             buttonDeleteUser.Text = "Delete";
             buttonDeleteUser.UseVisualStyleBackColor = false;
+            buttonDeleteUser.Click += buttonDeleteUser_Click;
             // 
             // textBoxServerId
             // 
@@ -268,6 +270,18 @@
             label2.Size = new Size(112, 31);
             label2.TabIndex = 0;
             label2.Text = "Service Id";
+            // 
+            // buttonUpdate
+            // 
+            buttonUpdate.BackColor = SystemColors.ActiveCaption;
+            buttonUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonUpdate.Location = new Point(976, 302);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(131, 45);
+            buttonUpdate.TabIndex = 18;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = false;
+            buttonUpdate.Click += buttonUpdate_Click;
             // 
             // ServiceForm
             // 
@@ -309,12 +323,13 @@
         private TextBox textBoxPrice;
         private TextBox textBoxService;
         private Button buttonInsertUser;
-        private Button buttonUpdateUser;
         private Button buttonDeleteUser;
         private TextBox textBoxServerId;
         private Label label4;
         private Label label3;
         private Label label2;
         private Button buttonSearch;
+        private TextBox textBoxServiceId;
+        private Button buttonUpdate;
     }
 }
