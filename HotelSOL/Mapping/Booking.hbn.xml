@@ -1,1 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="HotelSOL" namespace="HotelSOL.Models">
+
+	<class name="Booking" table="bookings">
+		<id name="bookings_id" column="bookings_id" type="Int32">
+			<generator class="identity"/>
+		</id>
+		<property name="customer_id" column="customer_id"/>
+		<property name="services_id" column="services_id"/>
+		<property name="customerName" column="customerName"/>
+		<property name="customerEmail" column="customerEmail"/>
+		<property name="roomNumber" column="roomNumber"/>
+		<property name="service" column="service"/>
+		<property name="checkIn" column="checkIn"/>
+		<property name="chekOn" column="chekOn"/>
+		<property name="days" column="days"/>
+		<property name="totalPrice" column="totalPrice"/>
+	</class>
+
+</hibernate-mapping>
