@@ -42,11 +42,8 @@
             dataGridViewAllRooms = new DataGridView();
             groupBox3 = new GroupBox();
             buttonExport = new Button();
-            textRoomDescription = new Label();
             textRoomSeason = new Label();
             textRoomCapacity = new Label();
-            textBoxTotalPrice = new TextBox();
-            textBoxCheckOut = new TextBox();
             textBoxCheckIn = new TextBox();
             label7 = new Label();
             label6 = new Label();
@@ -58,9 +55,12 @@
             textBoxRoomId = new TextBox();
             textBoxCustomerId = new TextBox();
             textBoxBookingId = new TextBox();
-            label4 = new Label();
             label3 = new Label();
-            label2 = new Label();
+            label5 = new Label();
+            groupBox6 = new GroupBox();
+            dataGridView1 = new DataGridView();
+            groupBox7 = new GroupBox();
+            dataGridView2 = new DataGridView();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -68,6 +68,10 @@
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAllRooms).BeginInit();
             groupBox3.SuspendLayout();
+            groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -81,7 +85,7 @@
             groupBox1.Size = new Size(1328, 212);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Search Rooms";
+            groupBox1.Text = "Search booking";
             // 
             // groupBox4
             // 
@@ -100,10 +104,10 @@
             radioButtonRoomId.AutoSize = true;
             radioButtonRoomId.Location = new Point(869, 28);
             radioButtonRoomId.Name = "radioButtonRoomId";
-            radioButtonRoomId.Size = new Size(103, 24);
+            radioButtonRoomId.Size = new Size(114, 24);
             radioButtonRoomId.TabIndex = 3;
             radioButtonRoomId.TabStop = true;
-            radioButtonRoomId.Text = "By room Id";
+            radioButtonRoomId.Text = "By Service Id";
             radioButtonRoomId.UseVisualStyleBackColor = true;
             // 
             // radioButtonCustomerType
@@ -111,10 +115,10 @@
             radioButtonCustomerType.AutoSize = true;
             radioButtonCustomerType.Location = new Point(560, 27);
             radioButtonCustomerType.Name = "radioButtonCustomerType";
-            radioButtonCustomerType.Size = new Size(128, 24);
+            radioButtonCustomerType.Size = new Size(144, 24);
             radioButtonCustomerType.TabIndex = 1;
             radioButtonCustomerType.TabStop = true;
-            radioButtonCustomerType.Text = "By customer Id";
+            radioButtonCustomerType.Text = "By RoomNumber";
             radioButtonCustomerType.UseVisualStyleBackColor = true;
             // 
             // radioButtonIdentity
@@ -122,10 +126,10 @@
             radioButtonIdentity.AutoSize = true;
             radioButtonIdentity.Location = new Point(187, 28);
             radioButtonIdentity.Name = "radioButtonIdentity";
-            radioButtonIdentity.Size = new Size(108, 24);
+            radioButtonIdentity.Size = new Size(87, 24);
             radioButtonIdentity.TabIndex = 0;
             radioButtonIdentity.TabStop = true;
-            radioButtonIdentity.Text = "By Indentity";
+            radioButtonIdentity.Text = "By Email";
             radioButtonIdentity.UseVisualStyleBackColor = true;
             // 
             // buttonSearch
@@ -145,9 +149,9 @@
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(34, 40);
             label1.Name = "label1";
-            label1.Size = new Size(485, 31);
+            label1.Size = new Size(410, 31);
             label1.TabIndex = 1;
-            label1.Text = "Search Booking by id,customer id and room id";
+            label1.Text = "Search Booking by email, room, service";
             // 
             // textBoxSearch
             // 
@@ -162,7 +166,7 @@
             groupBox5.Controls.Add(dataGridViewSeaarchResult);
             groupBox5.Location = new Point(12, 221);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(624, 269);
+            groupBox5.Size = new Size(624, 416);
             groupBox5.TabIndex = 7;
             groupBox5.TabStop = false;
             groupBox5.Text = "Search Results";
@@ -170,10 +174,10 @@
             // dataGridViewSeaarchResult
             // 
             dataGridViewSeaarchResult.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewSeaarchResult.Location = new Point(26, 35);
+            dataGridViewSeaarchResult.Location = new Point(29, 35);
             dataGridViewSeaarchResult.Name = "dataGridViewSeaarchResult";
             dataGridViewSeaarchResult.RowHeadersWidth = 51;
-            dataGridViewSeaarchResult.Size = new Size(569, 207);
+            dataGridViewSeaarchResult.Size = new Size(569, 391);
             dataGridViewSeaarchResult.TabIndex = 1;
             // 
             // groupBox2
@@ -181,7 +185,7 @@
             groupBox2.Controls.Add(dataGridViewAllRooms);
             groupBox2.Location = new Point(686, 221);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(617, 269);
+            groupBox2.Size = new Size(617, 242);
             groupBox2.TabIndex = 8;
             groupBox2.TabStop = false;
             groupBox2.Text = "All Bookings";
@@ -192,17 +196,16 @@
             dataGridViewAllRooms.Location = new Point(27, 35);
             dataGridViewAllRooms.Name = "dataGridViewAllRooms";
             dataGridViewAllRooms.RowHeadersWidth = 51;
-            dataGridViewAllRooms.Size = new Size(566, 207);
+            dataGridViewAllRooms.Size = new Size(566, 115);
             dataGridViewAllRooms.TabIndex = 2;
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(buttonExport);
-            groupBox3.Controls.Add(textRoomDescription);
             groupBox3.Controls.Add(textRoomSeason);
             groupBox3.Controls.Add(textRoomCapacity);
-            groupBox3.Controls.Add(textBoxTotalPrice);
-            groupBox3.Controls.Add(textBoxCheckOut);
+            groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(textBoxCheckIn);
             groupBox3.Controls.Add(label7);
             groupBox3.Controls.Add(label6);
@@ -214,13 +217,10 @@
             groupBox3.Controls.Add(textBoxRoomId);
             groupBox3.Controls.Add(textBoxCustomerId);
             groupBox3.Controls.Add(textBoxBookingId);
-            groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(label2);
             groupBox3.Font = new Font("Segoe UI", 13.8F);
-            groupBox3.Location = new Point(12, 496);
+            groupBox3.Location = new Point(23, 664);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1274, 471);
+            groupBox3.Size = new Size(1274, 373);
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Room Details";
@@ -229,28 +229,19 @@
             // 
             buttonExport.BackColor = SystemColors.ActiveCaption;
             buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(38, 406);
+            buttonExport.Location = new Point(26, 325);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(131, 46);
             buttonExport.TabIndex = 19;
             buttonExport.Text = "Export";
             buttonExport.UseVisualStyleBackColor = false;
-            // 
-            // textRoomDescription
-            // 
-            textRoomDescription.AutoSize = true;
-            textRoomDescription.Font = new Font("Segoe UI", 13.8F);
-            textRoomDescription.Location = new Point(9, 348);
-            textRoomDescription.Name = "textRoomDescription";
-            textRoomDescription.Size = new Size(119, 31);
-            textRoomDescription.TabIndex = 18;
-            textRoomDescription.Text = "Total Price";
+            buttonExport.Click += buttonExport_Click;
             // 
             // textRoomSeason
             // 
             textRoomSeason.AutoSize = true;
             textRoomSeason.Font = new Font("Segoe UI", 13.8F);
-            textRoomSeason.Location = new Point(9, 308);
+            textRoomSeason.Location = new Point(18, 257);
             textRoomSeason.Name = "textRoomSeason";
             textRoomSeason.Size = new Size(119, 31);
             textRoomSeason.TabIndex = 14;
@@ -260,27 +251,11 @@
             // 
             textRoomCapacity.AutoSize = true;
             textRoomCapacity.Font = new Font("Segoe UI", 13.8F);
-            textRoomCapacity.Location = new Point(9, 260);
+            textRoomCapacity.Location = new Point(18, 216);
             textRoomCapacity.Name = "textRoomCapacity";
             textRoomCapacity.Size = new Size(100, 31);
             textRoomCapacity.TabIndex = 17;
             textRoomCapacity.Text = "Check In";
-            // 
-            // textBoxTotalPrice
-            // 
-            textBoxTotalPrice.Font = new Font("Segoe UI", 13.8F);
-            textBoxTotalPrice.Location = new Point(204, 345);
-            textBoxTotalPrice.Name = "textBoxTotalPrice";
-            textBoxTotalPrice.Size = new Size(1049, 38);
-            textBoxTotalPrice.TabIndex = 16;
-            // 
-            // textBoxCheckOut
-            // 
-            textBoxCheckOut.Font = new Font("Segoe UI", 13.8F);
-            textBoxCheckOut.Location = new Point(204, 301);
-            textBoxCheckOut.Name = "textBoxCheckOut";
-            textBoxCheckOut.Size = new Size(1050, 38);
-            textBoxCheckOut.TabIndex = 15;
             // 
             // textBoxCheckIn
             // 
@@ -294,17 +269,17 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13.8F);
-            label7.Location = new Point(6, 216);
+            label7.Location = new Point(18, 176);
             label7.Name = "label7";
-            label7.Size = new Size(153, 31);
+            label7.Size = new Size(163, 31);
             label7.TabIndex = 13;
-            label7.Text = "Number Days";
+            label7.Text = "Room Number";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 13.8F);
-            label6.Location = new Point(9, 176);
+            label6.Location = new Point(18, 44);
             label6.Name = "label6";
             label6.Size = new Size(110, 31);
             label6.TabIndex = 12;
@@ -330,7 +305,7 @@
             // 
             buttonInsertCust.BackColor = SystemColors.ActiveCaption;
             buttonInsertCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInsertCust.Location = new Point(825, 407);
+            buttonInsertCust.Location = new Point(825, 325);
             buttonInsertCust.Name = "buttonInsertCust";
             buttonInsertCust.Size = new Size(131, 45);
             buttonInsertCust.TabIndex = 9;
@@ -341,7 +316,7 @@
             // 
             buttonUpdateRoom.BackColor = SystemColors.ActiveCaption;
             buttonUpdateRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateRoom.Location = new Point(977, 407);
+            buttonUpdateRoom.Location = new Point(977, 326);
             buttonUpdateRoom.Name = "buttonUpdateRoom";
             buttonUpdateRoom.Size = new Size(131, 45);
             buttonUpdateRoom.TabIndex = 8;
@@ -352,7 +327,7 @@
             // 
             buttonDeleteRoom.BackColor = SystemColors.ActiveCaption;
             buttonDeleteRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteRoom.Location = new Point(1123, 407);
+            buttonDeleteRoom.Location = new Point(1114, 326);
             buttonDeleteRoom.Name = "buttonDeleteRoom";
             buttonDeleteRoom.Size = new Size(131, 45);
             buttonDeleteRoom.TabIndex = 3;
@@ -383,41 +358,73 @@
             textBoxBookingId.Size = new Size(1050, 38);
             textBoxBookingId.TabIndex = 4;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 13.8F);
-            label4.Location = new Point(9, 132);
-            label4.Name = "label4";
-            label4.Size = new Size(106, 31);
-            label4.TabIndex = 2;
-            label4.Text = "Romm Id";
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13.8F);
-            label3.Location = new Point(6, 91);
+            label3.Location = new Point(18, 87);
             label3.Name = "label3";
-            label3.Size = new Size(138, 31);
+            label3.Size = new Size(179, 31);
             label3.TabIndex = 1;
-            label3.Text = "Customer Id";
+            label3.Text = "Customer Name";
             // 
-            // label2
+            // label5
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 13.8F);
-            label2.Location = new Point(6, 43);
-            label2.Name = "label2";
-            label2.Size = new Size(125, 31);
-            label2.TabIndex = 0;
-            label2.Text = "Booking ID";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 13.8F);
+            label5.Location = new Point(18, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(174, 31);
+            label5.TabIndex = 20;
+            label5.Text = "Customer Email";
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(dataGridView1);
+            groupBox6.Location = new Point(680, 377);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(617, 148);
+            groupBox6.TabIndex = 10;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "All Rooms";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AccessibleRole = AccessibleRole.OutlineButton;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(33, 33);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(566, 104);
+            dataGridView1.TabIndex = 2;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(dataGridView2);
+            groupBox7.Location = new Point(674, 520);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(617, 159);
+            groupBox7.TabIndex = 11;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "All Services";
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.AccessibleRole = AccessibleRole.OutlineButton;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(37, 26);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(566, 101);
+            dataGridView2.TabIndex = 2;
             // 
             // BookingForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1475, 982);
+            ClientSize = new Size(1475, 1049);
+            Controls.Add(groupBox7);
+            Controls.Add(groupBox6);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox5);
@@ -435,6 +442,10 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewAllRooms).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
         }
 
@@ -454,11 +465,8 @@
         private DataGridView dataGridViewAllRooms;
         private GroupBox groupBox3;
         private Button buttonExport;
-        private Label textRoomDescription;
         private Label textRoomSeason;
         private Label textRoomCapacity;
-        private TextBox textBoxTotalPrice;
-        private TextBox textBoxCheckOut;
         private TextBox textBoxCheckIn;
         private Label label7;
         private Label label6;
@@ -470,8 +478,11 @@
         private TextBox textBoxRoomId;
         private TextBox textBoxCustomerId;
         private TextBox textBoxBookingId;
-        private Label label4;
         private Label label3;
-        private Label label2;
+        private Label label5;
+        private GroupBox groupBox6;
+        private DataGridView dataGridView1;
+        private GroupBox groupBox7;
+        private DataGridView dataGridView2;
     }
 }
