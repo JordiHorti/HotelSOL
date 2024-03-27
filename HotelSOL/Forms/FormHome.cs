@@ -69,5 +69,11 @@ namespace HotelSOL
             BookingForm bookingForm = new BookingForm();
             bookingForm.Show();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            InvoiceForm invoices = new InvoiceForm();
+            invoices.Show();
+        }
     }
 }

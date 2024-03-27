@@ -17,7 +17,7 @@
 		<property name="service" column="service"/>
 		<property name="servicePrice" column="servicePrice"/>
 		<property name="checkIn" column="checkIn"/>
-		<property name="chekOn" column="chekOn"/>
+		<property name="checkOut" column="checkOut"/>
 		<property name="days" column="days"/>
 		<property name="totalPrice" column="totalPrice"/>
 	</class>

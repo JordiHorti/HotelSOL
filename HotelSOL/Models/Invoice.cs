@@ -21,7 +21,7 @@ namespace HotelSOL.Models
         public virtual string service { get; set; }
         public virtual int servicePrice { get; set; }
         public virtual DateTime checkIn { get; set; }
-        public virtual DateTime checkOn { get; set; }
+        public virtual DateTime checkOut { get; set; }
         public virtual int days { get; set; }
         public virtual int totalPrice { get; set; }
 

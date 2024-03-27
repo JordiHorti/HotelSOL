@@ -77,6 +77,52 @@ namespace HotelSOL
                 Console.WriteLine($"Error al ejecutar la query en la tabla bookings: {ex.Message}");
             }
         }
+        public void uploadInvoices()
+        {
+            try
+            {
+                string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                UPDATE invoices
+                SET
+                   customer_id = b.customer_id,
+                   customerName = c.customerName,
+                   customerEmail = c.customerEmail,
+                   customerPhone = c.customerPhone,
+                   roomNumber = r.roomNumber,
+                   roomType = r.roomType,
+                   roomCapacity = r.roomCapacity,
+                   roomPrice = r.price,
+                   service = s.service,
+                   servicePrice = s.servicePrice,
+                   checkIn = b.checkIn,
+                   checkOut = b.checkOut,
+                   days = b.days,
+                   totalPrice = ((r.price + s.servicePrice) * b.days)
+                FROM
+                   invoices i
+                INNER JOIN bookings b ON i.bookings_id = b.bookings_id
+                INNER JOIN customers c ON b.customer_id = c.customer_id
+                INNER JOIN rooms r ON b.roomNumber = r.roomNumber
+                INNER JOIN services s ON b.services_id = s.services_id";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    Console.WriteLine($"Se actualizaron {rowsAffected} filas en la tabla 'invoices'.");
+
+                    connection.Close(); // Cierra la conexión
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar la query en la tabla invoices: {ex.Message}");
+            }
+        }
 
     }
 }
