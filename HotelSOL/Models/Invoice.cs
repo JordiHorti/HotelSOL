@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelSOL.Models
 {
-    internal class Invoice
+    public class Invoice
     {
         public virtual int invoices_id { get; set; }
         public virtual int bookings_id { get; set; }

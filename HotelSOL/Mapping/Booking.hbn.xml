@@ -12,7 +12,7 @@
 		<property name="roomNumber" column="roomNumber"/>
 		<property name="service" column="service"/>
 		<property name="checkIn" column="checkIn"/>
-		<property name="chekOn" column="chekOn"/>
+		<property name="checkOut" column="checkOut"/>
 		<property name="days" column="days"/>
 		<property name="totalPrice" column="totalPrice"/>
 	</class>

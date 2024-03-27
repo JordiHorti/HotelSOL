@@ -63,5 +63,11 @@ namespace HotelSOL
             ServiceForm serviceForm = new ServiceForm();
             serviceForm.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            BookingForm bookingForm = new BookingForm();
+            bookingForm.Show();
+        }
     }
 }

@@ -162,6 +162,7 @@
             button5.TabIndex = 0;
             button5.Text = "Open Booking Forms";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // groupBox6
             // 
