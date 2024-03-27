@@ -21,5 +21,12 @@ namespace HotelSOL.Forms
         {
 
         }
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.uploadBookings();
+            cargaDatos.ExportarDatosAXml("bookings", "data_bookings");
+        }
     }
 }

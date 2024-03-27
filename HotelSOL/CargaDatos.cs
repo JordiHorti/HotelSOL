@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace HotelSOL
 {
@@ -35,5 +36,46 @@ namespace HotelSOL
                 Console.WriteLine($"Error al exportar datos a XML: {ex.Message}");
             }
         }
+
+        public void uploadBookings()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open(); // Abre la conexión
+
+                    string query = @"
+                        UPDATE b
+                        SET 
+                            b.customer_id = c.customer_id,
+                            b.service = tmp.service,
+                            b.totalPrice = tmp.totalPrice
+                        FROM bookings b
+                        JOIN (
+                            SELECT 
+                                b.bookings_id,
+                                s.service as service,
+                                ((r.Price + s.servicePrice) * b.days) as totalPrice
+                            FROM bookings b
+                            JOIN services s ON b.services_id = s.services_id
+                            JOIN rooms r ON b.roomNumber = r.roomNumber
+                        ) AS tmp ON b.bookings_id = tmp.bookings_id
+                        JOIN customers c ON b.customerName = c.customerName AND b.customerEmail = c.customerEmail;";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    Console.WriteLine($"Se actualizaron {rowsAffected} filas en la tabla 'bookings'.");
+
+                    connection.Close(); // Cierra la conexión
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar la query en la tabla bookings: {ex.Message}");
+            }
+        }
+
     }
 }
