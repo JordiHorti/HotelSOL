@@ -41,6 +41,8 @@
             groupBox2 = new GroupBox();
             dataGridViewAllBooking = new DataGridView();
             groupBox3 = new GroupBox();
+            label2 = new Label();
+            textBox1 = new TextBox();
             label5 = new Label();
             buttonExport = new Button();
             textRoomSeason = new Label();
@@ -180,6 +182,7 @@
             dataGridViewSeaarchResult.RowHeadersWidth = 51;
             dataGridViewSeaarchResult.Size = new Size(569, 391);
             dataGridViewSeaarchResult.TabIndex = 1;
+            dataGridViewSeaarchResult.CellContentClick += dataGridViewSeaarchResult_CellContentClick;
             // 
             // groupBox2
             // 
@@ -202,6 +205,8 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(textBox1);
             groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(textRoomSeason);
@@ -221,10 +226,30 @@
             groupBox3.Font = new Font("Segoe UI", 13.8F);
             groupBox3.Location = new Point(23, 664);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1274, 373);
+            groupBox3.Size = new Size(1268, 397);
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Booking Details";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 13.8F);
+            label2.Location = new Point(18, 301);
+            label2.Name = "label2";
+            label2.Size = new Size(123, 31);
+            label2.TabIndex = 22;
+            label2.Text = "Booking Id";
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 13.8F);
+            textBox1.ForeColor = SystemColors.InactiveCaption;
+            textBox1.Location = new Point(204, 301);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(1050, 38);
+            textBox1.TabIndex = 21;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label5
             // 
@@ -240,7 +265,7 @@
             // 
             buttonExport.BackColor = SystemColors.ActiveCaption;
             buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(26, 325);
+            buttonExport.Location = new Point(18, 345);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(131, 46);
             buttonExport.TabIndex = 19;
@@ -326,7 +351,7 @@
             // 
             buttonInsertCust.BackColor = SystemColors.ActiveCaption;
             buttonInsertCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInsertCust.Location = new Point(825, 325);
+            buttonInsertCust.Location = new Point(829, 346);
             buttonInsertCust.Name = "buttonInsertCust";
             buttonInsertCust.Size = new Size(131, 45);
             buttonInsertCust.TabIndex = 9;
@@ -338,23 +363,25 @@
             // 
             buttonUpdateRoom.BackColor = SystemColors.ActiveCaption;
             buttonUpdateRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateRoom.Location = new Point(977, 326);
+            buttonUpdateRoom.Location = new Point(977, 346);
             buttonUpdateRoom.Name = "buttonUpdateRoom";
             buttonUpdateRoom.Size = new Size(131, 45);
             buttonUpdateRoom.TabIndex = 8;
             buttonUpdateRoom.Text = "Update";
             buttonUpdateRoom.UseVisualStyleBackColor = false;
+            buttonUpdateRoom.Click += buttonUpdateRoom_Click;
             // 
             // buttonDeleteRoom
             // 
             buttonDeleteRoom.BackColor = SystemColors.ActiveCaption;
             buttonDeleteRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteRoom.Location = new Point(1114, 326);
+            buttonDeleteRoom.Location = new Point(1114, 346);
             buttonDeleteRoom.Name = "buttonDeleteRoom";
             buttonDeleteRoom.Size = new Size(131, 45);
             buttonDeleteRoom.TabIndex = 3;
             buttonDeleteRoom.Text = "Delete";
             buttonDeleteRoom.UseVisualStyleBackColor = false;
+            buttonDeleteRoom.Click += buttonDeleteRoom_Click;
             // 
             // textBoxCustomerEmail
             // 
@@ -426,7 +453,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1475, 1049);
+            ClientSize = new Size(1522, 1073);
             Controls.Add(groupBox7);
             Controls.Add(groupBox6);
             Controls.Add(groupBox3);
@@ -490,5 +517,7 @@
         private DataGridView dataGridViewBookingServices;
         private RadioButton radioButtonBookingService;
         private RadioButton radioButtonRoomNumber;
+        private Label label2;
+        private TextBox textBox1;
     }
 }

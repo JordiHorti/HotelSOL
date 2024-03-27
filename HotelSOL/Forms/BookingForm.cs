@@ -50,16 +50,20 @@ namespace HotelSOL.Forms
             _roomDAO = new DAOimpl<Room>(mySessionFactory.OpenSession());
 
             _serviceDAO = new DAOimpl<Service>(mySessionFactory.OpenSession());
-            
-        
+
+
 
         }
 
         private void BookingForm_Load(object sender, EventArgs e)
         {
             showDataBookings();
-            showDataRooms();
             showDataServices();
+            showDataRooms();
+
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.uploadBookings();
+
         }
 
         private void showDataBookings()
@@ -284,15 +288,15 @@ namespace HotelSOL.Forms
             string customer_email = textBoxCustomerEmail.Text;
             string room_number = textBoxRoomNumber.Text;
             string check_In = textBoxChekIn.Text;
-            string check_Out = textBoxCheckOut.Text;
+            string check_Out = textBoxChekIn.Text;
 
-            if (String.IsNullOrEmpty(customer_name) || String.IsNullOrEmpty(servicesId) || String.IsNullOrEmpty(customer_email) || 
+            if (String.IsNullOrEmpty(customer_name) || String.IsNullOrEmpty(servicesId) || String.IsNullOrEmpty(customer_email) ||
                 String.IsNullOrEmpty(room_number) || String.IsNullOrEmpty(check_In) || String.IsNullOrEmpty(check_Out))
             {
                 MessageBox.Show("No empty fields allowed");
                 return;
-            }   
-            
+            }
+
             try
             {
                 // Crear un nuevo objeto booking con los datos del formulario
@@ -302,12 +306,15 @@ namespace HotelSOL.Forms
                     customerName = customer_name,
                     customerEmail = customer_email,
                     roomNumber = int.Parse(room_number),
-                    checkIn =  DateTime.ParseExact(check_In, "yyyy/MM/dd", CultureInfo.InvariantCulture),
+                    checkIn = DateTime.ParseExact(check_In, "yyyy/MM/dd", CultureInfo.InvariantCulture),
                     checkOut = DateTime.ParseExact(check_Out, "yyyy/MM/dd", CultureInfo.InvariantCulture)
                 };
 
                 // Guardar el nuevo booking en la base de datos utilizando el DAO genérico
                 _bookingDAO.Insert(newBooking);
+
+                CargaDatos cargaDatos = new CargaDatos();
+                cargaDatos.uploadBookings();
 
                 showDataBookings(); // Actualizar la visualización de los Bookings en el formulario
 
@@ -318,6 +325,104 @@ namespace HotelSOL.Forms
                 string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonUpdateRoom_Click(object sender, EventArgs e)
+        {
+            string booking_identityNo = textBoxBookingId.Text;
+
+            try
+            {
+                // Intentar convertir el ID del cliente a entero
+                if (int.TryParse(booking_identityNo, out int bookingId))
+                {
+                    // Utilizar el método GetById para obtener el cliente por su ID
+                    Booking bookingToUpdate = _bookingDAO.GetById(bookingId);
+
+                    if (bookingToUpdate != null)
+                    {
+                        // Actualizar los datos del cliente con los nuevos valores del formulario
+                        bookingToUpdate.customerName = textBoxCustomerName.Text;
+                        bookingToUpdate.customerEmail = textBoxCustomerEmail.Text;
+                        bookingToUpdate.roomNumber = int.Parse(textBoxRoomNumber.Text);
+                        bookingToUpdate.checkIn = DateTime.Parse(textBoxChekIn.Text);
+                        bookingToUpdate.checkOut = DateTime.Parse(textBoxChekIn.Text);
+
+
+
+
+                        // Utilizar el método Update del DAO para guardar los cambios
+                        _bookingDAO.Update(bookingToUpdate);
+
+                        MessageBox.Show("Customer updated successfully!");
+
+                        // Actualizar la visualización de los clientes en el formulario
+                        showDataBookings();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No customer found with ID: {bookingId}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid customer ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonDeleteRoom_Click(object sender, EventArgs e)
+        {
+            string booking_identityNo = textBoxBookingId.Text;
+
+            try
+            {
+                // Intentar convertir el ID del cliente a entero
+                if (int.TryParse(booking_identityNo, out int customerId))
+                {
+                    // Utilizar el método GetById para obtener el cliente por su ID
+                    Booking bookingToDelete = _bookingDAO.GetById(customerId);
+
+                    if (bookingToDelete != null)
+                    {
+                        // Eliminar el cliente utilizando el método Delete del DAO
+                        _bookingDAO.Delete(bookingToDelete);
+
+                        MessageBox.Show("Customer deleted successfully!");
+
+                        // Actualizar la visualización de los clientes en el formulario
+                        showDataBookings();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No customer found with ID: {customerId}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid customer ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridViewSeaarchResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
