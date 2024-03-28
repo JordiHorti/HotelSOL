@@ -153,7 +153,7 @@ namespace HotelSOL.Forms
                     using (ISession mySession = mySessionFactory.OpenSession())
                     {
                         // Crear una consulta HQL para buscar clientes por teléfono
-                        string hqlQuery = "FROM Invoice WHERE customerEmail LIKE :email";
+                        string hqlQuery = "FROM Invoicegit  WHERE customerEmail LIKE :email";
 
                         // Ejecutar la consulta utilizando NHibernate
                         IQuery query = mySession.CreateQuery(hqlQuery);

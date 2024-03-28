@@ -51,12 +51,13 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1004, 906);
+            button1.BackColor = SystemColors.ActiveCaption;
+            button1.Location = new Point(913, 624);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(175, 65);
             button1.TabIndex = 0;
             button1.Text = "Exit";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // groupBox1

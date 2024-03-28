@@ -46,23 +46,23 @@ namespace HotelSOL
                     connection.Open(); // Abre la conexión
 
                     string query = @"
-                                    UPDATE b
-                    SET 
-                        b.customer_id = c.customer_id,
-                        b.service = tmp.service,
-                        b.totalPrice = tmp.totalPrice,
-                        b.days = DATEDIFF(day, b.checkIn, b.checkOut)
-                    FROM bookings b
-                    JOIN (
-                        SELECT 
-                            b.bookings_id,
-                            s.service as service, 
-                            ((r.Price + s.servicePrice) * DATEDIFF(day, b.checkIn, b.checkOut)) as totalPrice
-                        FROM bookings b
-                        JOIN services s ON b.services_id = s.services_id
-                        JOIN rooms r ON b.roomNumber = r.roomNumber
-                    ) AS tmp ON b.bookings_id = tmp.bookings_id
-                    JOIN customers c ON b.customerName = c.customerName AND b.customerEmail = c.customerEmail;";
+                                   UPDATE bookings
+                                    SET 
+                                        customer_id = c.customer_id,
+                                        service = tmp.service,
+                                        totalPrice = tmp.totalPrice,
+                                        days = DATEDIFF(day, b.checkIn, b.checkOut)
+                                    FROM bookings b
+                                    JOIN (
+                                        SELECT 
+                                            b.bookings_id,
+                                            s.service as service, 
+                                            ((r.Price + s.servicePrice) * DATEDIFF(day, b.checkIn, b.checkOut)) as totalPrice
+                                        FROM bookings b
+                                        JOIN services s ON b.services_id = s.services_id
+                                        JOIN rooms r ON b.roomNumber = r.roomNumber
+                                    ) AS tmp ON b.bookings_id = tmp.bookings_id
+                                    JOIN customers c ON b.customerName = c.customerName AND b.customerEmail = c.customerEmail;";
 
                     SqlCommand command = new SqlCommand(query, connection);
                     int rowsAffected = command.ExecuteNonQuery();

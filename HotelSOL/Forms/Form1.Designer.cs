@@ -119,7 +119,7 @@
             Font = new Font("Times New Roman", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Margin = new Padding(9, 7, 9, 7);
             Name = "Form1";
-            Text = "Hotel Management System Login";
+            Text = "a";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
