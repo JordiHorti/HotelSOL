@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NHibernate.Criterion;
+using HotelSOL.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace HotelSOL.DAO
 {
@@ -67,6 +69,19 @@ namespace HotelSOL.DAO
             }
             return new List<T>();
         }
-
+        public Booking GetLastInsertedBooking()
+        {
+            try
+            {
+                // Hacer una consulta para obtener la última reserva insertada basándote en el ID de la reserva
+                // Esto es un ejemplo, asegúrate de adaptarlo a tu esquema de base de datos y a tu lógica de negocio
+                return _session.Query<Booking>().OrderByDescending(b => b.bookings_id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener la última reserva insertada: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

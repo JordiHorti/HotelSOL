@@ -30,6 +30,7 @@
         {
             label1 = new Label();
             groupBox1 = new GroupBox();
+            button2 = new Button();
             button1 = new Button();
             textBoxPassword = new TextBox();
             textBoxUsername = new TextBox();
@@ -50,6 +51,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(textBoxPassword);
             groupBox1.Controls.Add(textBoxUsername);
@@ -63,12 +65,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Please login to coniue";
             // 
+            // button2
+            // 
+            button2.BackColor = SystemColors.ActiveCaption;
+            button2.Location = new Point(449, 284);
+            button2.Name = "button2";
+            button2.Size = new Size(168, 40);
+            button2.TabIndex = 5;
+            button2.Text = "Register";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
             // button1
             // 
             button1.BackColor = SystemColors.ActiveCaption;
-            button1.Location = new Point(197, 281);
+            button1.Location = new Point(197, 284);
             button1.Name = "button1";
-            button1.Size = new Size(420, 40);
+            button1.Size = new Size(168, 40);
             button1.TabIndex = 4;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = false;
@@ -113,7 +126,7 @@
             // 
             AutoScaleDimensions = new SizeF(24F, 45F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1030, 704);
+            ClientSize = new Size(1030, 629);
             Controls.Add(groupBox1);
             Controls.Add(label1);
             Font = new Font("Times New Roman", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -136,5 +149,6 @@
         private TextBox textBoxPassword;
         private TextBox textBoxUsername;
         private Button button1;
+        private Button button2;
     }
 }

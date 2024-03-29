@@ -16,11 +16,14 @@ using NHibernate;
 using NHibernate.Cfg;
 using System.Globalization;
 using System.Collections;
+using static System.Collections.Specialized.BitVector32;
 
 namespace HotelSOL.Forms
 {
     public partial class BookingForm : Form
     {
+        private IDAO<Invoice> _invoiceDAO;
+
         private IDAO<Booking> _bookingDAO;
 
         private IDAO<Room> _roomDAO;
@@ -31,13 +34,14 @@ namespace HotelSOL.Forms
 
         private ISessionFactory mySessionFactory;
 
-        public BookingForm()
+        public BookingForm(DAOimpl<Booking> bookingsDAO)
         {
 
             InitializeComponent();
 
             myConfiguration = new Configuration()
                   .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Booking.hbn.xml")
+                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Invoice.hbn.xml")
                   .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Rooms.hbn.xml")
                   .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Service.hbn.xml");
 
@@ -51,6 +55,7 @@ namespace HotelSOL.Forms
 
             _serviceDAO = new DAOimpl<Service>(mySessionFactory.OpenSession());
 
+            _invoiceDAO = new DAOimpl<Invoice>(mySessionFactory.OpenSession());
 
 
         }
@@ -280,6 +285,7 @@ namespace HotelSOL.Forms
             }
         }
 
+
         private void buttonInsertCust_Click(object sender, EventArgs e)
         {
             // Obtener datos del formulario
@@ -313,6 +319,11 @@ namespace HotelSOL.Forms
                 // Guardar el nuevo booking en la base de datos utilizando el DAO genérico
                 _bookingDAO.Insert(newBooking);
 
+
+                _bookingDAO.Insert(newBooking);
+
+                GenerateInvoice(newBooking);
+
                 CargaDatos cargaDatos = new CargaDatos();
                 cargaDatos.uploadBookings();
 
@@ -326,7 +337,38 @@ namespace HotelSOL.Forms
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void GenerateInvoice(Booking booking)
+        {
+            try
+            {
 
+
+                // Crear una nueva instancia de Invoice y asignar los valores
+                Invoice newInvoice = new Invoice
+                {
+                    bookings_id = booking.bookings_id,
+                    customer_id = booking.customer_id,
+                    customerName = booking.customerName,
+                    customerEmail = booking.customerEmail,
+                    roomNumber = booking.roomNumber,
+                    service = booking.service, // Puede ser nulo
+                    checkIn = booking.checkIn,
+                    checkOut = booking.checkOut,
+                    days = (booking.checkOut - booking.checkIn).Days, // Calcular la duración de la reserva
+                };
+
+                // Guardar la nueva factura en la base de datos utilizando el DAO correspondiente
+                _invoiceDAO.Insert(newInvoice);
+
+                MessageBox.Show("Invoice generated and saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que ocurra al generar y guardar la factura
+                string errorMessage = $"Error while generating and saving invoice: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void buttonUpdateRoom_Click(object sender, EventArgs e)
         {
             string booking_identityNo = textBoxBookingId.Text;
@@ -347,9 +389,6 @@ namespace HotelSOL.Forms
                         bookingToUpdate.roomNumber = int.Parse(textBoxRoomNumber.Text);
                         bookingToUpdate.checkIn = DateTime.Parse(textBoxChekIn.Text);
                         bookingToUpdate.checkOut = DateTime.Parse(textBoxChekIn.Text);
-
-
-
 
                         // Utilizar el método Update del DAO para guardar los cambios
                         _bookingDAO.Update(bookingToUpdate);
@@ -423,6 +462,12 @@ namespace HotelSOL.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataBookingsToDatabase();
         }
     }
 

@@ -227,18 +227,14 @@ namespace HotelSOL
         {
             string room_id = textBoxRoomId.Text;
 
-            // Intentar convertir el ID del cliente a entero
             if (int.TryParse(room_id, out int roomId))
             {
-
-                // Utilizar el método GetById para obtener la habitacion por su ID
                 Room roomToUpdate = _roomDAO.GetById(roomId);
 
                 try
                 {
                     if (roomToUpdate != null)
                     {
-                        // Actualizar los datos del cliente con los nuevos valores del formulario
                         if (int.TryParse(textBoxRommNo.Text, out int roomNo))
                         {
                             roomToUpdate.roomNumber = roomNo;
@@ -248,29 +244,26 @@ namespace HotelSOL
 
                         if (int.TryParse(textBoxRoomCapacity.Text, out int capacity))
                         {
-                            roomToUpdate.roomNumber = capacity;
+                            roomToUpdate.roomCapacity = capacity;
                         }
 
                         roomToUpdate.roomSeason = textBoxRoomSeason.Text;
 
-                        if (!decimal.TryParse(textBoxRoomPrice.Text, out decimal roomPrice))
+                        if (decimal.TryParse(textBoxRoomPrice.Text, out decimal roomPrice))
                         {
-                            roomToUpdate.price = roomPrice;
+                            roomToUpdate.price = roomPrice; 
                         }
 
                         roomToUpdate.roomDescription = textBoxRoomDescription.Text;
 
-                        if (!bool.TryParse(textBoxRoomBooked.Text, out bool roomBooked))
+                        if (bool.TryParse(textBoxRoomBooked.Text, out bool roomBooked))
                         {
                             roomToUpdate.booked = roomBooked;
                         }
 
-                        // Utilizar el método Update del DAO para guardar los cambios
                         _roomDAO.Update(roomToUpdate);
 
                         MessageBox.Show("Room updated successfully!");
-
-                        // Actualizar la visualización de los clientes en el formulario
                         showDataRooms();
                     }
                     else
@@ -280,11 +273,12 @@ namespace HotelSOL
                 }
                 catch (Exception ex)
                 {
-                    string errorMessage = $"Connection Error: {ex.Message}";
+                    string errorMessage = $"Error: {ex.Message}";
                     MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         private void buttonDeleteRoom_Click(object sender, EventArgs e)
         {
@@ -356,6 +350,13 @@ namespace HotelSOL
         {
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.ExportarDatosAXml("rooms", "data_rooms");
+        }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataRoomsToDatabase();
         }
     }
 

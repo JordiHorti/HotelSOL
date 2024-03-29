@@ -2,13 +2,14 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using System.Reflection;
-
+using HotelSOL.DAO;
+using HotelSOL.Models;
 
 
 
 namespace HotelSOL
 {
-    internal static class Program
+    public static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -18,6 +19,8 @@ namespace HotelSOL
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            CargaDatos cargadatos = new CargaDatos();
+            cargadatos.uploadUsers();
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }

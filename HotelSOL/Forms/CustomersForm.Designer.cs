@@ -39,7 +39,10 @@
             dataGridViewSeaarchResult = new DataGridView();
             dataGridViewAllCustomers = new DataGridView();
             groupBox2 = new GroupBox();
-            groupBox3 = new GroupBox();
+            groupBoxImportData = new GroupBox();
+            buttonImportData = new Button();
+            textBoxcustomerPassword = new TextBox();
+            label6 = new Label();
             buttonExport = new Button();
             buttonInsertCust = new Button();
             buttonUpdateCust = new Button();
@@ -58,7 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).BeginInit();
             groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
+            groupBoxImportData.SuspendLayout();
             groupBox5.SuspendLayout();
             SuspendLayout();
             // 
@@ -156,7 +159,7 @@
             dataGridViewSeaarchResult.Location = new Point(26, 35);
             dataGridViewSeaarchResult.Name = "dataGridViewSeaarchResult";
             dataGridViewSeaarchResult.RowHeadersWidth = 51;
-            dataGridViewSeaarchResult.Size = new Size(569, 257);
+            dataGridViewSeaarchResult.Size = new Size(569, 152);
             dataGridViewSeaarchResult.TabIndex = 1;
             // 
             // dataGridViewAllCustomers
@@ -165,7 +168,7 @@
             dataGridViewAllCustomers.Location = new Point(27, 35);
             dataGridViewAllCustomers.Name = "dataGridViewAllCustomers";
             dataGridViewAllCustomers.RowHeadersWidth = 51;
-            dataGridViewAllCustomers.Size = new Size(566, 257);
+            dataGridViewAllCustomers.Size = new Size(566, 152);
             dataGridViewAllCustomers.TabIndex = 2;
             // 
             // groupBox2
@@ -173,38 +176,71 @@
             groupBox2.Controls.Add(dataGridViewAllCustomers);
             groupBox2.Location = new Point(723, 244);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(617, 320);
+            groupBox2.Size = new Size(617, 213);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Al Customers";
             // 
-            // groupBox3
+            // groupBoxImportData
             // 
-            groupBox3.Controls.Add(buttonExport);
-            groupBox3.Controls.Add(buttonInsertCust);
-            groupBox3.Controls.Add(buttonUpdateCust);
-            groupBox3.Controls.Add(buttonDeleteCust);
-            groupBox3.Controls.Add(textBoxCustId);
-            groupBox3.Controls.Add(textCustEmail);
-            groupBox3.Controls.Add(textCustConNO);
-            groupBox3.Controls.Add(textBoxCustName);
-            groupBox3.Controls.Add(label5);
-            groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(label2);
-            groupBox3.Font = new Font("Segoe UI", 13.8F);
-            groupBox3.Location = new Point(62, 570);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1278, 279);
-            groupBox3.TabIndex = 4;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Customer Details";
+            groupBoxImportData.Controls.Add(buttonImportData);
+            groupBoxImportData.Controls.Add(textBoxcustomerPassword);
+            groupBoxImportData.Controls.Add(label6);
+            groupBoxImportData.Controls.Add(buttonExport);
+            groupBoxImportData.Controls.Add(buttonInsertCust);
+            groupBoxImportData.Controls.Add(buttonUpdateCust);
+            groupBoxImportData.Controls.Add(buttonDeleteCust);
+            groupBoxImportData.Controls.Add(textBoxCustId);
+            groupBoxImportData.Controls.Add(textCustEmail);
+            groupBoxImportData.Controls.Add(textCustConNO);
+            groupBoxImportData.Controls.Add(textBoxCustName);
+            groupBoxImportData.Controls.Add(label5);
+            groupBoxImportData.Controls.Add(label4);
+            groupBoxImportData.Controls.Add(label3);
+            groupBoxImportData.Controls.Add(label2);
+            groupBoxImportData.Font = new Font("Segoe UI", 13.8F);
+            groupBoxImportData.Location = new Point(62, 480);
+            groupBoxImportData.Name = "groupBoxImportData";
+            groupBoxImportData.Size = new Size(1278, 371);
+            groupBoxImportData.TabIndex = 4;
+            groupBoxImportData.TabStop = false;
+            groupBoxImportData.Text = "Customer Details";
+            // 
+            // buttonImportData
+            // 
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(231, 290);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(159, 46);
+            buttonImportData.TabIndex = 13;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
+            // 
+            // textBoxcustomerPassword
+            // 
+            textBoxcustomerPassword.Font = new Font("Segoe UI", 13.8F);
+            textBoxcustomerPassword.Location = new Point(241, 220);
+            textBoxcustomerPassword.Name = "textBoxcustomerPassword";
+            textBoxcustomerPassword.Size = new Size(1013, 38);
+            textBoxcustomerPassword.TabIndex = 12;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 13.8F);
+            label6.Location = new Point(9, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(214, 31);
+            label6.TabIndex = 11;
+            label6.Text = "Customer Password";
             // 
             // buttonExport
             // 
             buttonExport.BackColor = SystemColors.ActiveCaption;
             buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(52, 227);
+            buttonExport.Location = new Point(38, 290);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(131, 46);
             buttonExport.TabIndex = 10;
@@ -216,7 +252,7 @@
             // 
             buttonInsertCust.BackColor = SystemColors.ActiveCaption;
             buttonInsertCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonInsertCust.Location = new Point(819, 227);
+            buttonInsertCust.Location = new Point(816, 290);
             buttonInsertCust.Name = "buttonInsertCust";
             buttonInsertCust.Size = new Size(131, 46);
             buttonInsertCust.TabIndex = 9;
@@ -228,7 +264,7 @@
             // 
             buttonUpdateCust.BackColor = SystemColors.ActiveCaption;
             buttonUpdateCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdateCust.Location = new Point(972, 227);
+            buttonUpdateCust.Location = new Point(971, 290);
             buttonUpdateCust.Name = "buttonUpdateCust";
             buttonUpdateCust.Size = new Size(131, 46);
             buttonUpdateCust.TabIndex = 8;
@@ -240,7 +276,7 @@
             // 
             buttonDeleteCust.BackColor = SystemColors.ActiveCaption;
             buttonDeleteCust.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonDeleteCust.Location = new Point(1123, 227);
+            buttonDeleteCust.Location = new Point(1123, 290);
             buttonDeleteCust.Name = "buttonDeleteCust";
             buttonDeleteCust.Size = new Size(131, 46);
             buttonDeleteCust.TabIndex = 3;
@@ -325,7 +361,7 @@
             groupBox5.Controls.Add(dataGridViewSeaarchResult);
             groupBox5.Location = new Point(62, 244);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(624, 320);
+            groupBox5.Size = new Size(624, 213);
             groupBox5.TabIndex = 5;
             groupBox5.TabStop = false;
             groupBox5.Text = "Search Results";
@@ -336,7 +372,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1419, 904);
             Controls.Add(groupBox5);
-            Controls.Add(groupBox3);
+            Controls.Add(groupBoxImportData);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "CustomersForm";
@@ -349,8 +385,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewSeaarchResult).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAllCustomers).EndInit();
             groupBox2.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            groupBoxImportData.ResumeLayout(false);
+            groupBoxImportData.PerformLayout();
             groupBox5.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -364,7 +400,7 @@
         private DataGridView dataGridViewSeaarchResult;
         private DataGridView dataGridViewAllCustomers;
         private GroupBox groupBox2;
-        private GroupBox groupBox3;
+        private GroupBox groupBoxImportData;
         private Label label2;
         private Label label5;
         private Label label4;
@@ -383,5 +419,8 @@
         private RadioButton radioButtonIdentity;
         private GroupBox groupBox5;
         private Button buttonExport;
+        private TextBox textBoxcustomerPassword;
+        private Label label6;
+        private Button buttonImportData;
     }
 }

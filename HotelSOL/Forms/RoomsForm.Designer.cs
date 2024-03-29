@@ -45,6 +45,7 @@ namespace HotelSOL
             groupBox2 = new GroupBox();
             dataGridViewAllRooms = new DataGridView();
             groupBox3 = new GroupBox();
+            buttonImportData = new Button();
             buttonExport = new Button();
             textRoomDescription = new Label();
             textRoomSeason = new Label();
@@ -204,6 +205,7 @@ namespace HotelSOL
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonImportData);
             groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(textRoomDescription);
             groupBox3.Controls.Add(textRoomSeason);
@@ -232,6 +234,18 @@ namespace HotelSOL
             groupBox3.TabStop = false;
             groupBox3.Text = "Room Details";
             groupBox3.Enter += groupBox3_Enter;
+            // 
+            // buttonImportData
+            // 
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(266, 407);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(148, 46);
+            buttonImportData.TabIndex = 20;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
             // 
             // buttonExport
             // 
@@ -488,6 +502,7 @@ namespace HotelSOL
         private Label textRoomSeason;
         private Label textRoomCapacity;
         private Button buttonExport;
+        private Button buttonImportData;
     }
     
 }

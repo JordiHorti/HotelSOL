@@ -39,6 +39,7 @@
             groupBox2 = new GroupBox();
             dataGridViewAllServices = new DataGridView();
             groupBox3 = new GroupBox();
+            buttonUpdate = new Button();
             buttonExport = new Button();
             textBoxPrice = new TextBox();
             textBoxService = new TextBox();
@@ -48,7 +49,7 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            buttonUpdate = new Button();
+            buttonImportData = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -163,6 +164,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonImportData);
             groupBox3.Controls.Add(buttonUpdate);
             groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(textBoxPrice);
@@ -180,6 +182,18 @@
             groupBox3.TabIndex = 11;
             groupBox3.TabStop = false;
             groupBox3.Text = "Service Details";
+            // 
+            // buttonUpdate
+            // 
+            buttonUpdate.BackColor = SystemColors.ActiveCaption;
+            buttonUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonUpdate.Location = new Point(976, 302);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(131, 45);
+            buttonUpdate.TabIndex = 18;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = false;
+            buttonUpdate.Click += buttonUpdate_Click;
             // 
             // buttonExport
             // 
@@ -271,17 +285,17 @@
             label2.TabIndex = 0;
             label2.Text = "Service Id";
             // 
-            // buttonUpdate
+            // buttonImportData
             // 
-            buttonUpdate.BackColor = SystemColors.ActiveCaption;
-            buttonUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonUpdate.Location = new Point(976, 302);
-            buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(131, 45);
-            buttonUpdate.TabIndex = 18;
-            buttonUpdate.Text = "Update";
-            buttonUpdate.UseVisualStyleBackColor = false;
-            buttonUpdate.Click += buttonUpdate_Click;
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(289, 301);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(156, 46);
+            buttonImportData.TabIndex = 19;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
             // 
             // ServiceForm
             // 
@@ -331,5 +345,6 @@
         private Button buttonSearch;
         private TextBox textBoxServiceId;
         private Button buttonUpdate;
+        private Button buttonImportData;
     }
 }

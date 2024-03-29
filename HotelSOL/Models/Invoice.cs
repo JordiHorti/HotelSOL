@@ -23,7 +23,7 @@ namespace HotelSOL.Models
         public virtual DateTime checkIn { get; set; }
         public virtual DateTime checkOut { get; set; }
         public virtual int days { get; set; }
-        public virtual int totalPrice { get; set; }
+        public virtual decimal totalPrice { get; set; }
 
     }
 }

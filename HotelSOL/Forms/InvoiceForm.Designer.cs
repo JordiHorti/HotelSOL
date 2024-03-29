@@ -37,6 +37,7 @@
             radioButtonCustomerName = new RadioButton();
             buttonExport = new Button();
             buttonSearch = new Button();
+            buttonImportData = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAllInvoices).BeginInit();
             groupBox5.SuspendLayout();
             SuspendLayout();
@@ -78,6 +79,7 @@
             dataGridViewAllInvoices.RowHeadersWidth = 51;
             dataGridViewAllInvoices.Size = new Size(1222, 391);
             dataGridViewAllInvoices.TabIndex = 1;
+            dataGridViewAllInvoices.CellContentClick += dataGridViewAllInvoices_CellContentClick;
             // 
             // groupBox5
             // 
@@ -115,7 +117,7 @@
             // 
             buttonExport.BackColor = SystemColors.ActiveCaption;
             buttonExport.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonExport.Location = new Point(523, 580);
+            buttonExport.Location = new Point(363, 580);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(131, 46);
             buttonExport.TabIndex = 21;
@@ -135,11 +137,24 @@
             buttonSearch.UseVisualStyleBackColor = false;
             buttonSearch.Click += buttonSearch_Click;
             // 
+            // buttonImportData
+            // 
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(677, 580);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(141, 46);
+            buttonImportData.TabIndex = 22;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
+            // 
             // InvoiceForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1302, 656);
+            Controls.Add(buttonImportData);
             Controls.Add(buttonExport);
             Controls.Add(buttonSearch);
             Controls.Add(radioButtonCustomerName);
@@ -168,5 +183,6 @@
         private RadioButton radioButtonCustomerName;
         private Button buttonExport;
         private Button buttonSearch;
+        private Button buttonImportData;
     }
 }

@@ -8,6 +8,7 @@
 		<property name="customerName" column="customerName"/>
 		<property name="customerEmail" column="customerEmail"/>
 		<property name="customerPhone" column="customerPhone"/>
+		<property name="customerPassword" column="customerPassword"/>
 	</class>
 
 </hibernate-mapping>

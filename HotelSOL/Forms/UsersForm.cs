@@ -116,7 +116,7 @@ namespace HotelSOL
                             dataGridViewSeaarchResult.Columns.Add("Column4", "User Role");
                             dataGridViewSeaarchResult.Columns.Add("Column5", "Customer Email");
                         }
-                        dataGridViewSeaarchResult.Rows.Add(user.user_id, user.userName, user.password, user.user_role);
+                        dataGridViewSeaarchResult.Rows.Add(user.user_id, user.userName, user.userPassword, user.user_role);
                     }
                     else
                     {
@@ -229,7 +229,7 @@ namespace HotelSOL
                 {
 
                     userName = userName,
-                    password = password,
+                    userPassword = password,
                     user_role = int.Parse(role)
 
                 };
@@ -321,7 +321,7 @@ namespace HotelSOL
                     {
                         // Actualizar los datos del usuario con los nuevos valores del formulario
                         userToUpdate.userName = textBoxUserName.Text;
-                        userToUpdate.password = textBoxPassword.Text;
+                        userToUpdate.userPassword = textBoxPassword.Text;
                         userToUpdate.user_role = int.Parse(textBoxRole.Text);
 
                         // Utilizar el método Update del DAO para guardar los cambios
@@ -353,6 +353,12 @@ namespace HotelSOL
         {
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.ExportarDatosAXml("users", "data_users");
+        }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataUsersToDatabase();
         }
     }
 }

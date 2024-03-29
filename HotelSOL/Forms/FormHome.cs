@@ -18,6 +18,8 @@ namespace HotelSOL
 {
     public partial class FormHome : Form
     {
+        private DAOimpl<Booking> _bookingsDAO;
+
         private IDAO<Customer> _customerDAO;
         private NhibernateUtils _nhibernateUtils;
 
@@ -66,7 +68,7 @@ namespace HotelSOL
 
         private void button5_Click(object sender, EventArgs e)
         {
-            BookingForm bookingForm = new BookingForm();
+            BookingForm bookingForm = new BookingForm(_bookingsDAO);
             bookingForm.Show();
         }
 

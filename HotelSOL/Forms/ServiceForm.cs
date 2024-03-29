@@ -41,11 +41,18 @@ namespace HotelSOL.Forms
         {
             try
             {
-                // Obtener todos los usuaios utilizando el DAO 
+                // Obtener todos los servicios utilizando el DAO 
                 IList<Service> services = _serviceDAO.GetAll();
 
-                // Mostrar los clientes en el DataGridView
-                dataGridViewAllServices.DataSource = services;
+                if (services.Count > 0)
+                {
+                    // Mostrar los servicios en el DataGridView
+                    dataGridViewAllServices.DataSource = services;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron servicios para mostrar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -53,6 +60,7 @@ namespace HotelSOL.Forms
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -144,7 +152,7 @@ namespace HotelSOL.Forms
 
         }
 
-       
+
         private void buttonDeleteUser_Click(object sender, EventArgs e)
         {
             string serviceId = textBoxServerId.Text;
@@ -192,47 +200,53 @@ namespace HotelSOL.Forms
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-           string serviceId = textBoxServerId.Text;
-           string serviceName = textBoxService.Text;
-           string price = textBoxPrice.Text;
+            string serviceId = textBoxServerId.Text;
+            string serviceName = textBoxService.Text;
+            string price = textBoxPrice.Text;
             MessageBox.Show($"Service ID: {serviceId}");
             try
-           {
-               // Intentar convertir el ID del servicio a entero
-               if (int.TryParse(serviceId, out int serviceID))
-               {
-                   // Utilizar el método GetById para obtener el servicio por su ID
-                   Service serviceToUpdate = _serviceDAO.GetById(serviceID);
+            {
+                // Intentar convertir el ID del servicio a entero
+                if (int.TryParse(serviceId, out int serviceID))
+                {
+                    // Utilizar el método GetById para obtener el servicio por su ID
+                    Service serviceToUpdate = _serviceDAO.GetById(serviceID);
 
-                   if (serviceToUpdate != null)
-                   {
-                       // Actualizar los datos del servicio con los nuevos valores del formulario
-                       serviceToUpdate.service = textBoxService.Text;
-                       serviceToUpdate.servicePrice = decimal.Parse(textBoxPrice.Text);
+                    if (serviceToUpdate != null)
+                    {
+                        // Actualizar los datos del servicio con los nuevos valores del formulario
+                        serviceToUpdate.service = textBoxService.Text;
+                        serviceToUpdate.servicePrice = decimal.Parse(textBoxPrice.Text);
 
-                       // Utilizar el método servicio del DAO para guardar los cambios
-                       _serviceDAO.Update(serviceToUpdate);
+                        // Utilizar el método servicio del DAO para guardar los cambios
+                        _serviceDAO.Update(serviceToUpdate);
 
-                       MessageBox.Show("Servicio updated successfully!");
+                        MessageBox.Show("Servicio updated successfully!");
 
-                       // Actualizar la visualización de los servicio en el formulario
-                       showDataService();
-                   }
-                   else
-                   {
-                       MessageBox.Show($"No servicio found with ID: {serviceID}");
-                   }
-               }
-               else
-               {
-                   MessageBox.Show("Invalid servicio ID");
-               }
-           }
-           catch (Exception ex)
-           {
-               string errorMessage = $"Error: {ex.Message}";
-               MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
+                        // Actualizar la visualización de los servicio en el formulario
+                        showDataService();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No servicio found with ID: {serviceID}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid servicio ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Error: {ex.Message}";
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataServicesToDatabase();
         }
     }
 }

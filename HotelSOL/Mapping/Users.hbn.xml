@@ -5,8 +5,10 @@
 		<id name="user_id" column="users_id" type="Int32">
 			<generator class="identity" />
 		</id>
+		<property name="customer_id" column="customer_id" type="Int32" />
 		<property name="userName" column="userName" type="String" />
-		<property name="password" column="password" type="String" />
+		<property name="userEmail" column="userEmail" type="String" />
+		<property name="userPassword" column="userPassword" type="String" />
 		<property name="user_role" column="user_role" type="Int32" />
 	</class>
 

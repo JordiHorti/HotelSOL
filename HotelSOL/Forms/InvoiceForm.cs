@@ -176,5 +176,16 @@ namespace HotelSOL.Forms
             }
 
         }
+
+        private void dataGridViewAllInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataInvoicesToDatabase();
+        }
     }
 }

@@ -41,6 +41,7 @@
             groupBox2 = new GroupBox();
             dataGridViewAllBooking = new DataGridView();
             groupBox3 = new GroupBox();
+            label4 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
             label5 = new Label();
@@ -63,7 +64,7 @@
             dataGridViewBookingRooms = new DataGridView();
             groupBox7 = new GroupBox();
             dataGridViewBookingServices = new DataGridView();
-            label4 = new Label();
+            buttonImportData = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -206,6 +207,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonImportData);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(label2);
             groupBox3.Controls.Add(textBox1);
@@ -232,6 +234,18 @@
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Booking Details";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(1161, 311);
+            label4.Name = "label4";
+            label4.Size = new Size(255, 23);
+            label4.TabIndex = 23;
+            label4.Text = "Rellenar solo en caso de DELETE";
             // 
             // label2
             // 
@@ -451,17 +465,17 @@
             dataGridViewBookingServices.TabIndex = 2;
             dataGridViewBookingServices.CellContentClick += dataGridView2_CellContentClick;
             // 
-            // label4
+            // buttonImportData
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(1161, 311);
-            label4.Name = "label4";
-            label4.Size = new Size(255, 23);
-            label4.TabIndex = 23;
-            label4.Text = "Rellenar solo en caso de DELETE";
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(404, 350);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(157, 46);
+            buttonImportData.TabIndex = 24;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
             // 
             // BookingForm
             // 
@@ -536,5 +550,6 @@
         private Label label2;
         private TextBox textBox1;
         private Label label4;
+        private Button buttonImportData;
     }
 }

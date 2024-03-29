@@ -1,4 +1,7 @@
 using HotelSOL.Cliente;
+using HotelSOL.DAO;
+using HotelSOL.Forms;
+using HotelSOL.Models;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -8,9 +11,12 @@ namespace HotelSOL
     {
         private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
+        private DAOimpl<Booking> _bookingsDAO;
+
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,7 +35,7 @@ namespace HotelSOL
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "SELECT users_id, user_role FROM users WHERE username = @userName AND password = @password";
+                cmd.CommandText = "SELECT users_id, user_role FROM users WHERE username = @userName AND userPassword = @password";
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
 
@@ -77,6 +83,12 @@ namespace HotelSOL
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.Show();
         }
     }
 }

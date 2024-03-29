@@ -54,8 +54,9 @@ namespace HotelSOL
             string customer_name = textBoxCustName.Text;
             string customerPhoneNo = textCustConNO.Text;
             string customerEmail = textCustEmail.Text;
+            string customerPassword = textBoxcustomerPassword.Text;
 
-            if (String.IsNullOrEmpty(customer_name) || String.IsNullOrEmpty(customerPhoneNo))
+            if (String.IsNullOrEmpty(customer_name) || String.IsNullOrEmpty(customerPhoneNo) || String.IsNullOrEmpty(customerEmail) || String.IsNullOrEmpty(customerPassword))
             {
                 MessageBox.Show("No empty fields allowed except email address of the customer");
                 return;
@@ -68,7 +69,8 @@ namespace HotelSOL
                 {
                     customerName = customer_name,
                     customerEmail = customerEmail,
-                    customerPhone = customerPhoneNo
+                    customerPhone = customerPhoneNo,
+                    customerPassword = customerPassword
                 };
 
                 // Guardar el nuevo cliente en la base de datos utilizando el DAO genérico
@@ -229,6 +231,7 @@ namespace HotelSOL
                         customerToUpdate.customerName = textBoxCustName.Text;
                         customerToUpdate.customerPhone = textCustConNO.Text;
                         customerToUpdate.customerEmail = textCustEmail.Text;
+                        customerToUpdate.customerPassword = textCustEmail.Text;
 
                         // Utilizar el método Update del DAO para guardar los cambios
                         _customerDAO.Update(customerToUpdate);
@@ -298,6 +301,15 @@ namespace HotelSOL
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.ExportarDatosAXml("customers", "data_customer");
         }
+
+        private void buttonImportData_Click(object sender, EventArgs e)
+        {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.importDataCustomerToDataBase();
+        }
+
+
+
 
         /*
         private string CONNECTION_STRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;Integrated Security=True;Connect Timeout=30;Encrypt=False";

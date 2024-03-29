@@ -53,6 +53,7 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            buttonImportData = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -196,6 +197,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonImportData);
             groupBox3.Controls.Add(buttonExport);
             groupBox3.Controls.Add(textBoxRole);
             groupBox3.Controls.Add(textBoxPassword);
@@ -341,6 +343,18 @@
             label2.Text = "User ID";
             label2.Click += label2_Click;
             // 
+            // buttonImportData
+            // 
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(245, 302);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(154, 46);
+            buttonImportData.TabIndex = 17;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
+            // 
             // UsersForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -399,5 +413,6 @@
         private TextBox textBoxPassword;
         private TextBox textBoxUserName;
         private Button buttonExport;
+        private Button buttonImportData;
     }
 }

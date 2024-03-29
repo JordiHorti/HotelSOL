@@ -56,6 +56,7 @@
             ButtonMisReservas.TabIndex = 0;
             ButtonMisReservas.Text = "Mis Reservas";
             ButtonMisReservas.UseVisualStyleBackColor = true;
+            ButtonMisReservas.Click += ButtonMisReservas_Click;
             // 
             // groupBox3
             // 
@@ -100,6 +101,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "RoomsCliente";
             Text = "RoomsCliente";
+            Load += RoomsCliente_Load;
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             ResumeLayout(false);

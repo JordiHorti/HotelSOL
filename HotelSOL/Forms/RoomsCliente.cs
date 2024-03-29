@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HotelSOL.DAO;
+using HotelSOL.Forms;
+using HotelSOL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +15,8 @@ namespace HotelSOL.Cliente
 {
     public partial class RoomsCliente : Form
     {
+        
+
         public RoomsCliente()
         {
             InitializeComponent();
@@ -26,6 +31,17 @@ namespace HotelSOL.Cliente
         {
             VerHabitaciones verHabitaciones = new VerHabitaciones();
             verHabitaciones.Show();
+        }
+
+        private void ButtonMisReservas_Click(object sender, EventArgs e)
+        {
+            ReservasCliente reservasCliente = new ReservasCliente();
+            reservasCliente.Show();
+        }
+
+        private void RoomsCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

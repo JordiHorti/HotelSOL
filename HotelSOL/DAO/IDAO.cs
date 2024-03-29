@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelSOL.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,6 +13,6 @@ public interface IDAO<T>
     void Update(T entity);
     void Delete(T entity);
     IList<T> GetAll();
-  
+    
 }
 
