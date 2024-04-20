@@ -41,6 +41,7 @@
             groupBox2 = new GroupBox();
             dataGridViewAllBooking = new DataGridView();
             groupBox3 = new GroupBox();
+            buttonImportData = new Button();
             label4 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -64,7 +65,6 @@
             dataGridViewBookingRooms = new DataGridView();
             groupBox7 = new GroupBox();
             dataGridViewBookingServices = new DataGridView();
-            buttonImportData = new Button();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -90,6 +90,7 @@
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search booking";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // groupBox4
             // 
@@ -234,6 +235,18 @@
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Booking Details";
+            // 
+            // buttonImportData
+            // 
+            buttonImportData.BackColor = SystemColors.ActiveCaption;
+            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buttonImportData.Location = new Point(404, 350);
+            buttonImportData.Name = "buttonImportData";
+            buttonImportData.Size = new Size(157, 46);
+            buttonImportData.TabIndex = 24;
+            buttonImportData.Text = "ImportData";
+            buttonImportData.UseVisualStyleBackColor = false;
+            buttonImportData.Click += buttonImportData_Click;
             // 
             // label4
             // 
@@ -464,18 +477,6 @@
             dataGridViewBookingServices.Size = new Size(785, 101);
             dataGridViewBookingServices.TabIndex = 2;
             dataGridViewBookingServices.CellContentClick += dataGridView2_CellContentClick;
-            // 
-            // buttonImportData
-            // 
-            buttonImportData.BackColor = SystemColors.ActiveCaption;
-            buttonImportData.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            buttonImportData.Location = new Point(404, 350);
-            buttonImportData.Name = "buttonImportData";
-            buttonImportData.Size = new Size(157, 46);
-            buttonImportData.TabIndex = 24;
-            buttonImportData.Text = "ImportData";
-            buttonImportData.UseVisualStyleBackColor = false;
-            buttonImportData.Click += buttonImportData_Click;
             // 
             // BookingForm
             // 

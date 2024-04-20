@@ -182,7 +182,10 @@ namespace HotelSOL.Forms
             }
 
             else if (number)
+
+             
             {
+                MessageBox.Show("RoomNumber search selected");
 
                 try
                 {
@@ -215,6 +218,8 @@ namespace HotelSOL.Forms
             }
             else if (service)
             {
+                MessageBox.Show("ServiceId search selected");
+
                 try
                 {
 
@@ -468,6 +473,11 @@ namespace HotelSOL.Forms
         {
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.importDataBookingsToDatabase();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 

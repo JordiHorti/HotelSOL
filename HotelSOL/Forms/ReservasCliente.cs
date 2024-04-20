@@ -63,33 +63,37 @@ namespace HotelSOL.Forms
         }
         private void dataGridViewSeaarchResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
             try
             {
                 // Obtener el nombre y el correo electrónico del cliente de los cuadros de texto
                 string customerName = textBoxCustName.Text;
                 string customerEmail = textCustEmail.Text;
 
-                // Validar que se hayan proporcionado el nombre y el correo electrónico del cliente
-                if (string.IsNullOrWhiteSpace(customerName) || string.IsNullOrWhiteSpace(customerEmail))
+                using (ISession mySession = mySessionFactory.OpenSession())
                 {
-                    MessageBox.Show("Please enter customer name and email.");
-                    return;
-                }
+                    dataGridViewSeaarchResult.Columns.Clear();
 
-                // Realizar la consulta a la base de datos para obtener las facturas del cliente
-                using (ISession session = mySessionFactory.OpenSession())
-                {
-                    var query = session.QueryOver<Invoice>()
-                                       .Where(x => x.customerName == customerName && x.customerEmail == customerEmail)
-                                       .List();
 
-                    // Mostrar las facturas en un nuevo formulario o en cualquier otro lugar de tu aplicación
-                    ShowCustomerInvoices(query);
+                    // Crear una consulta HQL para buscar clientes por nombre y email
+                    string hqlQuery = "FROM Booking WHERE customerEmail LIKE :customerEmail AND customerName LIKE :customerName ";
+
+                    // Ejecutar la consulta utilizando NHibernate
+                    IQuery query = mySession.CreateQuery(hqlQuery);
+                    query.SetString("customerEmail", "%" + customerEmail + "%" + "customerName" + "%" + customerName + "%");
+
+                    // Obtener los resultados de la consulta
+                    IList<Booking> bookings = query.List<Booking>();
+
+                    // Llenar el DataGridView con los resultados
+                    dataGridViewSeaarchResult.DataSource = bookings;
+
                 }
             }
             catch (Exception ex)
             {
-                string errorMessage = $"Error: {ex.Message}";
+                string errorMessage = $"Connection Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

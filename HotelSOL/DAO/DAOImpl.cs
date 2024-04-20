@@ -29,8 +29,23 @@ namespace HotelSOL.DAO
         {
             using (var transaction = _session.BeginTransaction())
             {
-                _session.Save(entity);
-                transaction.Commit();
+                try
+                {
+                    if (transaction != null)
+                    {
+                        _session.Save(entity);
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al insertar entidad: {ex.Message}");
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+                    throw; // Lanza la excepción para que se maneje en niveles superiores
+                }
             }
         }
 
@@ -38,8 +53,23 @@ namespace HotelSOL.DAO
         {
             using (var transaction = _session.BeginTransaction())
             {
-                _session.Update(entity);
-                transaction.Commit();
+                try
+                {
+                    _session.Update(entity);
+                    if (transaction != null)
+                    {
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al actualizar entidad: {ex.Message}");
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+                    throw; // Lanza la excepción para que se maneje en niveles superiores
+                }
             }
         }
 
@@ -47,9 +77,25 @@ namespace HotelSOL.DAO
         {
             using (var transaction = _session.BeginTransaction())
             {
-                _session.Delete(entity);
-                transaction.Commit();
+                try
+                {
+                    _session.Delete(entity);
+                    if (transaction != null)
+                    {
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al eliminar entidad: {ex.Message}");
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+                    throw; // Lanza la excepción para que se maneje en niveles superiores
+                }
             }
+        
         }
 
         public IList<T> GetAll()
@@ -59,15 +105,14 @@ namespace HotelSOL.DAO
                 using (var transaction = _session.BeginTransaction())
                 {
                     var query = _session.Query<T>().ToList();
-                    transaction.Commit();
                     return query;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al obtener todos los registros de {typeof(T).Name}: {ex.Message}");
+                throw; // Lanza la excepción para que se maneje en niveles superiores
             }
-            return new List<T>();
         }
         public Booking GetLastInsertedBooking()
         {

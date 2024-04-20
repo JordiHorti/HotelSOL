@@ -228,7 +228,7 @@ namespace HotelSOL.Forms
                     }
                     else
                     {
-                        MessageBox.Show($"No servicio found with ID: {serviceID}");
+                        MessageBox.Show($"No service found with ID: {serviceID}");
                     }
                 }
                 else

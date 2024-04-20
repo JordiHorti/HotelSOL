@@ -81,7 +81,7 @@ namespace HotelSOL.Forms
 
             if (invoiceId)
             {
-                MessageBox.Show("Email search selected");
+                MessageBox.Show("Id search selected");
 
 
 
@@ -92,11 +92,11 @@ namespace HotelSOL.Forms
                         dataGridViewAllInvoices.Columns.Clear();
 
                         // Crear una consulta HQL para buscar clientes por nombre
-                        string hqlQuery = "FROM Invoice WHERE invoices_id LIKE :id";
+                        string hqlQuery = "FROM Invoice WHERE invoices_id LIKE :invoices_id";
 
                         // Ejecutar la consulta utilizando NHibernate
                         IQuery query = mySession.CreateQuery(hqlQuery);
-                        query.SetString("id", "%" + textToSearch + "%");
+                        query.SetString("invoices_id", "%" + textToSearch + "%");
 
                         // Obtener los resultados de la consulta
                         IList<Invoice> invoices = query.List<Invoice>();
@@ -115,6 +115,7 @@ namespace HotelSOL.Forms
 
             else if (customer_Name)
             {
+                MessageBox.Show("Name search selected");
 
                 try
                 {
@@ -147,17 +148,20 @@ namespace HotelSOL.Forms
             }
             else if (customer_Email)
             {
+
+                MessageBox.Show("Email search selected");
+
                 try
                 {
 
                     using (ISession mySession = mySessionFactory.OpenSession())
                     {
                         // Crear una consulta HQL para buscar clientes por teléfono
-                        string hqlQuery = "FROM Invoicegit  WHERE customerEmail LIKE :email";
+                        string hqlQuery = "FROM Invoice  WHERE customerEmail LIKE :customerEmail";
 
                         // Ejecutar la consulta utilizando NHibernate
                         IQuery query = mySession.CreateQuery(hqlQuery);
-                        query.SetString("email", "%" + textToSearch + "%");
+                        query.SetString("customerEmail", "%" + textToSearch + "%");
 
                         // Obtener los resultados de la consulta
                         IList<Invoice> invoices = query.List<Invoice>();
@@ -186,6 +190,11 @@ namespace HotelSOL.Forms
         {
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.importDataInvoicesToDatabase();
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -30,12 +30,22 @@ namespace HotelSOL.DAO
             dataTable.Columns.Add("Invoice ID");
             dataTable.Columns.Add("Customer Name");
             dataTable.Columns.Add("Customer Email");
-            // Agrega más columnas según sea necesario
+            dataTable.Columns.Add("Service");
+            dataTable.Columns.Add("Room Number");
+            dataTable.Columns.Add("Room Capacity");
+            dataTable.Columns.Add("CheckIn");
+            dataTable.Columns.Add("CheckOut");
+            dataTable.Columns.Add("Days");
+            dataTable.Columns.Add("Total Price");
+
+
+
+
+
 
             foreach (var invoice in invoices)
             {
-                dataTable.Rows.Add(invoice.invoices_id, invoice.customerName, invoice.customerEmail);
-                // Añade más columnas según sea necesario
+                dataTable.Rows.Add(invoice.invoices_id, invoice.customerName, invoice.customerEmail,invoice.service,invoice.roomNumber,invoice.roomCapacity,invoice.checkIn,invoice.checkOut,invoice.days,invoice.totalPrice);
             }
 
             return dataTable;

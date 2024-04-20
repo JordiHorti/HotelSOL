@@ -59,6 +59,7 @@
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(1276, 38);
             textBoxSearch.TabIndex = 8;
+            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             // 
             // radioButtonIdentity
             // 
