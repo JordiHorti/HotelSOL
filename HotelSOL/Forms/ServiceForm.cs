@@ -29,7 +29,8 @@ namespace HotelSOL.Forms
         {
             InitializeComponent();
             myConfiguration = new Configuration()
-               .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Service.hbn.xml");
+                .AddFile(FilePaths.GetFilePath("Service.hbn.xml"));
+
             mySessionFactory = myConfiguration.BuildSessionFactory();
 
             // Inicializar DAO con la sesión obtenida del sessionFactory

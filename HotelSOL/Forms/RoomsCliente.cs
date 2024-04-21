@@ -35,6 +35,8 @@ namespace HotelSOL.Cliente
 
         private void ButtonMisReservas_Click(object sender, EventArgs e)
         {
+            CargaDatos cargaDatos = new CargaDatos();
+            cargaDatos.uploadInvoices();
             ReservasCliente reservasCliente = new ReservasCliente();
             reservasCliente.Show();
         }

@@ -597,6 +597,358 @@ namespace HotelSOL
                 Console.WriteLine($"Error al ejecutar la query en la tabla bookings: {ex.Message}");
             }
         }
+        public void initialData()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open(); // Abre la conexión
+
+                    string query = @"          
+                USE HotelSOL;
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'customers')
+                BEGIN
+                    CREATE TABLE customers (
+                        customer_id INT IDENTITY(1,1) PRIMARY KEY,
+                        customerName VARCHAR(100) NOT NULL,
+                        customerEmail VARCHAR(100) NOT NULL,
+                        customerPhone VARCHAR(20) NOT NULL,
+                        customerPassword VARCHAR(100) NOT NULL
+                    );
+                END
+
+                INSERT INTO customers (customerName, customerEmail, customerPhone, customerPassword)
+                SELECT 'admin', 'admin@HotelSOL.com', '123-456-7890', '1234' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'admin@HotelSOL.com'
+                )
+                UNION ALL
+                SELECT 'recep', 'recep@HotelSOL.com', '123-456-7890', '12' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'recep@HotelSOL.com'
+                )
+                UNION ALL
+                SELECT 'pepito', 'rpepito@ejemplo', '123-456-7890', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'rpepito@ejemplo'
+                )
+                UNION ALL
+                SELECT 'Juan Pérez', 'juan@example.com', '123-456-7890', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'juan@example.com'
+                )
+                UNION ALL
+                SELECT 'Carlos Martínez', 'carlos@example.com', '987-654-3210', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'carlos@example.com'
+                )
+                UNION ALL
+                SELECT 'Ana López', 'ana@example.com', '987-654-3210', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'ana@example.com'
+                )
+                UNION ALL
+                SELECT 'Pedro Rodríguez', 'pedro@example.com', '987-654-3210', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'pedro@example.com'
+                )
+                UNION ALL
+                SELECT 'Laura Sánchez', 'laura@example.com', '987-654-3210', '1' WHERE NOT EXISTS (
+                    SELECT 1 FROM customers WHERE customerEmail = 'laura@example.com'
+                );
+
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'users')
+                BEGIN
+                CREATE TABLE users (
+                    users_id INT IDENTITY(1,1) PRIMARY KEY,
+                    customer_id INT,
+                    userName NVARCHAR(100) NOT NULL,
+                    userEmail NVARCHAR (100),
+                    userPassword NVARCHAR(100) NOT NULL,
+                    user_role INT CHECK (user_role IN (1,2,3))
+                );
+                END
+
+
+                INSERT INTO users(customer_id, userName, userEmail, userPassword)
+                SELECT DISTINCT c.customer_id, c.customerName, c.customerEmail, c.customerPassword
+                FROM customers c
+                WHERE NOT EXISTS (
+                    SELECT DISTINCT customer_id
+                    FROM users u
+                    WHERE u.customer_id = c.customer_id
+                );
+
+
+                UPDATE users
+                SET user_role = 
+                    CASE 
+                        WHEN userName = 'admin' THEN 1
+                        WHEN userName = 'recep' THEN 3
+                        ELSE 2 
+                    END;
+
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'rooms')
+                BEGIN
+                CREATE TABLE rooms (
+                    rooms_id INT IDENTITY(1,1) PRIMARY KEY,
+                    roomNumber INT UNIQUE NOT NULL,
+                    roomType VARCHAR(20) NOT NULL CHECK (roomType IN ('Individual', 'Doble', 'Familiar', 'Suite')),
+                    price DECIMAL(10, 2) NOT NULL,
+                    booked BIT NOT NULL,
+                    roomCapacity INT NOT NULL,
+                    roomSeason VARCHAR(10) NOT NULL CHECK (roomSeason IN ('Alta', 'Media', 'Baja')),
+                    roomDescription NVARCHAR(250)
+                );
+                END
+
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'services')
+                BEGIN
+                CREATE TABLE services (
+                    services_id INT IDENTITY(1,1) PRIMARY KEY,
+                    service VARCHAR(100) NOT NULL,
+                    servicePrice DECIMAL(10, 2) NOT NULL
+                );
+                END
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'bookings')
+                BEGIN
+                CREATE TABLE bookings (
+                    bookings_id INT IDENTITY(1,1) PRIMARY KEY,
+                    customer_id INT,
+                    services_id INT NOT NULL,
+                    customerName VARCHAR(100) NOT NULL,
+                    customerEmail VARCHAR(100) NOT NULL,
+                    roomNumber INT NOT NULL,
+                    service VARCHAR(100),
+                    checkIn DATE NOT NULL,
+                    checkOut DATE NOT NULL,
+                    days INT,
+                    totalPrice DECIMAL(10, 2),
+                );
+                END
+
+                IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'invoices')
+                BEGIN
+                CREATE TABLE invoices (
+                    invoices_id INT IDENTITY(1,1) PRIMARY KEY,
+                    bookings_id INT NOT NULL,
+                    customer_id INT,
+                    customerName VARCHAR(100),
+                    customerEmail VARCHAR(100),
+                    customerPhone VARCHAR(20),
+                    roomNumber INT,
+                    roomType VARCHAR(20),
+                    roomCapacity INT,
+                    roomPrice DECIMAL(10,2),
+                    service VARCHAR(100),
+                    servicePrice DECIMAL(10,2),
+                    checkIn DATE,
+                    checkOut DATE,
+                    days INT,
+                    totalPrice DECIMAL(10, 2),
+                );
+                END
+
+                /*
+                ---------------------------------------------
+	                        INSERCION DE DATOS
+                ---------------------------------------------
+                INSERCION HABITACIONES
+                */
+
+
+                INSERT INTO rooms (roomNumber, roomType, price, booked, roomCapacity, roomSeason, roomDescription)
+                SELECT 101, 'Individual', 100.00, 0, 1, 'Alta', N'Habitación individual con baño privado.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 101
+                )
+                UNION ALL
+                SELECT 102, 'Doble', 150.00, 1, 2, 'Media', N'Habitación doble con vistas al mar.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 102
+                )
+                UNION ALL
+                SELECT 103, 'Familiar', 250.00, 0, 4, 'Alta', N'Suite familiar con sala de estar.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 103
+                )
+                UNION ALL
+                SELECT 104, 'Suite', 180.00, 1, 2, 'Baja', N'Suite de lujo con jacuzzi.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 104
+                )
+                UNION ALL
+                SELECT 105, 'Individual', 120.00, 0, 1, 'Media', N'Habitación individual con balcón.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 105
+                )
+                UNION ALL
+                SELECT 106, 'Doble', 90.00, 1, 2, 'Baja', N'Habitación doble estándar.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 106
+                )
+                UNION ALL
+                SELECT 107, 'Familiar', 200.00, 0, 4, 'Media', N'Suite familiar con cocina americana.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 107
+                )
+                UNION ALL
+                SELECT 108, 'Suite', 300.00, 1, 2, 'Alta', N'Suite de lujo con vistas panorámicas.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 108
+                )
+                UNION ALL
+                SELECT 109, 'Individual', 80.00, 0, 1, 'Baja', N'Habitación individual económica.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 109
+                )
+                UNION ALL
+                SELECT 110, 'Doble', 200.00, 1, 2, 'Alta', N'Habitación doble con terraza privada.' WHERE NOT EXISTS (
+                    SELECT 1 FROM rooms WHERE roomNumber = 110
+                );
+
+                /* 
+                INSERCION SERVICIOS
+                */
+
+                INSERT INTO services (service, servicePrice)
+                SELECT 'Limpieza de habitación', 50.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Limpieza de habitación'
+                )
+                UNION ALL
+                SELECT 'Desayuno buffet', 20.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Desayuno buffet'
+                )
+                UNION ALL
+                SELECT 'Servicio de lavandería', 30.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Servicio de lavandería'
+                )
+                UNION ALL
+                SELECT 'Transporte al aeropuerto', 50.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Transporte al aeropuerto'
+                )
+                UNION ALL
+                SELECT 'Masaje relajante', 80.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Masaje relajante'
+                )
+                UNION ALL
+                SELECT 'Alquiler de bicicletas', 15.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Alquiler de bicicletas'
+                )
+                UNION ALL
+                SELECT 'Tour guiado por la ciudad', 70.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Tour guiado por la ciudad'
+                )
+                UNION ALL
+                SELECT 'Acceso al spa', 60.00 WHERE NOT EXISTS (
+                    SELECT 1 FROM services WHERE service = 'Acceso al spa'
+                );
+
+                /*
+                    INSERCION RESERVAS
+                */
+
+                INSERT INTO bookings (services_id, customerName, customerEmail, roomNumber, checkIn, checkOut)
+                SELECT 1, 'Juan Pérez', 'juan@example.com', 101, '2023-04-01', '2023-04-03' WHERE NOT EXISTS (
+                    SELECT 1 FROM bookings WHERE customerEmail = 'juan@example.com' AND roomNumber = 101
+                )
+                UNION ALL
+                SELECT 2, 'Carlos Martínez', 'carlos@example.com', 103, '2022-04-10', '2022-04-15' WHERE NOT EXISTS (
+                    SELECT 1 FROM bookings WHERE customerEmail = 'carlos@example.com' AND roomNumber = 103
+                )
+                UNION ALL
+                SELECT 3, 'Ana López', 'ana@example.com', 104, '2023-04-20', '2023-04-22' WHERE NOT EXISTS (
+                    SELECT 1 FROM bookings WHERE customerEmail = 'ana@example.com' AND roomNumber = 104
+                )
+                UNION ALL
+                SELECT 4, 'Pedro Rodríguez', 'pedro@example.com', 105, '2024-04-25', '2024-04-30' WHERE NOT EXISTS (
+                    SELECT 1 FROM bookings WHERE customerEmail = 'pedro@example.com' AND roomNumber = 105
+                )
+                UNION ALL
+                SELECT 5, 'Laura Sánchez', 'laura@example.com', 106, '2024-05-01', '2024-05-03' WHERE NOT EXISTS (
+                    SELECT 1 FROM bookings WHERE customerEmail = 'laura@example.com' AND roomNumber = 106
+                );
+
+
+                /*
+                ------------------------------------
+                    ACTUALIZACION TABLA RESERVAS
+                ------------------------------------
+                */
+
+                UPDATE b
+                SET 
+                    customer_id = c.customer_id,
+                    service = tmp.service,
+                    totalPrice = tmp.totalPrice,
+                    days = DATEDIFF(day, b.checkIn, b.checkOut)
+                FROM bookings b
+                JOIN (
+                    SELECT 
+                        b.bookings_id,
+                        s.service as service, 
+                        ((r.Price + s.servicePrice) * DATEDIFF(day, b.checkIn, b.checkOut)) as totalPrice
+                    FROM bookings b
+                    JOIN services s ON b.services_id = s.services_id
+                    JOIN rooms r ON b.roomNumber = r.roomNumber
+                ) AS tmp ON b.bookings_id = tmp.bookings_id
+                JOIN customers c ON b.customerName = c.customerName AND b.customerEmail = c.customerEmail;
+
+
+                /*
+                ------------------------------------
+                    ACTUALIZACION TABLA HABITACIONES
+                ------------------------------------
+                */
+                UPDATE rooms
+                SET booked = 
+                    CASE 
+                        WHEN roomNumber IN (
+                            SELECT DISTINCT roomNumber
+                            FROM bookings
+                            WHERE checkIn > GETDATE() 
+                        ) THEN 1
+                        ELSE 0
+                    END;
+
+                /*
+                ------------------------------------
+                    ACTUALIZACION TABLA FACTURAS
+                ------------------------------------
+                */
+                TRUNCATE TABLE invoices;  -- Con este truncate evitamos duplicados
+
+                INSERT INTO INVOICES (bookings_id)
+                SELECT DISTINCT bookings_id FROM bookings
+
+                UPDATE invoices
+                SET
+                    customer_id = b.customer_id,
+                    customerName = c.customerName,
+                    customerEmail = c.customerEmail,
+                    customerPhone = c.customerPhone,
+                    roomNumber = r.roomNumber,
+                    roomType = r.roomType,
+                    roomCapacity = r.roomCapacity,
+                    roomPrice = r.price,
+                    service = s.service,
+                    servicePrice = s.servicePrice,
+                    checkIn = b.checkIn,
+                    checkOut = b.checkOut,
+                    days = b.days,
+                    totalPrice = ((r.price + s.servicePrice) * b.days)
+                FROM
+                    invoices i
+                INNER JOIN bookings b ON i.bookings_id = b.bookings_id
+                INNER JOIN customers c ON b.customer_id = c.customer_id
+                INNER JOIN rooms r ON b.roomNumber = r.roomNumber
+                INNER JOIN services s ON b.services_id = s.services_id
+                ";
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    Console.WriteLine($"Se cargaron todos los datos de la bbdd.");
+
+                    connection.Close(); // Cierra la conexión
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al ejecutar la query de carga de datos iniciales {ex.Message}");
+            }
+
+        }
     }
-    
+   
 }

@@ -1,22 +1,8 @@
 ﻿using HotelSOL.DAO;
 using HotelSOL.Models;
 using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using HotelSOL.Models;
-using HotelSOL.DAO;
-using NHibernate;
 using NHibernate.Cfg;
 using System.Globalization;
-using System.Collections;
-using static System.Collections.Specialized.BitVector32;
 
 namespace HotelSOL.Forms
 {
@@ -40,10 +26,10 @@ namespace HotelSOL.Forms
             InitializeComponent();
 
             myConfiguration = new Configuration()
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Booking.hbn.xml")
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Invoice.hbn.xml")
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Rooms.hbn.xml")
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Service.hbn.xml");
+                    .AddFile(FilePaths.GetFilePath("Booking.hbn.xml"))
+                    .AddFile(FilePaths.GetFilePath("Invoice.hbn.xml"))
+                    .AddFile(FilePaths.GetFilePath("Rooms.hbn.xml"))
+                    .AddFile(FilePaths.GetFilePath("Service.hbn.xml"));
 
 
             mySessionFactory = myConfiguration.BuildSessionFactory();

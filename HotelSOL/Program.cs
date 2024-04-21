@@ -20,6 +20,7 @@ namespace HotelSOL
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             CargaDatos cargadatos = new CargaDatos();
+            cargadatos.initialData();
             cargadatos.uploadUsers();
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());

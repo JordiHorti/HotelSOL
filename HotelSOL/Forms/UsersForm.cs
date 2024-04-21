@@ -18,7 +18,6 @@ namespace HotelSOL
     public partial class UsersForm : Form
     {
 
-
         private IDAO<User> _userDAO;
 
         private Configuration myConfiguration;
@@ -30,7 +29,7 @@ namespace HotelSOL
         {
             InitializeComponent();
             myConfiguration = new Configuration()
-               .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Users.hbn.xml");
+                .AddFile(FilePaths.GetFilePath("Users.hbn.xml"));
             mySessionFactory = myConfiguration.BuildSessionFactory();
 
             // Inicializar DAO con la sesión obtenida del sessionFactory

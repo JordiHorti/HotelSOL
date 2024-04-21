@@ -37,7 +37,8 @@ namespace HotelSOL
             InitializeComponent();
 
             myConfiguration = new Configuration()
-                  .AddFile("C:\\Users\\jordi\\source\\repos\\HotelSOL\\HotelSOL\\Mapping\\Rooms.hbn.xml");
+                   .AddFile(FilePaths.GetFilePath("Rooms.hbn.xml"));
+
             mySessionFactory = myConfiguration.BuildSessionFactory();
 
             // Inicializar DAO con la sesión obtenida del sessionFactory
