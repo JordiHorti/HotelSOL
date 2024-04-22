@@ -9,7 +9,7 @@ namespace HotelSOL
 {
     public static class FilePaths
     {
-        private static readonly string BasePath = Path.Combine("C:", "Users", Environment.UserName, "source", "repos", "HotelSOL", "HotelSOL", "Mapping");
+        private static readonly string BasePath = Path.Combine("C:","Users", Environment.UserName, "OneDrive","Escritorio","Hotel","Mapping");
 
         public static string GetFilePath(string fileName)
         {

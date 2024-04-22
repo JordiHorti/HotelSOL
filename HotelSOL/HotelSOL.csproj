@@ -8,7 +8,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon></PackageIcon>
     <Description>Aplicación de gestion del HotelSOL</Description>
+    <ApplicationIcon>hotel_building_stars_holiday_vacation_icon_196768.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="hotel_building_stars_holiday_vacation_icon_196768.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="3.3.0" />
