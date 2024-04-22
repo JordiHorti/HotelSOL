@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace HotelSOL
 {
     public static class FilePaths
     {
-        private static readonly string BasePath = Path.Combine("C:","Users", Environment.UserName, "OneDrive","Escritorio","Hotel","Mapping");
+        private static readonly string BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),"Hotel", "Mapping");
 
         public static string GetFilePath(string fileName)
         {
