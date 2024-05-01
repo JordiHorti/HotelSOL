@@ -14,7 +14,7 @@ namespace HotelSOL.Nhibernate
    
     internal class NhibernateUtils
     {
-        private string connStr = @"Data Source=.\SQLEXPRESS;Initial Catalog=HotelSOL;User Id=root;Password=1234;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        private string connStr = @"Data Source=.\DESKTOP-DR4N647\SQLEXPRESS01;Initial Catalog=HotelSOL;User Id=root;Password=1234;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
         public Configuration Config { get; private set; }
 

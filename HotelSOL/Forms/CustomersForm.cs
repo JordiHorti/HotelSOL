@@ -294,13 +294,40 @@ namespace HotelSOL
             {
                 string errorMessage = $"Error: {ex.Message}";
                 MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
         }
-
         private void buttonExport_Click(object sender, EventArgs e)
         {
             CargaDatos cargaDatos = new CargaDatos();
             cargaDatos.ExportarDatosAXml("customers", "data_customer");
+            // Llamar a la función de exportación en Python
+            EjecutarScriptPython();
+        }
+
+        private void EjecutarScriptPython()
+        {
+            // Ruta al archivo Python
+            string rutaArchivoPython = @"C:\Users\jordi\source\repos\HotelSOL\HotelSOL\python.py";
+
+            // Crear un proceso para ejecutar el archivo Python
+            System.Diagnostics.ProcessStartInfo psi =
+                new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "python",
+                    Arguments = rutaArchivoPython,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                };
+
+            // Ejecutar el proceso
+            using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(psi))
+            {
+                // Obtener la salida del proceso (si es necesario)
+                string result = process.StandardOutput.ReadToEnd();
+                Console.WriteLine(result);
+            }
         }
 
         private void buttonImportData_Click(object sender, EventArgs e)

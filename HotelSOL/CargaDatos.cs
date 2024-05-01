@@ -37,7 +37,7 @@ namespace HotelSOL
                     adapter.Fill(dataSet, nombreTabla);
 
                     // Guardar los datos en un archivo XML en la ruta especificada
-                    string rutaArchivo = @"C:\Users\jordi\OneDrive\Escritorio\" + $"{nombreArchivo}.xml";
+                    string rutaArchivo = FilePaths.GetFilePath($"{nombreArchivo}.xml");
                     dataSet.WriteXml(rutaArchivo);
 
                     Console.WriteLine($"Los datos de la tabla '{nombreTabla}' han sido exportados correctamente a '{rutaArchivo}'.");
