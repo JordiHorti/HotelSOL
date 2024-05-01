@@ -309,9 +309,18 @@ namespace HotelSOL
 
         private void EjecutarScriptPython()
         {
-            // Ruta al archivo Python
-            string rutaArchivoPython = Path.Combine(System.Environment.CurrentDirectory, "python.py");
+            // Obtén la ruta base del directorio de la aplicación
+            string directorioBase = AppDomain.CurrentDomain.BaseDirectory;
 
+            // Combina la ruta base con la ruta relativa al archivo Python
+            string rutaArchivoPython = Path.Combine(directorioBase, "python.py");
+
+            // Verifica si el archivo Python existe
+            if (!File.Exists(rutaArchivoPython))
+            {
+                MessageBox.Show("El archivo Python no se encuentra en la ruta especificada: " + rutaArchivoPython);
+                return;
+            }
 
             // Crear un proceso para ejecutar el archivo Python
             System.Diagnostics.ProcessStartInfo psi =
@@ -332,6 +341,7 @@ namespace HotelSOL
                 Console.WriteLine(result);
             }
         }
+
 
         private void buttonImportData_Click(object sender, EventArgs e)
         {
