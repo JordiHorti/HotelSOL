@@ -4,7 +4,7 @@ import xmlrpc.client
 db = "HotelSOL"
 port = "5432"
 username = "alberto-1993@hotmail.es"
-password = "Cataroloko01"
+password = "shinycode"
 registros = []
 
 def import_customers():
@@ -56,7 +56,7 @@ def conexion_odoo(db, username, password, registros):
     try:
         uid = common.authenticate(db, username, password, {})
     except xmlrpc.client.Fault as err:
-        print("Error de conexiónn:", err)
+        print("Error de conexion:", err)
         return False
 
     # Verificar si la autenticaciÃ³n fue exitosa

@@ -16,6 +16,8 @@ using HotelSOL.DAO;
 using NHibernate;
 using NHibernate.Cfg;
 
+
+
 namespace HotelSOL
 {
     public partial class CustomersForm : Form
@@ -308,7 +310,8 @@ namespace HotelSOL
         private void EjecutarScriptPython()
         {
             // Ruta al archivo Python
-            string rutaArchivoPython = @"C:\Users\jordi\source\repos\HotelSOL\HotelSOL\python.py";
+            string rutaArchivoPython = Path.Combine(System.Environment.CurrentDirectory, "python.py");
+
 
             // Crear un proceso para ejecutar el archivo Python
             System.Diagnostics.ProcessStartInfo psi =
