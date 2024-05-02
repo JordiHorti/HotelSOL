@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelSOL", "HotelSOL\HotelSOL.csproj", "{CA6C234F-14F3-49E4-B44E-167A1D674247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelSOLTEST", "HotelSOLTEST\HotelSOLTEST.csproj", "{E8FE0514-6B09-498D-B50D-3951C93C19F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelSOLTEST", "HotelSOLTEST\HotelSOLTEST.csproj", "{E8FE0514-6B09-498D-B50D-3951C93C19F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as et
 import xmlrpc.client
+import os
 
 db = "HotelSOL"
 port = "5432"
@@ -9,7 +10,11 @@ registros = []
 
 def import_customers():
     global registros
-    ruta_archivo = "C:/Users/alber/OneDrive/Escritorio/aHotelSOL/HotelSOL/Mapping/data_customer.xml"
+    # Obtener la ruta del directorio actual del archivo Python
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construir la ruta al archivo XML relativa al directorio actual
+    ruta_archivo = os.path.join(current_directory, "Mapping", "data_customer.xml")
     
     try:
         tree = et.parse(ruta_archivo)
